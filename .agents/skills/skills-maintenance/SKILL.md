@@ -69,6 +69,11 @@ easily. Rules:
   prefer restructuring into stacked rows.
 - **Status honesty:** mark unbuilt capabilities as planned and point to
   `project/roadmap.md`; don't present future surfaces as current.
+- **Voice (humanizer):** no em dashes in prose (use periods, commas, colons;
+  middots · and arrows → are fine). Cut AI vocabulary (crucial, leverage,
+  seamless, robust, "at its core"); prefer "is" over "serves as"; straight
+  quotes; minimal boldface; no decorative emoji. Keep the terse, honest,
+  lowercase-terminal voice. Run the blader/humanizer pass over new copy.
 
 ## Hard rule
 
