@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # local screenshots (dev/QA artifacts)
 /screenshots/
+
+# scratch / design references — not part of the repo
+/temp/
