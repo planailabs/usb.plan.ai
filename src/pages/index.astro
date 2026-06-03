@@ -62,42 +62,75 @@
 			</div>
 		</nav>
 
-		<!-- HERO -->
+		<!-- HERO — CRT terminal boot -->
 		<header class="hero" id="top">
-			<div class="wrap grid">
-				<div>
-					<span class="pill"><span class="dot" aria-hidden="true"></span>Concept · Spec v0.2 · building in public</span>
-					<h1>Not one model's <span class="g">opinion.</span><br />A council's verdict.</h1>
-					<p class="sub">Offline-first AI on a USB stick — voice, vision, chat, and an <b>auditable council</b> of the models you trust. A single model wins at "write me an email." A council wins at "review this code, this risk — and show me the dissent."</p>
-					<div class="cta">
-						<a class="btn btn-pri" href="https://github.com/planailabs/usb.plan.ai">Build your own — free</a>
-						<a class="btn btn-ghost" href="#how">How it works →</a>
+			<div class="wrap">
+				<div class="crt">
+					<div class="crt-bar">
+						<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="crt-title">usb.plan.ai — tty1</span>
+						<span class="crt-stat"><span class="dot" aria-hidden="true"></span>offline</span>
 					</div>
-					<p class="meta"><b>Apache-2.0</b> · Windows · macOS · Linux · grid-down ready · no login · no telemetry</p>
-				</div>
+					<div class="crt-screen">
+						<ol class="boot" aria-label="Boot log">
+							<li class="boot-line" style="--i:0"><span class="bt">[0.00]</span><span class="bmsg">init council kernel</span><span class="bdot" aria-hidden="true"></span><span class="bok">[ OK ]</span></li>
+							<li class="boot-line" style="--i:1"><span class="bt">[0.18]</span><span class="bmsg">mount /dev/usb (exFAT)</span><span class="bdot" aria-hidden="true"></span><span class="bok">[ OK ]</span></li>
+							<li class="boot-line" style="--i:2"><span class="bt">[0.37]</span><span class="bmsg">verify model-pack sha256</span><span class="bdot" aria-hidden="true"></span><span class="bok">[ OK ]</span></li>
+							<li class="boot-line" style="--i:3"><span class="bt">[0.61]</span><span class="bmsg">llama-server :8080 — local</span><span class="bdot" aria-hidden="true"></span><span class="bok">[ OK ]</span></li>
+							<li class="boot-line" style="--i:4"><span class="bt">[0.94]</span><span class="bmsg">role-council: solver skeptic security chair</span><span class="bdot" aria-hidden="true"></span><span class="bok">[ OK ]</span></li>
+							<li class="boot-line" style="--i:5"><span class="bt">[1.22]</span><span class="bmsg">whisper.cpp · vision (vlm)</span><span class="bdot" aria-hidden="true"></span><span class="bok">[ OK ]</span></li>
+							<li class="boot-line" style="--i:6"><span class="bt">[1.41]</span><span class="bmsg">privacy-guard: air-gapped</span><span class="bdot" aria-hidden="true"></span><span class="bheld">[ HELD ]</span></li>
+						</ol>
 
-				<div>
-					<div class="trace">
-						<div class="th">⬡ council trace <span class="sp"><span class="dot" aria-hidden="true"></span>offline · verified</span></div>
-						<div class="body">
-							<div class="kv"><span class="k">prompt</span><span class="v">"run this risky bash script offline"</span></div>
-							<div class="kv"><span class="k">sha256</span><span class="v nw"><span class="m">9f3a1c7b…e10d</span></span></div>
-							<div class="seats">
-								<span class="seat">solver</span><span class="seat">skeptic</span><span class="seat">security</span><span class="seat">chairman</span>
-							</div>
-							<div class="op s"><span class="role">solver›</span><span class="txt">run it with <b>sudo</b> to skip the permission errors.</span></div>
-							<div class="op k"><span class="role">skeptic!</span><span class="txt"><b>sudo</b> + unverified script = full-system exposure.</span></div>
-							<div class="op x"><span class="role">security!</span><span class="txt">no checksum, no sandbox. <b>block as-is.</b></span></div>
-							<div class="chair">
-								<div class="lbl">⬢ chairman · synthesis</div>
-								<div class="ver">Don't <b>sudo</b> it. Dry-run in a sandbox, verify the checksum, run as your user.</div>
-								<div class="verdict"><span class="blocked">verdict · blocked</span> → <span class="safe">safe path</span><span class="signed">signed offline · 2026-06-03</span></div>
-							</div>
+						<div class="hero-head">
+							<span class="pill"><span class="dot" aria-hidden="true"></span>Concept · Spec v0.2 · building in public</span>
+							<h1>Boot your <span class="g">council.</span></h1>
+							<p class="sub">Offline-first AI on a USB stick — voice, vision, chat, and an <b>auditable council</b> of the models you trust. No login, no subscription, no telemetry.</p>
 						</div>
+
+						<div class="prompt">
+							<span class="p">council@usb:~$</span>
+							<span class="typed">council "review this risky bash script offline"</span>
+							<span class="bcur" aria-hidden="true"></span>
+						</div>
+
+						<div class="cta">
+							<a class="btn btn-pri" href="https://github.com/planailabs/usb.plan.ai">Build your own — free</a>
+							<a class="btn btn-ghost" href="#how">How it works →</a>
+						</div>
+						<p class="meta"><b>Apache-2.0</b> · Windows · macOS · Linux · grid-down ready · no login · no telemetry</p>
 					</div>
 				</div>
 			</div>
 		</header>
+
+		<!-- TRACE SHOWCASE (the deliberation card, kept from Direction B) -->
+		<section class="sec" id="trace">
+			<div class="rainband" data-rain-band aria-hidden="true"></div>
+			<div class="wrap">
+				<div class="kick reveal"><span class="no">§00</span> TRACE <span class="mode">AUDIT · DELIBERATION</span></div>
+				<h2 class="h2 display reveal">Not one model's opinion. A council's verdict.</h2>
+				<p class="lead reveal">A single model wins at "write me an email." A council wins at "review this code, this risk — and show me the dissent." Here's a real trace: solver proposes, skeptic and security object, the chairman synthesizes a safe path — auditable and signed, offline.</p>
+				<div class="trace reveal">
+					<div class="th">⬡ council trace <span class="sp"><span class="dot" aria-hidden="true"></span>offline · verified</span></div>
+					<div class="body">
+						<div class="kv"><span class="k">prompt</span><span class="v">"run this risky bash script offline"</span></div>
+						<div class="kv"><span class="k">sha256</span><span class="v nw"><span class="m">9f3a1c7b…e10d</span></span></div>
+						<div class="seats">
+							<span class="seat">solver</span><span class="seat">skeptic</span><span class="seat">security</span><span class="seat">chairman</span>
+						</div>
+						<div class="op s"><span class="role">solver›</span><span class="txt">run it with <b>sudo</b> to skip the permission errors.</span></div>
+						<div class="op k"><span class="role">skeptic!</span><span class="txt"><b>sudo</b> + unverified script = full-system exposure.</span></div>
+						<div class="op x"><span class="role">security!</span><span class="txt">no checksum, no sandbox. <b>block as-is.</b></span></div>
+						<div class="chair">
+							<div class="lbl">⬢ chairman · synthesis</div>
+							<div class="ver">Don't <b>sudo</b> it. Dry-run in a sandbox, verify the checksum, run as your user.</div>
+							<div class="verdict"><span class="blocked">verdict · blocked</span> → <span class="safe">safe path</span><span class="signed">signed offline · 2026-06-03</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!-- HOW IT WORKS -->
 		<section class="sec" id="how">
@@ -396,8 +429,38 @@
 			.hero .sub { margin-top: 24px; font-size: 17px; line-height: 1.62; color: var(--ink-soft); max-width: 48ch; }
 			.hero .sub b { color: var(--ink); font-weight: 500; }
 			.hero .cta { margin-top: 32px; display:flex; gap: 14px; align-items:center; flex-wrap: wrap; }
-			.hero .meta { margin-top: 30px; font-size: 12.5px; color: var(--muted); letter-spacing: 0.03em; }
+			.hero .meta { margin-top: 24px; font-size: 12.5px; color: var(--muted); letter-spacing: 0.03em; }
 			.hero .meta b { color: var(--green-dim); }
+
+			/* CRT terminal boot hero (restored from the previous version) */
+			.hero { padding: 52px 0 84px; }
+			.hero .crt { max-width: 980px; margin: 0 auto; border: 1px solid var(--line-bright); border-radius: 12px; background: linear-gradient(180deg,#0c1213,#090d0e); box-shadow: 0 40px 90px -40px #000, inset 0 0 60px rgba(77,255,160,0.03); overflow: hidden; }
+			.crt-bar { display:flex; align-items:center; gap:12px; padding:11px 16px; border-bottom:1px solid var(--line); background: rgba(0,0,0,0.25); font-size:12px; color: var(--ink-soft); }
+			.crt-bar .dots { display:flex; gap:6px; } .crt-bar .dots i { width:10px; height:10px; border-radius:50%; background: var(--line-bright); display:block; }
+			.crt-bar .dots i:nth-child(1){ background:#ff5f57; } .crt-bar .dots i:nth-child(2){ background:#febc2e; } .crt-bar .dots i:nth-child(3){ background:#28c840; }
+			.crt-title { margin-left:4px; } .crt-stat { margin-left:auto; color: var(--green); display:flex; align-items:center; gap:7px; }
+			.crt-screen { padding: clamp(20px,3vw,34px); }
+			.boot { list-style:none; margin:0 0 24px; padding:0; font-size:13px; }
+			.boot-line { display:flex; align-items:center; gap:8px; padding:2px 0; color: var(--ink-soft); }
+			.boot-line .bt { color: var(--green-dim); } .boot-line .bmsg { white-space:nowrap; }
+			.boot-line .bdot { flex:1; border-bottom:1px dotted var(--faint); margin:0 6px; transform: translateY(-3px); min-width:14px; }
+			.boot-line .bok { color: var(--green); font-weight:600; } .boot-line .bheld { color: var(--amber); font-weight:600; }
+			.hero-head { margin: 22px 0 18px; }
+			.hero-head h1 { font-family: var(--display); font-size: clamp(40px,6vw,72px); line-height:0.96; letter-spacing:-0.03em; color: var(--ink); margin-top:16px; }
+			.hero-head h1 .g { color: var(--green); text-shadow: 0 0 28px var(--green-glow); }
+			.hero-head .sub { margin-top:18px; font-size:16px; line-height:1.62; color: var(--ink-soft); max-width:58ch; }
+			.hero-head .sub b { color: var(--ink); font-weight:500; }
+			.hero .prompt { display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding:12px 14px; margin:0 0 20px; border:1px solid var(--line); border-radius:8px; background: rgba(0,0,0,0.25); font-size:13.5px; }
+			.hero .prompt .p { color: var(--green); } .hero .prompt .typed { color: var(--green-hi); }
+			.bcur { display:inline-block; width:9px; height:1.05em; background: var(--green); box-shadow:0 0 10px var(--green-glow); vertical-align:text-bottom; animation: blink 1.1s steps(1) infinite; }
+			.hero .cta { margin-top:0; }
+			#trace .trace { max-width: 640px; margin-top: 34px; }
+			@keyframes bootIn { from { opacity:0; transform: translateY(4px); } to { opacity:1; transform:none; } }
+			@keyframes type { from { width:0; } to { width: 46ch; } }
+			@media (prefers-reduced-motion: no-preference) {
+				.boot-line { opacity:0; animation: bootIn .34s both; animation-delay: calc(var(--i) * 0.12s); }
+				.hero .prompt .typed { overflow:hidden; white-space:nowrap; display:inline-block; max-width:100%; animation: type 1.4s steps(46) 1.3s both; }
+			}
 
 			/* trace card */
 			.trace { background: linear-gradient(180deg,#0c1213,#090d0e); border:1px solid var(--line-bright); border-radius:10px; overflow:hidden; box-shadow: 0 40px 90px -40px #000, 0 0 0 1px rgba(77,255,160,0.04); }
