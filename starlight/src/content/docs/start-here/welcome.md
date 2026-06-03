@@ -14,6 +14,13 @@ different core from existing offline-AI sticks: an **auditable AI Council**.
 > explicitly allow it, as a real multi-provider *frontier council*. The Council
 > is a deliberate **review mode**, not the default chat.
 
+:::caution[Status: concept / spec v0.2]
+The website and these docs exist today. The **product** — the portable engine,
+the council orchestrator, the evals, the vault — is **not built yet**. This is a
+build-in-public spec; everything described here is the *target*. See the
+[roadmap](/project/roadmap/).
+:::
+
 ## Positioning
 
 A good single model wins at "write me an email." A council wins at "review this

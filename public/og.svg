@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+	<defs>
+		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#0c0e11"/>
+			<stop offset="1" stop-color="#070809"/>
+		</linearGradient>
+		<radialGradient id="glow" cx="0.82" cy="0.1" r="0.7">
+			<stop offset="0" stop-color="#5ef2a4" stop-opacity="0.16"/>
+			<stop offset="1" stop-color="#5ef2a4" stop-opacity="0"/>
+		</radialGradient>
+		<pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+			<path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+		</pattern>
+	</defs>
+	<rect width="1200" height="630" fill="url(#bg)"/>
+	<rect width="1200" height="630" fill="url(#grid)"/>
+	<rect width="1200" height="630" fill="url(#glow)"/>
+	<g font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace">
+		<circle cx="80" cy="86" r="7" fill="#5ef2a4"/>
+		<text x="100" y="92" font-size="24" fill="#5ef2a4" letter-spacing="2">usb.plan.ai</text>
+		<text x="1120" y="92" font-size="20" fill="#f7b955" text-anchor="end" letter-spacing="1">v0.2 · concept</text>
+	</g>
+	<text x="80" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="118" font-weight="700" fill="#e9e5db" letter-spacing="-3">Portable</text>
+	<text x="80" y="420" font-family="Georgia, 'Times New Roman', serif" font-size="118" font-weight="700" fill="#5ef2a4" letter-spacing="-3">AI Council</text>
+	<text x="82" y="500" font-family="system-ui, sans-serif" font-size="30" fill="#9aa1a9">Bring the best models you trust into one auditable council — offline-first.</text>
+	<g font-family="ui-monospace, monospace" font-size="22" fill="#696f77">
+		<text x="82" y="566">First Opinions</text>
+		<text x="340" y="566" fill="#3a3f45">→</text>
+		<text x="380" y="566">Peer Review</text>
+		<text x="600" y="566" fill="#3a3f45">→</text>
+		<text x="640" y="566" fill="#6bb8ff">Chairman</text>
+		<text x="1120" y="566" text-anchor="end" fill="#696f77">Apache-2.0 · offline-first</text>
+	</g>
+</svg>

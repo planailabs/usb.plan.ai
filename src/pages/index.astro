@@ -85,8 +85,17 @@ const compare = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>usb.plan.ai — Portable AI Council</title>
 		<meta name="description" content="An open-source, offline-first, auditable AI Council on a USB stick. Your council. Your machine. No cloud required." />
+		<link rel="canonical" href="https://usb.plan.ai/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://usb.plan.ai/" />
+		<meta property="og:site_name" content="usb.plan.ai" />
 		<meta property="og:title" content="usb.plan.ai — Portable AI Council" />
-		<meta property="og:description" content="Your council. Your machine. No cloud required. Offline-first, auditable, open-source." />
+		<meta property="og:description" content="Your council. Your machine. No cloud required. Offline-first, auditable, open-source. (v0.2 concept — building in public.)" />
+		<meta property="og:image" content="https://usb.plan.ai/og.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="usb.plan.ai — Portable AI Council" />
+		<meta name="twitter:description" content="Bring the best models you trust into one auditable council — offline-first. v0.2 concept, building in public." />
+		<meta name="twitter:image" content="https://usb.plan.ai/og.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -108,11 +117,15 @@ const compare = [
 			</nav>
 		</header>
 
+		<a class="concept-banner" href="/docs/project/roadmap/">
+			<b>v0.2 concept &amp; spec</b> — the site and docs exist; the product (engine, council, evals) isn’t built yet. Building in public → roadmap
+		</a>
+
 		<main>
 			<!-- HERO -->
 			<section class="hero">
 				<div class="hero-copy">
-					<p class="kicker"><i class="led g"></i> Operational · Council v0.2 · llama.cpp</p>
+					<p class="kicker"><i class="led amber"></i> Concept · Spec v0.2 · building in public</p>
 					<h1>Your council.<br />Your machine.<br /><span class="accent">No cloud required.</span></h1>
 					<p class="tagline">
 						Offline-first AI on a USB stick — voice, vision, chat, and an
@@ -352,7 +365,14 @@ const compare = [
 				position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.04;
 				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 			}
-			main, .nav, .foot { position: relative; z-index: 1; }
+			main, .nav, .foot, .concept-banner { position: relative; z-index: 1; }
+			.concept-banner {
+				display: block; text-align: center; padding: 9px 16px;
+				font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--text);
+				background: rgba(247, 185, 85, 0.08); border-bottom: 1px solid rgba(247, 185, 85, 0.25);
+			}
+			.concept-banner b { color: var(--amber); }
+			.concept-banner:hover { background: rgba(247, 185, 85, 0.14); }
 			a { color: inherit; text-decoration: none; }
 			code { font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; background: rgba(255,255,255,0.06); padding: 0.1em 0.35em; border-radius: 4px; color: var(--green); }
 			.g { color: var(--green); } .b { color: var(--blue); } .dim { color: var(--dim); } .accent { color: var(--green); }
@@ -388,6 +408,7 @@ const compare = [
 			.led { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); display: inline-block; flex: none; }
 			.led.b { background: var(--blue); box-shadow: 0 0 10px var(--blue); }
 			.led.red { background: var(--red); box-shadow: 0 0 10px var(--red); }
+			.led.amber { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
 			.trace-title { color: var(--dim); margin-left: auto; }
 			.replay { background: none; border: 1px solid var(--line2); color: var(--muted); width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-size: 13px; }
 			.replay:hover { color: var(--green); border-color: var(--green); }

@@ -12,6 +12,16 @@ Inspired by [PortableMind](https://portablemind.io) and the OSS DIY build
 with a fundamentally different core: an **auditable AI Council** instead of a
 single model. 🟢 offline by default, 🔵 frontier models on opt-in.
 
+> ## 🚧 Status: v0.2 concept & spec — building in public
+>
+> **What exists today:** this repository's **website + documentation + the v0.2
+> spec**. **What does *not* exist yet:** the product itself — the portable
+> `llama-server` bundle, the FastAPI council orchestrator, the role-council, the
+> evals, `preflight-check`, and the vault. The setup/run steps below describe the
+> **target** experience; they don't work yet. Follow the
+> [roadmap](https://usb.plan.ai/docs/project/roadmap/) and
+> [contribute](./CONTRIBUTING.md) to help build it.
+
 ---
 
 ## ⚡ Why a council?
