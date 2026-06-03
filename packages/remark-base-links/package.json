@@ -1,0 +1,28 @@
+{
+  "name": "@plan/remark-base-links",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Remark plugin that prefixes absolute markdown body links with Astro's `base` — the link-rewriting Starlight omits.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "astro",
+    "starlight",
+    "remark",
+    "base",
+    "links"
+  ]
+}
