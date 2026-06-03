@@ -61,6 +61,6 @@ pnpm preview      # serve dist/
 - No `_headers` yet. `public/_redirects` exists — a Cloudflare 301 from `/docs` and `/docs/` to `/docs/start-here/welcome/` (replaces the old meta-refresh).
 - No `.npmrc` — pnpm defaults.
 - No Prettier / ESLint / `.editorconfig` — formatting is by-hand consistency for now.
-- No LICENSE — defaults to "all rights reserved" until decided.
+- `LICENSE` present: **Apache-2.0** (code). Model weights keep their own licenses — see `docs/models/licenses`.
 - No shared styling/theme between main app and docs (independent branding).
 - `/docs/` → `/docs/start-here/welcome/` via a **Cloudflare 301** (`public/_redirects`); the docs root has no page (no meta-refresh). Local `astro preview` won't honor the rule — prod-only. No splash at `/docs/`.

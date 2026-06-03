@@ -14,7 +14,7 @@ different core from existing offline-AI sticks: an **auditable AI Council**.
 > explicitly allow it, as a real multi-provider *frontier council*. The Council
 > is a deliberate **review mode**, not the default chat.
 
-:::caution[Status: concept / spec v0.2]
+:::caution[Status: concept / spec v0.3]
 The website and these docs exist today. The **product** — the portable engine,
 the council orchestrator, the evals, the vault — is **not built yet**. This is a
 build-in-public spec; everything described here is the *target*. See the
@@ -49,9 +49,9 @@ and the [Council](/council/overview/).
 | Product | Portable AI Council |
 | Tagline | "Bring the best models you trust into one auditable council — offline-first." |
 | Code license | Apache-2.0 (model weights keep their own — see [licenses](/models/licenses/)) |
-| Status | Concept / spec **v0.2** (council-optimized), 2026-06-03 |
+| Status | Concept / spec **v0.3** (council-optimized), 2026-06-03 |
 | Owner | plan.ai |
 
-> v0.2 is the result of a 3-stage LLM council (first opinions on Claude Opus 4.8,
+> v0.3 is the result of a 3-stage LLM council (first opinions on Claude Opus 4.8,
 > GPT-5.5, Gemini 3.1 Pro → peer review → chairman synthesis). The key
 > corrections versus v0.1 are in the [council changelog](/project/changelog/).

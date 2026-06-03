@@ -1,9 +1,23 @@
 ---
-title: Council changelog (v0.1 → v0.2)
-description: The corrections the 3-stage council made to v0.1.
+title: Council changelog
+description: How the spec leveled up across versions.
 sidebar:
   order: 2
 ---
+
+## v0.3 — IA & online hardening
+
+- Aligned the spec to **v0.3** (the design system was already v0.3).
+- Added a [glossary](/reference/glossary/) fixing the council naming taxonomy
+  (local role · local multi-model · online frontier).
+- Made [hardware/tiers](/hardware/tiers/) the single source of truth for tier
+  specs; other pages link rather than restate (anti-drift).
+- Wide doc tables now scroll on narrow viewports; full mobile pass on the site.
+- Documented the future [local wireless distribution](/project/roadmap/) (v0.6)
+  with an explicit "internet-off LAN, **not air-gapped**" boundary.
+- Added a real `LICENSE` (Apache-2.0) + [manufacturing notes](/reference/manufacturing/).
+
+## v0.2 — council-optimized (from v0.1)
 
 Result of the project's own 3-stage council (Tech-Architect · Product-Strategist
 · Devil's Advocate).

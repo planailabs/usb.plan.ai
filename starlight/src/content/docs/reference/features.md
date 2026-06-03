@@ -22,3 +22,7 @@ sidebar:
 Chat is the default; the [Council](/council/overview/) is the deliberate review
 mode. Online features are gated by the
 [privacy guard](/architecture/routing-and-privacy/).
+
+> These are the **target** capabilities. What ships when is in the
+> [roadmap](/project/roadmap/) — voice, vision and phone access land in v0.5,
+> and wireless distribution in v0.6.

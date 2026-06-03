@@ -40,6 +40,11 @@ review_bias_guard:
   randomize_order: true
   forbid_self_voting: true
   normalize_style: true
+
+wireless:                       # planned (v0.6) — off by default
+  hub_mode: false               # serve to nearby devices over high-speed Wi-Fi
+  share: [model-packs, tools, council-api]   # never: vault, chats, keys
+  internet_bridge: false        # local LAN only — not air-gapped
 ```
 
 ## Fields
@@ -53,3 +58,4 @@ review_bias_guard:
 | `online_seats` | Frontier [seats](/models/seats/) used on opt-in. |
 | `routing` | Offline preference, escalation trigger, privacy guard, [cost cap](/architecture/routing-and-privacy/). |
 | `review_bias_guard` | Peer-review fairness — see [bias guard](/council/bias-and-confidence/). |
+| `wireless` | **Planned (v0.6)**, off by default — [local distribution](/reference/extensibility/) hub mode; internet-off LAN, not air-gapped. |

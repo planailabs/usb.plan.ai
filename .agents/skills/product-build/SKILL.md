@@ -20,6 +20,7 @@ served at `/docs/project/build-runbook/`). Keep this skill in sync with it.
 6. Browser-only UI (`ui/`) on localhost.
 7. Evals (`evals/`) — Council-vs-Single, raw prompts + traces.
 8. Signed updates (cosign + TUF + xdelta3 + syft, versioned dirs).
+9. **(v0.6) Local wireless distribution** — optional Wi-Fi hub: serve signed model-packs + tools + a local council API to paired peers. Off by default; internet-off LAN, **not air-gapped**; TUF + SHA-256 verified; never shares vault/chats/keys. See `/docs/reference/extensibility/`.
 
 ## Chosen stack (don't re-litigate without reason)
 

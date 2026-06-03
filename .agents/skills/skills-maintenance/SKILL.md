@@ -46,6 +46,30 @@ grep -nE '4321|4322|usb-docs|/docs|base:|outDir' AGENTS.md .agents/skills/**/SKI
 
 Eyeball: every match should still reflect reality.
 
+## Spec versioning & anti-drift (this is a spec repo — guard it)
+
+The docs **are** the product spec *and* the marketing site, so numbers drift
+easily. Rules:
+
+- **One spec version, everywhere.** When bumping the version, update it
+  atomically across: `start-here/welcome.md`, `project/changelog.md` (new
+  entry), `src/pages/index.astro` (announce + pill + OG meta),
+  `src/pages/style-guide.astro`, and the `product-build` / `landing-design`
+  skills. The design-system page (`/style-guide`) and docs must agree.
+- **Single source of truth per fact.** Tier RAM/USB/model specs live only in
+  `hardware/tiers.md`; the council naming taxonomy only in `reference/glossary.md`;
+  model rosters only in `models/seats.md`; engine/STT/VLM detail only in
+  `software-stack.md`. Everywhere else, **link — don't restate numbers.** A
+  duplicated number is a future contradiction.
+- **Terminology:** `reference/glossary.md` is canonical. Distinct names for
+  *local role* vs *local multi-model* vs *online frontier* council. `Privacy-Diff`
+  always hyphenated + capitalized. Lowercase mono for UI/labels/seat names.
+- **Wide tables:** rely on the scroll CSS in `starlight/src/styles/theme.css`
+  (`.sl-markdown-content table { overflow-x:auto }`); for the worst offenders
+  prefer restructuring into stacked rows.
+- **Status honesty:** mark unbuilt capabilities as planned and point to
+  `project/roadmap.md`; don't present future surfaces as current.
+
 ## Hard rule
 
 Audit + update skills **in the same commit** as the structural change. Deferring drift = next agent acts on stale truth.

@@ -40,6 +40,17 @@ Nothing here is proprietary: any host, any USB-C power source, any compliant
 drive. We publish the requirements ([performance reality](/hardware/performance/))
 so the community can assemble and share kits.
 
+## Local distribution (planned · v0.6)
+
+A powered stick (e.g. on a USB-C [power bank](#hardware-extensions)) can become a
+**Wi-Fi hub** that serves signed **model-packs**, tools, and a local **council
+API** to paired nearby devices over high-speed Wi-Fi — so a field team shares one
+stick without per-device installs. **Off by default.** It is **internet-off LAN
+networking, not air-gapped**: peers verify TUF metadata + SHA-256; no internet
+bridge, no vault/chat/key sharing. See the [roadmap](/project/roadmap/),
+[threat model](/security/threat-model/), and candidate
+[wireless hardware](/reference/manufacturing/).
+
 ## Contribute an extension
 
 Add a `plugin/`, `recipe/`, `playbook/`, `model-pack/`, or a documented hardware

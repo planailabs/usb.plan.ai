@@ -42,6 +42,7 @@ Everything runs from the USB drive (exFAT, NVMe-SSD recommended). A FastAPI
 | **Cloud Council** | OpenRouter (first) / native SDKs (optional) | Frontier models on network + consent |
 | **Vault** | Argon2id KDF + AES-256 (age/libsodium) | Passphrase-unlocked; key material never plaintext on the stick |
 | **Phone Access** | Local HTTPS (self-signed) + one-time token | Phone/tablet as 2nd screen, bound to the active LAN IP |
+| **Wireless hub** *(planned · v0.6)* | Wi-Fi 6E/7 local link | Optional "hub mode": serve signed model-packs + a council API to nearby devices. Off by default; **internet-off LAN, not air-gapped** |
 
 The [Council](/council/overview/) runs on top of the local engine (role or
 multi-model) or the cloud council. See [configuration](/reference/configuration/)

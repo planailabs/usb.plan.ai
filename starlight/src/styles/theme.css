@@ -27,3 +27,14 @@
 .site-title { color: var(--sl-color-text-accent); }
 .sl-markdown-content code:not(:where(.expressive-code *)) { color: #86ff63; }
 .sl-markdown-content a { text-underline-offset: 3px; }
+
+/* Wide multi-column tables scroll horizontally instead of overflowing the
+   content column on narrow / mobile viewports. */
+.sl-markdown-content table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.sl-markdown-content table :where(th, td) { white-space: nowrap; }
+.sl-markdown-content table :where(th, td):last-child { white-space: normal; }

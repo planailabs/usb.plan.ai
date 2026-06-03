@@ -20,6 +20,13 @@ sidebar:
 > usb.plan.ai protects your data *at rest on the stick* and *in transit on
 > escalation* — it cannot protect you from a machine that is already owned.
 
+**Planned local wireless distribution (v0.6) is *not* air-gapped.** Hub mode is
+internet-off **LAN** networking: it serves signed model-packs + a council API to
+paired peers (verified via TUF metadata + SHA-256), with no internet bridge and
+no vault/chat/key sharing — but a shared local network is a larger surface than a
+single offline stick. It stays **off by default**, and online escalation still
+requires the [Privacy-Diff](/architecture/routing-and-privacy/).
+
 "Minimal-trace" is deliberate honesty: a portable app cannot leave *zero* trace
 on every OS, so the unavoidable artifacts are listed rather than denied. The
 encrypted vault holds keys, chats, and the [Council trace](/council/the-trace/);
