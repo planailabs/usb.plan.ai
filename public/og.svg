@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
 	<defs>
 		<radialGradient id="glow" cx="0.84" cy="0.06" r="0.75">
-			<stop offset="0" stop-color="#4dffa0" stop-opacity="0.14"/>
-			<stop offset="1" stop-color="#4dffa0" stop-opacity="0"/>
+			<stop offset="0" stop-color="#33ff00" stop-opacity="0.16"/>
+			<stop offset="1" stop-color="#33ff00" stop-opacity="0"/>
 		</radialGradient>
 		<pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
 			<rect width="6" height="3" fill="#000000" opacity="0.16"/>
@@ -11,16 +11,16 @@
 	<rect width="1200" height="630" fill="#06090a"/>
 	<rect width="1200" height="630" fill="url(#glow)"/>
 	<g font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="22">
-		<text x="74" y="86" fill="#4dffa0" letter-spacing="1">▚ usb<tspan fill="#d6e4dc">.plan.ai</tspan></text>
+		<text x="74" y="86" fill="#33ff00" letter-spacing="1">▚ usb<tspan fill="#d6e4dc">.plan.ai</tspan></text>
 		<text x="1126" y="86" fill="#ffc24b" text-anchor="end">v0.2 · concept</text>
 	</g>
-	<text x="70" y="250" font-family="'Space Grotesk', system-ui, sans-serif" font-size="78" font-weight="700" fill="#d6e4dc" letter-spacing="-2">Not one model's <tspan fill="#4dffa0">opinion.</tspan></text>
+	<text x="70" y="250" font-family="'Space Grotesk', system-ui, sans-serif" font-size="78" font-weight="700" fill="#d6e4dc" letter-spacing="-2">Not one model's <tspan fill="#33ff00">opinion.</tspan></text>
 	<text x="70" y="340" font-family="'Space Grotesk', system-ui, sans-serif" font-size="78" font-weight="700" fill="#d6e4dc" letter-spacing="-2">A council's verdict.</text>
 	<g font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="21">
-		<text x="72" y="430" fill="#4dffa0">solver›<tspan fill="#5e7269">  sudo it to skip the errors</tspan></text>
+		<text x="72" y="430" fill="#33ff00">solver›<tspan fill="#5e7269">  sudo it to skip the errors</tspan></text>
 		<text x="72" y="462" fill="#ffc24b">skeptic!<tspan fill="#5e7269">  unverified script = exposure</tspan></text>
 		<text x="72" y="494" fill="#b794ff">chairman=<tspan fill="#d6e4dc">  dry-run, verify, run as you</tspan></text>
-		<text x="72" y="540" fill="#ff5d5d">verdict · blocked <tspan fill="#5e7269">→</tspan> <tspan fill="#4dffa0">safe path</tspan></text>
+		<text x="72" y="540" fill="#ff5d5d">verdict · blocked <tspan fill="#5e7269">→</tspan> <tspan fill="#33ff00">safe path</tspan></text>
 	</g>
 	<text x="74" y="592" font-family="ui-monospace, monospace" font-size="18" fill="#5e7269">offline-first · auditable AI council · apache-2.0 · no cloud required</text>
 	<rect width="1200" height="630" fill="url(#scan)"/>

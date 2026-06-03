@@ -10,11 +10,16 @@ The landing is a **single self-contained file** (`src/pages/index.astro`): scope
 React. It is a faithful port of the Claude Design bundle **"Direction B ·
 Council Trace"** (see `temp/usb-plan-ai-landing-page/` if present).
 
+> **Source of truth:** the **Style Guide** page at `/style-guide`
+> (`src/pages/style-guide.astro`) — color, type, components, motion, voice. The
+> Starlight docs get a light tint from the same tokens via
+> `starlight/src/styles/theme.css` (wired in `starlight/astro.config.mjs#customCss`).
+
 ## Tokens (`:root`) — match `tokens.css`
 
 - Surfaces: `--bg #06090a`, `--panel #0b1011`, `--panel-2 #0f1517`; borders
   `--line #1b2422` / `--line-bright #27332f`.
-- Phosphor green = identity: `--green #4dffa0` (+ `--green-hi #8bffc4`,
+- Phosphor green = identity: `--green #33ff00` (classic CRT; + `--green-hi #86ff63`, `--green-dim #2f9c1f`, `--green-deep #134d08`,
   `--green-dim`, `--green-deep`, `--green-glow`). Accents: `--cyan #38d6ff`
   (online/network), `--amber #ffc24b` (skeptic), `--red #ff5d5d` (security/block),
   `--violet #b794ff` (chairman). Text: `--ink #d6e4dc`, `--ink-soft`, `--muted`.

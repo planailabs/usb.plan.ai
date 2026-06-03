@@ -1,0 +1,29 @@
+/* usb.plan.ai docs — a light phosphor-terminal tint over Starlight's default
+   theme, derived from the Style Guide (/style-guide). Intentionally restrained:
+   accent + carbon surfaces + mono code, not a full reskin. */
+
+:root {
+	/* phosphor accent scale → Starlight accent vars */
+	--sl-color-accent-low: #0b2b07;
+	--sl-color-accent: #2f9c1f;      /* --green-dim: readable green for links/active */
+	--sl-color-accent-high: #86ff63; /* --green-hi */
+	--sl-color-text-accent: #33ff00; /* --green: brand phosphor for emphasis */
+	/* monospace from the brand */
+	--sl-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+/* Dark theme = the product's carbon surfaces (Starlight default is dark-first). */
+:root[data-theme='dark'] {
+	--sl-color-bg: #06090a;          /* --bg */
+	--sl-color-bg-nav: rgba(6, 9, 10, 0.85);
+	--sl-color-bg-sidebar: #080c0d;
+	--sl-color-bg-inline-code: #0f1517;
+	--sl-color-hairline-light: #1b2422;
+	--sl-color-hairline: #131a18;
+	--sl-color-text: #d6e4dc;        /* --ink */
+}
+
+/* A touch of phosphor on the things that carry the brand. */
+.site-title { color: var(--sl-color-text-accent); }
+.sl-markdown-content code:not(:where(.expressive-code *)) { color: #86ff63; }
+.sl-markdown-content a { text-underline-offset: 3px; }

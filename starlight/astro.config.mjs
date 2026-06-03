@@ -30,6 +30,8 @@ export default defineConfig({
 		starlight({
 			title: 'usb.plan.ai',
 			description: 'Portable AI Council — an open-source, offline-first, auditable AI stick.',
+			// Light phosphor-terminal tint derived from the Style Guide (/style-guide).
+			customCss: ['./src/styles/theme.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/planailabs/usb.plan.ai' }],
 			components: {
 				// The default header title links to the docs root (/docs/).
