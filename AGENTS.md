@@ -39,6 +39,8 @@ pnpm preview      # serve dist/
 - `.agents/skills/astro-starlight-setup/SKILL.md` — reusable recipe to stand up Starlight docs at `/docs` + the Starlight/Astro upgrade ritual. Read when bootstrapping docs for another app or bumping Starlight.
 - `.agents/skills/dev-build/SKILL.md` — running, troubleshooting, deps, verification. Read when something won't run or build.
 - `.agents/skills/skills-maintenance/SKILL.md` — prevents skill drift. Read before committing any change that touches paths, names, ports, scripts, or configs referenced in docs.
+- `.agents/skills/product-build/SKILL.md` — agent playbook to implement the PRODUCT (engine, orchestrator, role council, model packs, updates) from the spec. Read before writing product code (vs the website). Canonical version: docs `/docs/project/build-runbook/`.
+- `.agents/skills/landing-design/SKILL.md` — the landing-page design system (dossier hero, instrument-panel layout, restraint, a11y). Read before changing `src/pages/index.astro` visuals.
 
 ## Hard rules
 
@@ -56,9 +58,9 @@ pnpm preview      # serve dist/
 - No tests except the `@plan/remark-base-links` unit tests (`node --test`).
 - No backend / database — static site only.
 - No `wrangler.toml` — Cloudflare Pages config lives in the CF dashboard.
-- No `_headers` / `_redirects` yet (add under `public/` when prod headers/redirects are needed).
+- No `_headers` yet. `public/_redirects` exists — a Cloudflare 301 from `/docs` and `/docs/` to `/docs/start-here/welcome/` (replaces the old meta-refresh).
 - No `.npmrc` — pnpm defaults.
 - No Prettier / ESLint / `.editorconfig` — formatting is by-hand consistency for now.
 - No LICENSE — defaults to "all rights reserved" until decided.
 - No shared styling/theme between main app and docs (independent branding).
-- `/docs/` 308-redirects to `/docs/start-here/welcome/` (Astro `redirects:`). No splash at `/docs/`.
+- `/docs/` → `/docs/start-here/welcome/` via a **Cloudflare 301** (`public/_redirects`); the docs root has no page (no meta-refresh). Local `astro preview` won't honor the rule — prod-only. No splash at `/docs/`.

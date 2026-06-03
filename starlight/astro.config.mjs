@@ -23,11 +23,9 @@ export default defineConfig({
 	markdown: {
 		remarkPlugins: [remarkBaseLinks()],
 	},
-	redirects: {
-		// Source key resolves relative to `base` ('/' → '/docs/'),
-		// destination is NOT auto-prefixed — write the full path.
-		'/': '/docs/start-here/welcome/',
-	},
+	// No meta-refresh redirect for the docs root. Cloudflare Pages does a real
+	// 301 from /docs and /docs/ to the first doc via public/_redirects (cleaner).
+	// (Local `astro preview` won't honor that rule — prod-only.)
 	integrations: [
 		starlight({
 			title: 'usb.plan.ai',

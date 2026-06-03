@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects — real 301s (cleaner than a meta-refresh page).
+# The docs root has no page of its own; send it to the first doc.
+/docs      /docs/start-here/welcome/   301
+/docs/     /docs/start-here/welcome/   301
