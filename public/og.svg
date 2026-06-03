@@ -1,34 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
 	<defs>
-		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-			<stop offset="0" stop-color="#0c0e11"/>
-			<stop offset="1" stop-color="#070809"/>
-		</linearGradient>
-		<radialGradient id="glow" cx="0.82" cy="0.1" r="0.7">
-			<stop offset="0" stop-color="#5ef2a4" stop-opacity="0.16"/>
-			<stop offset="1" stop-color="#5ef2a4" stop-opacity="0"/>
+		<radialGradient id="glow" cx="0.84" cy="0.08" r="0.7">
+			<stop offset="0" stop-color="#4dffa0" stop-opacity="0.14"/>
+			<stop offset="1" stop-color="#4dffa0" stop-opacity="0"/>
 		</radialGradient>
-		<pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-			<path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+		<pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
+			<rect width="6" height="3" fill="#000000" opacity="0.18"/>
 		</pattern>
 	</defs>
-	<rect width="1200" height="630" fill="url(#bg)"/>
-	<rect width="1200" height="630" fill="url(#grid)"/>
+	<rect width="1200" height="630" fill="#06090a"/>
 	<rect width="1200" height="630" fill="url(#glow)"/>
-	<g font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace">
-		<circle cx="80" cy="86" r="7" fill="#5ef2a4"/>
-		<text x="100" y="92" font-size="24" fill="#5ef2a4" letter-spacing="2">usb.plan.ai</text>
-		<text x="1120" y="92" font-size="20" fill="#f7b955" text-anchor="end" letter-spacing="1">v0.2 · concept</text>
+	<g font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" font-size="22">
+		<circle cx="74" cy="80" r="7" fill="#4dffa0"/>
+		<text x="92" y="87" fill="#4dffa0" letter-spacing="1">usb.plan.ai — tty1</text>
+		<text x="1126" y="87" fill="#ffc24b" text-anchor="end">v0.2 · concept</text>
 	</g>
-	<text x="80" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="118" font-weight="700" fill="#e9e5db" letter-spacing="-3">Portable</text>
-	<text x="80" y="420" font-family="Georgia, 'Times New Roman', serif" font-size="118" font-weight="700" fill="#5ef2a4" letter-spacing="-3">AI Council</text>
-	<text x="82" y="500" font-family="system-ui, sans-serif" font-size="30" fill="#9aa1a9">Bring the best models you trust into one auditable council — offline-first.</text>
-	<g font-family="ui-monospace, monospace" font-size="22" fill="#696f77">
-		<text x="82" y="566">First Opinions</text>
-		<text x="340" y="566" fill="#3a3f45">→</text>
-		<text x="380" y="566">Peer Review</text>
-		<text x="600" y="566" fill="#3a3f45">→</text>
-		<text x="640" y="566" fill="#6bb8ff">Chairman</text>
-		<text x="1120" y="566" text-anchor="end" fill="#696f77">Apache-2.0 · offline-first</text>
+	<g font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="20" fill="#5e7269">
+		<text x="74" y="150">[0.61] llama-server :8080 — local <tspan fill="#4dffa0">[ OK ]</tspan></text>
+		<text x="74" y="182">[0.94] role-council: solver skeptic chair <tspan fill="#4dffa0">[ OK ]</tspan></text>
+		<text x="74" y="214">[1.41] privacy-guard: air-gapped <tspan fill="#ffc24b">[ HELD ]</tspan></text>
 	</g>
+	<text x="70" y="350" font-family="'Space Grotesk', system-ui, sans-serif" font-size="104" font-weight="700" fill="#d6e4dc" letter-spacing="-3">Boot your</text>
+	<text x="70" y="452" font-family="'Space Grotesk', system-ui, sans-serif" font-size="104" font-weight="700" fill="#4dffa0" letter-spacing="-3">council.</text>
+	<g font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="22">
+		<text x="72" y="528" fill="#4dffa0">council@usb:~$ <tspan fill="#8bffc4">council "review this offline"</tspan></text>
+		<rect x="612" y="512" width="11" height="22" fill="#4dffa0"/>
+	</g>
+	<text x="74" y="588" font-family="ui-monospace, monospace" font-size="19" fill="#5e7269">offline-first · auditable council · apache-2.0 · no cloud required</text>
+	<rect width="1200" height="630" fill="url(#scan)"/>
 </svg>

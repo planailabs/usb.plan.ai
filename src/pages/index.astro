@@ -1,83 +1,94 @@
 ---
-// usb.plan.ai — landing page (evolved per design council: A+B+C+D).
-// Aesthetic: an "open engineering dossier" — instrument-panel layout with a
-// spec-sheet meta gutter, a real auditable Council-trace record as the hero
-// artifact (not decoration), typographic restraint (modular scale, green =
-// identity, blue = state-only), and a11y/perf hardening (AA contrast for body
-// text, grain stays behind text, one signature motion gated by reduced-motion).
-// Self-contained: scoped CSS + minimal JS (scroll reveal). Docs at /docs.
+// usb.plan.ai — landing page. Aesthetic: phosphor-green CRT / TTY terminal
+// "boot into the product" (adapted from temp/ Terminal-Boot design system).
+// Tokens: bg #06090a, green #4dffa0, accents cyan/violet/amber, ink #d6e4dc.
+// Fonts: JetBrains Mono (terminal) + Space Grotesk (display).
+// Signature: an animated boot log + typed shell prompt; sections render as
+// shell output ($ cmd). CRT scanlines/glow/flicker — all gated by
+// prefers-reduced-motion. AA-contrast body text. Self-contained: scoped CSS +
+// minimal inline JS (scroll reveal). Docs at /docs.
 const repo = 'https://github.com/planailabs/usb.plan.ai';
 
+const boot = [
+	['0.00', 'init council kernel', 'OK'],
+	['0.18', 'mount /dev/usb (exFAT)', 'OK'],
+	['0.37', 'verify model-pack sha256', 'OK'],
+	['0.61', 'llama-server :8080 — local', 'OK'],
+	['0.94', 'role-council: solver skeptic security chair', 'OK'],
+	['1.22', 'whisper.cpp · vision (vlm)', 'OK'],
+	['1.40', 'network probe', 'NONE'],
+	['1.41', 'privacy-guard: air-gapped', 'HELD'],
+];
+
 const seats = [
-	{ name: 'Claude Opus 4.8', role: 'Reasoning', house: 'Anthropic' },
-	{ name: 'GPT-5.5', role: 'Allround', house: 'OpenAI' },
-	{ name: 'Gemini 3.1 Pro', role: 'Long-context · Chairman', house: 'Google' },
-	{ name: 'DeepSeek V4', role: 'Cost / frontier', house: 'DeepSeek' },
-	{ name: 'DeepSeek-R1-Distill 32B', role: 'Local · MIT', house: 'on-device' },
-	{ name: 'Qwen3-32B', role: 'Local agent · Apache-2.0', house: 'on-device' },
+	{ name: 'Claude Opus 4.8', role: 'reasoning', house: 'anthropic' },
+	{ name: 'GPT-5.5', role: 'allround', house: 'openai' },
+	{ name: 'Gemini 3.1 Pro', role: 'long-ctx · chair', house: 'google' },
+	{ name: 'DeepSeek V4', role: 'cost · frontier', house: 'deepseek' },
+	{ name: 'DeepSeek-R1-Distill 32B', role: 'local · MIT', house: 'on-device' },
+	{ name: 'Qwen3-32B', role: 'local agent · apache-2', house: 'on-device' },
 ];
 
 const features = [
-	{ k: 'Local Chat', d: 'Fast single-model answers — the default mode.', tag: 'offline' },
-	{ k: 'Council / Review', d: 'Solve → Skeptic → Synthesis. The deliberate deep mode.', tag: 'offline' },
-	{ k: 'Council Trace', d: 'Every opinion, the peer ranking, the marked dissent.', tag: 'offline' },
-	{ k: 'Voice (STT)', d: 'Push-to-talk, on-device whisper.cpp.', tag: 'offline' },
-	{ k: 'Vision (VLM)', d: 'Read images and documents locally.', tag: 'offline' },
-	{ k: 'Phone Access', d: 'A 2nd screen on your LAN — TLS + one-time token.', tag: 'offline' },
-	{ k: 'BYO API Keys', d: 'Passphrase-encrypted in the on-stick vault.', tag: 'online' },
-	{ k: 'Privacy-Diff', d: 'See exactly what is sent, to whom, at what cost.', tag: 'online' },
+	{ k: 'local_chat', d: 'Fast single-model answers — the default.', tag: 'offline' },
+	{ k: 'council', d: 'Solve → skeptic → synthesis, with the trace.', tag: 'offline' },
+	{ k: 'trace', d: 'Every opinion, the ranking, the dissent.', tag: 'offline' },
+	{ k: 'voice_stt', d: 'Push-to-talk, on-device whisper.cpp.', tag: 'offline' },
+	{ k: 'vision_vlm', d: 'Read images & documents locally.', tag: 'offline' },
+	{ k: 'phone_access', d: '2nd screen on LAN — TLS + one-time token.', tag: 'offline' },
+	{ k: 'byo_keys', d: 'Passphrase-encrypted in the vault.', tag: 'online' },
+	{ k: 'privacy_diff', d: 'See what is sent, to whom, at what cost.', tag: 'online' },
 ];
 
 const playbooks = [
-	{ k: 'Code review', d: 'Run a risky diff past the Skeptic before it ships.' },
-	{ k: 'Incident response', d: 'Triage logs off-grid; get a ranked set of next steps.' },
-	{ k: 'Field notes', d: 'Dictate, summarize, and structure notes with no signal.' },
-	{ k: 'Document triage', d: 'Read a stack of PDFs locally; surface what matters.' },
+	{ k: 'code-review', d: 'Run a risky diff past the Skeptic before it ships.' },
+	{ k: 'incident', d: 'Triage logs off-grid; get ranked next steps.' },
+	{ k: 'field-notes', d: 'Dictate, summarize, structure with no signal.' },
+	{ k: 'doc-triage', d: 'Read a stack of PDFs locally; surface what matters.' },
 ];
 
 const personas = [
-	{ t: 'Privacy Developer', d: 'Review code, logs, architecture locally. Escalate online only when you choose to.' },
-	{ t: 'Field Researcher · Journalist · NGO', d: 'Process sensitive notes, photos and documents on the move, under changing connectivity.' },
-	{ t: 'Security · Compliance Power-User', d: 'Traceable model opinions, minimal-trace, bring-your-own keys.' },
+	{ t: 'privacy developer', d: 'Review code, logs, architecture locally. Escalate online only when you choose to.' },
+	{ t: 'field researcher · journalist', d: 'Process sensitive notes, photos, documents on the move, under changing connectivity.' },
+	{ t: 'security · compliance', d: 'Traceable model opinions, minimal-trace, bring-your-own keys.' },
 ];
 
 const editions = [
-	{ n: 'Pocket', tagline: 'Runs almost anywhere', m: ['1× 4–8B model', 'role council', 'whisper-base voice'], req: '8–12 GB RAM · CPU ok', star: false },
-	{ n: 'Field', tagline: 'Documents & notes, offline', m: ['8B model', 'vision (VLM)', 'voice'], req: '12–16 GB RAM · GPU recommended', star: false },
-	{ n: 'Lab', tagline: 'The real multi-model council', m: ['32B reasoning + 32B agent', '8B + vision', 'deep deliberation'], req: '48–64 GB RAM · GPU · NVMe-SSD', star: true },
+	{ n: 'pocket', tagline: 'runs almost anywhere', m: ['1× 4–8B model', 'role council', 'whisper-base'], req: '8–12 GB RAM · CPU ok', star: false },
+	{ n: 'field', tagline: 'documents & notes, offline', m: ['8B model', 'vision (vlm)', 'voice'], req: '12–16 GB RAM · GPU rec.', star: false },
+	{ n: 'lab', tagline: 'the real multi-model council', m: ['32B reason + 32B agent', '8B + vision', 'deep deliberation'], req: '48–64 GB RAM · GPU · NVMe', star: true },
 ];
 
 const faqs = [
 	{ q: 'Does it really work fully offline?', a: 'Yes — that’s the default. Online is opt-in only and gated by a Privacy-Diff. Nothing leaves the stick without your explicit consent.' },
-	{ q: 'Is there a subscription?', a: 'No. It’s free and open-source (Apache-2.0). Bring your own API keys if you ever want to escalate online.' },
+	{ q: 'Is there a subscription?', a: 'No. Free and open-source (Apache-2.0). Bring your own API keys if you ever want to escalate online.' },
 	{ q: 'What hardware do I need?', a: 'Pocket runs on a normal laptop (8–12 GB RAM, CPU ok). The multi-model Lab tier wants 48–64 GB RAM, a GPU, and an NVMe USB-SSD.' },
 	{ q: 'Council vs a single model — when does it win?', a: '“Review this code / decision / risk and show me the dissent.” For “write me an email,” a single model is fine. The edge is measured in evals, not asserted.' },
 	{ q: 'Is it “zero trace”?', a: 'No — minimal-trace, honestly. No persistent user data on the host, but unavoidable OS artifacts exist and are documented. A compromised host is out of scope.' },
 ];
 
 const compare = [
-	['', 'PortableMind', 'techjarves', 'usb.plan.ai'],
-	['License', 'Closed', 'MIT', 'Apache-2.0'],
-	['Core', 'Single-model', 'Single-model', 'Auditable Council'],
-	['Council mode', '—', '—', 'Opinion · Review · Chairman'],
-	['Online (opt-in)', '—', '—', 'Frontier + Privacy-Diff'],
-	['Engine', 'Proprietary', 'Ollama', 'llama.cpp llama-server'],
-	['Price', '$49–$129', 'Free', 'Free (OSS)'],
+	['', 'portablemind', 'techjarves', 'usb.plan.ai'],
+	['license', 'closed', 'MIT', 'Apache-2.0'],
+	['core', 'single-model', 'single-model', 'auditable council'],
+	['council', '—', '—', 'opinion · review · chair'],
+	['online (opt-in)', '—', '—', 'frontier + privacy-diff'],
+	['engine', 'proprietary', 'ollama', 'llama.cpp llama-server'],
+	['price', '$49–$129', 'free', 'free (oss)'],
 ];
 
-// Section gutter labels — the "instrument panel" spec-sheet rail.
-const SEC = {
-	how: ['§01', 'MODE · DELIBERATE'],
-	vs: ['§02', 'MODE · OFFLINE'],
-	routing: ['§03', 'GUARD · PRIVACY'],
-	seats: ['§04', 'REGISTRY · SEATS'],
-	features: ['§05', 'SURFACE · APP'],
-	playbooks: ['§06', 'MANUAL · FIELD'],
-	editions: ['§07', 'BUILD · TIERS'],
-	who: ['§08', 'PROFILE · USERS'],
-	compare: ['§09', 'INDEX · COMPARE'],
-	faq: ['§10', 'LOG · FAQ'],
-	proof: ['§11', 'NOTE · METHOD'],
+const sections = {
+	how: 'cat how-it-works.md',
+	vs: 'diff cloud offline',
+	routing: './privacy-guard --status',
+	seats: 'ls council/seats',
+	features: 'systemctl status app',
+	playbooks: 'ls playbooks/',
+	editions: './preflight --tiers',
+	who: 'whoami',
+	compare: 'column -t compare.tsv',
+	faq: 'man faq',
+	proof: 'git log --oneline council',
 };
 ---
 
@@ -88,530 +99,523 @@ const SEC = {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>usb.plan.ai — Portable AI Council</title>
-		<meta name="description" content="An open-source, offline-first, auditable AI Council on a USB stick. Your council. Your machine. No cloud required." />
+		<meta name="description" content="An open-source, offline-first, auditable AI Council on a USB stick. Boot your council. No cloud required." />
 		<link rel="canonical" href="https://usb.plan.ai/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://usb.plan.ai/" />
 		<meta property="og:site_name" content="usb.plan.ai" />
 		<meta property="og:title" content="usb.plan.ai — Portable AI Council" />
-		<meta property="og:description" content="Your council. Your machine. No cloud required. Offline-first, auditable, open-source. (v0.2 concept — building in public.)" />
+		<meta property="og:description" content="Boot your council. Offline-first, auditable, open-source. No cloud required. (v0.2 concept — building in public.)" />
 		<meta property="og:image" content="https://usb.plan.ai/og.png" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content="usb.plan.ai — Portable AI Council" />
-		<meta name="twitter:description" content="Bring the best models you trust into one auditable council — offline-first. v0.2 concept, building in public." />
+		<meta name="twitter:description" content="Bring the best models you trust into one auditable council — offline-first. v0.2 concept." />
 		<meta name="twitter:image" content="https://usb.plan.ai/og.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap"
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
 	<body>
-		<div class="grain" aria-hidden="true"></div>
+		<div class="scanlines" aria-hidden="true"></div>
+		<div class="vignette" aria-hidden="true"></div>
 
 		<header class="nav">
 			<a class="brand" href="/"><span class="dot" aria-hidden="true"></span>usb.plan.ai</a>
 			<nav class="nav-links" aria-label="Primary">
-				<a href="#how">How it works</a>
-				<a href="#vs">Cloud vs offline</a>
-				<a href="#editions">Editions</a>
-				<a href="/docs/">Docs</a>
-				<a class="ghost" href={repo}>GitHub ★</a>
+				<a href="#how">how</a>
+				<a href="#vs">cloud_vs_offline</a>
+				<a href="#editions">editions</a>
+				<a href="/docs/">docs</a>
+				<a class="ghost" href={repo}>github ★</a>
 			</nav>
 		</header>
 
 		<a class="concept-banner" href="/docs/project/roadmap/">
-			<b>v0.2 concept &amp; spec</b> — the site and docs exist; the product (engine, council, evals) isn’t built yet. Building in public → roadmap
+			<b>v0.2 concept</b> — site &amp; docs exist; the product (engine, council, evals) isn’t built yet. building in public → roadmap
 		</a>
 
 		<main>
-			<!-- HERO -->
+			<!-- HERO: CRT terminal boot -->
 			<section class="hero">
-				<div class="hero-copy">
-					<p class="kicker"><span class="led amber" aria-hidden="true"></span> Concept · Spec v0.2 · building in public</p>
-					<h1>Your council.<br />Your machine.<br /><span class="accent">No cloud required.</span></h1>
-					<p class="tagline">
-						Offline-first AI on a USB stick — voice, vision, chat, and an
-						<em>auditable council</em> of the models you trust. No login, no
-						subscription, no telemetry.
-					</p>
-					<div class="cta-row">
-						<a class="btn primary" href={repo}>Build your own — free</a>
-						<a class="btn" href="#how">How it works →</a>
+				<div class="crt">
+					<div class="crt-bar">
+						<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="crt-title">usb.plan.ai — tty1</span>
+						<span class="crt-stat"><span class="led" aria-hidden="true"></span> offline</span>
 					</div>
-					<p class="micro">Apache-2.0 · Windows · macOS · Linux · grid-down ready</p>
-				</div>
+					<div class="crt-screen">
+						<ol class="boot" aria-label="Boot log">
+							{boot.map((b, i) => (
+								<li class="boot-line" style={`--i:${i}`}>
+									<span class="t">[{b[0]}]</span>
+									<span class="msg">{b[1]}</span>
+									<span class="dotfill" aria-hidden="true"></span>
+									<span class={`stamp ${b[2] === 'OK' ? 'ok' : b[2] === 'HELD' ? 'held' : 'none'}`}>[ {b[2]} ]</span>
+								</li>
+							))}
+						</ol>
 
-				<!-- The hero artifact: a real, inspectable audit record (not decoration) -->
-				<figure class="dossier" aria-label="Sample Council trace — an auditable deliberation record">
-					<figcaption class="dsr-head">
-						<span class="dsr-id">COUNCIL&nbsp;TRACE</span>
-						<span class="dsr-status"><span class="led g" aria-hidden="true"></span> offline · verified</span>
-					</figcaption>
-					<dl class="dsr-meta">
-						<div><dt>prompt</dt><dd>“run this risky bash script offline”</dd></div>
-						<div><dt>sha256</dt><dd>9f3a1c7b…e10d</dd></div>
-						<div><dt>engine</dt><dd>llama-server · role-council</dd></div>
-						<div><dt>seats</dt><dd>solver · skeptic · security · chairman</dd></div>
-					</dl>
-					<ol class="dsr-log">
-						<li class="op solver"><span class="op-role">solver</span><span class="op-glyph" aria-hidden="true">›</span> run it with <code>sudo</code> to skip the permission errors.</li>
-						<li class="op risk"><span class="op-role">skeptic</span><span class="op-glyph" aria-hidden="true">!</span> <code>sudo</code> + unverified script = full-system exposure.</li>
-						<li class="op risk"><span class="op-role">security</span><span class="op-glyph" aria-hidden="true">!</span> no checksum, no sandbox. block as-is.</li>
-					</ol>
-					<div class="dsr-rank"><span class="op-role">review</span> skeptic ranked highest · accuracy &amp; insight <span class="muted">(anonymized, no self-vote)</span></div>
-					<div class="dsr-verdict">
-						<span class="op-role">chairman</span><span class="op-glyph" aria-hidden="true">=</span>
-						don’t <code>sudo</code> it. dry-run in a sandbox, verify the checksum, run as your user.
+						<div class="hero-head">
+							<p class="kicker">// portable ai council · grid-down ready</p>
+							<h1>Boot your<br /><span class="accent">council.</span></h1>
+							<p class="tagline">Offline-first AI on a USB stick — voice, vision, chat, and an <em>auditable council</em> of the models you trust. No login. No subscription. No telemetry.</p>
+						</div>
+
+						<div class="prompt">
+							<span class="ps1">council@usb:~$</span>
+							<span class="typed">council "review this risky bash script offline"</span>
+							<span class="cursor" aria-hidden="true"></span>
+						</div>
+
+						<div class="cta-row">
+							<a class="btn primary" href={repo}>$ build --free</a>
+							<a class="btn" href="#how">$ man how-it-works</a>
+						</div>
 					</div>
-					<div class="dsr-foot"><span>verdict · blocked → safe path</span><span>signed offline · 2026-06-03</span></div>
+				</div>
+			</section>
+
+			<!-- trust pillars -->
+			<section class="pillars" aria-label="Why it's different">
+				<div class="pillar"><span class="p-tag">[01] cloud</span><b>zero cloud dependency</b><p>Works when the internet doesn’t. No login, no account, no phone-home.</p></div>
+				<div class="pillar"><span class="p-tag">[02] data</span><b>private by default</b><p>Nothing leaves the stick unless you say so. Keys &amp; chats in the vault.</p></div>
+				<div class="pillar"><span class="p-tag">[03] reach</span><b>tri-platform + browser</b><p>Windows, macOS, Linux. Browser-only UI — nothing to install on the host.</p></div>
+			</section>
+
+			<!-- how -->
+			<section class="band" id="how">
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.how}</p>
+				<h2>A council, not a single answer.</h2>
+				<p class="lead">A good single model wins at "write me an email." A council wins at "review this decision, this code, this risk — and show me the dissent."</p>
+				<div class="rows reveal">
+					<div class="row"><span class="row-n">01</span><div><h3>first_opinions</h3><p>N seats answer in parallel — locally as roles, or as real frontier models.</p></div></div>
+					<div class="row"><span class="row-n">02</span><div><h3>peer_review</h3><p>Each seat ranks the others' anonymized answers. Order randomized, no self-voting.</p></div></div>
+					<div class="row"><span class="row-n">03</span><div><h3>chairman</h3><p>Synthesizes a reasoned final answer — plus the full, auditable trace.</p></div></div>
+				</div>
+			</section>
+
+			<!-- trace dossier -->
+			<section class="band" id="trace">
+				<p class="cmd"><span class="ps1">council@usb:~$</span> cat ~/.council/trace.json</p>
+				<figure class="dossier reveal" aria-label="Sample Council trace">
+					<div class="dsr-meta">
+						<span><b>prompt</b> “run this risky bash script offline”</span>
+						<span><b>sha256</b> 9f3a1c7b…e10d</span>
+						<span><b>engine</b> llama-server · role-council</span>
+						<span class="ok"><b>mode</b> offline · verified</span>
+					</div>
+					<ol class="dsr-log">
+						<li class="op solver"><span class="r">solver</span><span class="gl">›</span> run it with <code>sudo</code> to skip the permission errors.</li>
+						<li class="op risk"><span class="r">skeptic</span><span class="gl">!</span> <code>sudo</code> + unverified script = full-system exposure.</li>
+						<li class="op risk"><span class="r">security</span><span class="gl">!</span> no checksum, no sandbox. block as-is.</li>
+					</ol>
+					<div class="dsr-rank"><span class="r">review</span> skeptic ranked highest · accuracy &amp; insight <span class="muted">(anonymized, no self-vote)</span></div>
+					<div class="dsr-verdict"><span class="r">chairman</span><span class="gl">=</span> don’t <code>sudo</code> it. dry-run in a sandbox, verify the checksum, run as your user. dissent on <code>sudo</code> was decisive.</div>
 				</figure>
 			</section>
 
-			<!-- TRUST PILLARS -->
-			<section class="pillars" aria-label="Why it's different">
-				<div class="pillar"><span class="p-tag">01 · cloud</span><b>Zero cloud dependency</b><p>Works when the internet doesn’t. No login, no account, no phone-home.</p></div>
-				<div class="pillar"><span class="p-tag">02 · data</span><b>Private by default</b><p>Nothing leaves the stick unless you say so. Keys &amp; chats encrypted in the vault.</p></div>
-				<div class="pillar"><span class="p-tag">03 · reach</span><b>Tri-platform + browser</b><p>Windows, macOS, Linux. Browser-only UI — nothing to install on the host.</p></div>
-			</section>
-
-			<!-- HOW IT WORKS / COUNCIL -->
-			<section class="band" id="how">
-				<div class="band-meta"><span class="sec">{SEC.how[0]}</span><span class="mode">{SEC.how[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">How it works</p>
-					<h2>A council, not a single answer.</h2>
-					<p class="lead">A good single model wins at "write me an email." A council wins at "review this decision, this code, this risk — and show me the dissent."</p>
-					<div class="rows reveal">
-						<div class="row"><span class="row-n">01</span><div><h3>First Opinions</h3><p>N seats answer in parallel — locally as roles, or as real frontier models.</p></div></div>
-						<div class="row"><span class="row-n">02</span><div><h3>Peer Review</h3><p>Each seat ranks the others' anonymized answers. Order randomized, no self-voting.</p></div></div>
-						<div class="row"><span class="row-n">03</span><div><h3>Chairman</h3><p>Synthesizes a reasoned final answer — plus the full, auditable trace.</p></div></div>
-					</div>
-				</div>
-			</section>
-
-			<!-- CLOUD VS OFFLINE -->
+			<!-- cloud vs offline -->
 			<section class="band" id="vs">
-				<div class="band-meta"><span class="sec">{SEC.vs[0]}</span><span class="mode">{SEC.vs[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Cloud vs offline</p>
-					<h2>When the grid goes down, your chatbot dies. Your council doesn’t.</h2>
-					<div class="versus reveal">
-						<div class="vs-col cloud">
-							<div class="vs-head">Cloud chatbot</div>
-							<ul>
-								<li>Needs a login &amp; a connection</li>
-								<li>Uploads your data to a server</li>
-								<li>One model, one opinion</li>
-								<li>Dies when the grid goes down</li>
-								<li>Subscription, forever</li>
-							</ul>
-						</div>
-						<div class="vs-col ours">
-							<div class="vs-head"><span class="led g" aria-hidden="true"></span> usb.plan.ai</div>
-							<ul>
-								<li>Runs from the stick, air-gapped</li>
-								<li>Data stays local — opt-in to send</li>
-								<li>A council + the dissent, shown</li>
-								<li>Built for grid-down &amp; field work</li>
-								<li>Free · Apache-2.0 · forkable</li>
-							</ul>
-						</div>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.vs}</p>
+				<h2>When the grid goes down, your chatbot dies. Your council doesn’t.</h2>
+				<div class="versus reveal">
+					<div class="vs-col cloud">
+						<div class="vs-head">- cloud chatbot</div>
+						<ul>
+							<li>needs a login &amp; a connection</li>
+							<li>uploads your data to a server</li>
+							<li>one model, one opinion</li>
+							<li>dies when the grid goes down</li>
+							<li>subscription, forever</li>
+						</ul>
+					</div>
+					<div class="vs-col ours">
+						<div class="vs-head">+ usb.plan.ai</div>
+						<ul>
+							<li>runs from the stick, air-gapped</li>
+							<li>data stays local — opt-in to send</li>
+							<li>a council + the dissent, shown</li>
+							<li>built for grid-down &amp; field work</li>
+							<li>free · apache-2.0 · forkable</li>
+						</ul>
 					</div>
 				</div>
 			</section>
 
-			<!-- LOCAL-FIRST / ROUTING -->
+			<!-- routing -->
 			<section class="band" id="routing">
-				<div class="band-meta"><span class="sec">{SEC.routing[0]}</span><span class="mode">{SEC.routing[1]}</span></div>
-				<div class="band-body split">
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.routing}</p>
+				<div class="split">
 					<div>
-						<p class="eyebrow">Local-first, not local-only</p>
 						<h2>Nothing leaves the stick without your word.</h2>
-						<p class="lead">Works fully offline by default. With a network it gets smarter — but every online step shows a <b>Privacy-Diff</b> first.</p>
+						<p class="lead">Works fully offline by default. With a network it gets smarter — but every online step prints a <b>Privacy-Diff</b> first.</p>
 						<ul class="ticks">
-							<li>Default: <span class="state state-off">offline</span> — zero upload.</li>
-							<li>Opt-in: <span class="state state-on">online-council</span> — frontier models, your keys.</li>
-							<li>Keys live passphrase-encrypted in the on-stick vault.</li>
+							<li>default: <span class="state state-off">offline</span> — zero upload.</li>
+							<li>opt-in: <span class="state state-on">online-council</span> — frontier models, your keys.</li>
+							<li>keys live passphrase-encrypted in the vault.</li>
 						</ul>
 					</div>
 					<div class="diff reveal" role="group" aria-label="Privacy-Diff readout">
 						<div class="diff-head">privacy-diff · before send</div>
 						<div class="diff-row"><span>contents</span><b>logs.txt · 2.1 kB</b></div>
-						<div class="diff-row"><span>providers</span><b>Anthropic · OpenAI</b></div>
+						<div class="diff-row"><span>providers</span><b>anthropic · openai</b></div>
 						<div class="diff-row"><span>est. cost</span><b>$0.04</b></div>
-						<div class="diff-row"><span>store locally</span><b>yes</b></div>
-						<div class="diff-actions"><button class="btn sm" type="button">Cancel</button><button class="btn sm primary" type="button">Send to council</button></div>
+						<div class="diff-row"><span>store local</span><b>yes</b></div>
+						<div class="diff-actions"><button class="btn sm" type="button">[esc] cancel</button><button class="btn sm primary" type="button">[↵] send</button></div>
 					</div>
 				</div>
 			</section>
 
-			<!-- SEATS -->
+			<!-- seats -->
 			<section class="band" id="seats">
-				<div class="band-meta"><span class="sec">{SEC.seats[0]}</span><span class="mode">{SEC.seats[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Council seats</p>
-					<h2>Bring the best models you trust.</h2>
-					<p class="lead">Swappable seats — frontier houses online, MIT/Apache families on-device. Defaults the community maintains.</p>
-					<div class="seat-grid reveal">
-						{seats.map((s) => (
-							<div class="seat"><span class="seat-house">{s.house}</span><b>{s.name}</b><span class="seat-role">{s.role}</span></div>
-						))}
-					</div>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.seats}</p>
+				<h2>Bring the best models you trust.</h2>
+				<p class="lead">Swappable seats — frontier houses online, MIT/Apache families on-device.</p>
+				<div class="seat-grid reveal">
+					{seats.map((s) => (
+						<div class="seat"><span class="seat-house">{s.house}/</span><b>{s.name}</b><span class="seat-role">{s.role}</span></div>
+					))}
 				</div>
 			</section>
 
-			<!-- FEATURES -->
+			<!-- features -->
 			<section class="band" id="features">
-				<div class="band-meta"><span class="sec">{SEC.features[0]}</span><span class="mode">{SEC.features[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Inside the app</p>
-					<h2>Everything on the stick.</h2>
-					<div class="feat-grid reveal">
-						{features.map((f) => (
-							<div class="feat"><span class={`state ${f.tag === 'online' ? 'state-on' : 'state-off'}`}>{f.tag}</span><b>{f.k}</b><p>{f.d}</p></div>
-						))}
-					</div>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.features}</p>
+				<h2>Everything on the stick.</h2>
+				<div class="feat-grid reveal">
+					{features.map((f) => (
+						<div class="feat"><span class={`state ${f.tag === 'online' ? 'state-on' : 'state-off'}`}>{f.tag}</span><b>{f.k}</b><p>{f.d}</p></div>
+					))}
 				</div>
 			</section>
 
-			<!-- FIELD MANUAL / PLAYBOOKS -->
+			<!-- playbooks -->
 			<section class="band" id="playbooks">
-				<div class="band-meta"><span class="sec">{SEC.playbooks[0]}</span><span class="mode">{SEC.playbooks[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Field manual</p>
-					<h2>Offline playbooks for when it counts.</h2>
-					<p class="lead">Ready-made workflows — air-gapped, sneakernet your models in, go.</p>
-					<div class="play-grid reveal">
-						{playbooks.map((p, i) => (
-							<div class="play"><span class="play-n">{String(i + 1).padStart(2, '0')}</span><b>{p.k}</b><p>{p.d}</p></div>
-						))}
-					</div>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.playbooks}</p>
+				<h2>Offline playbooks for when it counts.</h2>
+				<div class="play-grid reveal">
+					{playbooks.map((p, i) => (
+						<div class="play"><span class="play-n">{String(i + 1).padStart(2, '0')}</span><b>{p.k}</b><p>{p.d}</p></div>
+					))}
 				</div>
 			</section>
 
-			<!-- EDITIONS -->
+			<!-- editions -->
 			<section class="band" id="editions">
-				<div class="band-meta"><span class="sec">{SEC.editions[0]}</span><span class="mode">{SEC.editions[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Editions</p>
-					<h2>Pick a tier. <span class="accent">Price: $0.</span></h2>
-					<p class="lead">Open-source, Apache-2.0. The <code>preflight-check</code> measures your hardware and recommends one.</p>
-					<div class="ed-grid reveal">
-						{editions.map((e) => (
-							<div class={`ed ${e.star ? 'star' : ''}`}>
-								{e.star && <span class="ed-flag">deepest</span>}
-								<b>{e.n}</b><span class="ed-tag">{e.tagline}</span>
-								<ul>{e.m.map((x) => <li>{x}</li>)}</ul>
-								<span class="ed-req">{e.req}</span>
-								<a class="btn sm primary" href="/docs/start-here/quickstart/">Quickstart →</a>
-							</div>
-						))}
-					</div>
-					<p class="note">A 20 GB model off a normal USB stick = ~2 min just to load. The Lab tier wants an NVMe USB-SSD. We’re honest about that.</p>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.editions}</p>
+				<h2>Pick a tier. <span class="accent">price: $0.</span></h2>
+				<div class="ed-grid reveal">
+					{editions.map((e) => (
+						<div class={`ed ${e.star ? 'star' : ''}`}>
+							{e.star && <span class="ed-flag">deepest</span>}
+							<b>{e.n}</b><span class="ed-tag">{e.tagline}</span>
+							<ul>{e.m.map((x) => <li>{x}</li>)}</ul>
+							<span class="ed-req">{e.req}</span>
+							<a class="btn sm primary" href="/docs/start-here/quickstart/">$ quickstart</a>
+						</div>
+					))}
 				</div>
+				<p class="note">A 20 GB model off a normal stick = ~2 min just to load. The Lab tier wants an NVMe USB-SSD. We’re honest about that.</p>
 			</section>
 
-			<!-- PERSONAS -->
+			<!-- who -->
 			<section class="band" id="who">
-				<div class="band-meta"><span class="sec">{SEC.who[0]}</span><span class="mode">{SEC.who[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">For whom</p>
-					<h2>Built for people who can’t just paste it into a chatbot.</h2>
-					<div class="persona-grid reveal">
-						{personas.map((p, i) => (
-							<div class="persona"><span class="pnum">0{i + 1}</span><h3>{p.t}</h3><p>{p.d}</p></div>
-						))}
-					</div>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.who}</p>
+				<h2>Built for people who can’t just paste it into a chatbot.</h2>
+				<div class="persona-grid reveal">
+					{personas.map((p, i) => (
+						<div class="persona"><span class="pnum">0{i + 1}</span><h3>{p.t}</h3><p>{p.d}</p></div>
+					))}
 				</div>
 			</section>
 
-			<!-- COMPARE -->
+			<!-- compare -->
 			<section class="band" id="compare">
-				<div class="band-meta"><span class="sec">{SEC.compare[0]}</span><span class="mode">{SEC.compare[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Compare</p>
-					<h2>Where it sits.</h2>
-					<div class="table-wrap reveal">
-						<table><tbody>
-							{compare.map((row, r) => (
-								<tr class={r === 0 ? 'thead' : ''}>{row.map((cell, c) => <td class={c === 3 ? 'ours' : ''}>{cell}</td>)}</tr>
-							))}
-						</tbody></table>
-					</div>
-				</div>
-			</section>
-
-			<!-- FAQ -->
-			<section class="band" id="faq">
-				<div class="band-meta"><span class="sec">{SEC.faq[0]}</span><span class="mode">{SEC.faq[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">FAQ</p>
-					<h2>Straight answers.</h2>
-					<div class="faq reveal">
-						{faqs.map((f) => (
-							<details><summary>{f.q}</summary><p>{f.a}</p></details>
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.compare}</p>
+				<h2>Where it sits.</h2>
+				<div class="table-wrap reveal">
+					<table><tbody>
+						{compare.map((row, r) => (
+							<tr class={r === 0 ? 'thead' : ''}>{row.map((cell, c) => <td class={c === 3 ? 'ours' : ''}>{cell}</td>)}</tr>
 						))}
-					</div>
+					</tbody></table>
 				</div>
 			</section>
 
-			<!-- PROVENANCE -->
-			<section class="band proof" id="proof">
-				<div class="band-meta"><span class="sec">{SEC.proof[0]}</span><span class="mode">{SEC.proof[1]}</span></div>
-				<div class="band-body">
-					<p class="eyebrow">Made the way it works</p>
-					<h2>This spec was written by a council.</h2>
-					<p class="lead">v0.2 came out of a 3-stage LLM council — first opinions on Claude Opus 4.8, GPT-5.5 and Gemini 3.1 Pro, peer-reviewed, then synthesized. The corrections are in the <a href="/docs/project/changelog/">changelog</a>. Open, forkable, and built in public.</p>
+			<!-- faq -->
+			<section class="band" id="faq">
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.faq}</p>
+				<h2>Straight answers.</h2>
+				<div class="faq reveal">
+					{faqs.map((f) => (
+						<details><summary>{f.q}</summary><p>{f.a}</p></details>
+					))}
 				</div>
+			</section>
+
+			<!-- proof -->
+			<section class="band proof" id="proof">
+				<p class="cmd"><span class="ps1">council@usb:~$</span> {sections.proof}</p>
+				<h2>This spec was written by a council.</h2>
+				<p class="lead">v0.2 came out of a 3-stage LLM council — first opinions on Claude Opus 4.8, GPT-5.5 and Gemini 3.1 Pro, peer-reviewed, then synthesized. The corrections are in the <a href="/docs/project/changelog/">changelog</a>. Open, forkable, built in public.</p>
 			</section>
 
 			<section class="cta-final">
-				<h2>Open. Offline. Auditable.<br /><span class="accent">Smarter together.</span></h2>
+				<p class="ps1 big">council@usb:~$ <span class="accent">smarter --together</span><span class="cursor" aria-hidden="true"></span></p>
+				<h2>Open. Offline. Auditable.</h2>
 				<div class="cta-row center">
-					<a class="btn primary" href={repo}>Star on GitHub ★</a>
-					<a class="btn" href="/docs/">Read the docs →</a>
+					<a class="btn primary" href={repo}>$ star --github</a>
+					<a class="btn" href="/docs/">$ read --docs</a>
 				</div>
 			</section>
 		</main>
 
 		<footer class="foot">
-			<span>usb.plan.ai — Portable AI Council</span>
-			<span class="muted">Apache-2.0 (code) · model weights keep their own license · plan.ai</span>
+			<span># usb.plan.ai — portable ai council</span>
+			<span class="muted">apache-2.0 (code) · model weights keep their own license · plan.ai</span>
 		</footer>
 
 		<style>
 			:root {
-				/* surfaces */
-				--bg: #0a0b0d; --bg2: #0e1013; --surface: #121519; --surface2: #171b21;
-				--line: rgba(255, 255, 255, 0.07); --line2: rgba(255, 255, 255, 0.13);
-				/* text — body colors all clear WCAG AA on --bg */
-				--text: #ece8df;     /* ~15:1 */
-				--muted: #a7adb5;    /* ~7.6:1 — secondary body */
-				--dim: #767c84;      /* ~4.6:1 — labels/large only */
-				/* identity = green; state-only = blue; warn = amber (sparingly) */
-				--green: #6df2ab; --blue: #74bcff; --amber: #f5b656; --red: #ff7a7a;
-				/* modular type scale */
-				--fs-0: 17px;
-				--fs--1: 14px;
-				--fs-1: clamp(19px, 1.4vw, 22px);
-				--fs-2: clamp(23px, 2vw, 27px);
-				--fs-3: clamp(30px, 4.4vw, 50px);
-				--fs-hero: clamp(44px, 7.4vw, 88px);
-				--maxw: 1180px;
+				--bg: #06090a; --panel: #0b1011; --panel-2: #0f1517;
+				--line: #1b2422; --line-bright: #27332f;
+				--green: #4dffa0; --green-hi: #8bffc4; --green-dim: #2a8f63; --green-deep: #11432f;
+				--green-glow: rgba(77, 255, 160, 0.5);
+				--cyan: #38d6ff; --violet: #b794ff; --amber: #ffc24b; --red: #ff5d5d;
+				--ink: #d6e4dc; --ink-soft: #93a89c; --muted: #5e7269; --faint: #38463f;
+				--mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+				--display: 'Space Grotesk', system-ui, sans-serif;
+				--maxw: 1100px;
 			}
 			* { box-sizing: border-box; }
 			html { scroll-behavior: smooth; }
 			body {
-				margin: 0; background: var(--bg); color: var(--text);
-				font-family: 'IBM Plex Sans', sans-serif; font-size: var(--fs-0); line-height: 1.62;
+				margin: 0; background: var(--bg); color: var(--ink);
+				font-family: var(--mono); font-size: 15.5px; line-height: 1.62;
 				-webkit-font-smoothing: antialiased; overflow-x: hidden;
 				background-image:
-					radial-gradient(115% 75% at 88% -12%, rgba(109, 242, 171, 0.06), transparent 60%),
-					linear-gradient(var(--line) 1px, transparent 1px),
-					linear-gradient(90deg, var(--line) 1px, transparent 1px);
-				background-size: auto, 72px 72px, 72px 72px;
-				background-position: 0 0, -1px -1px, -1px -1px;
+					radial-gradient(120% 80% at 84% -10%, rgba(77,255,160,0.07), transparent 58%),
+					radial-gradient(90% 60% at 6% 4%, rgba(56,214,255,0.045), transparent 55%);
 			}
-			/* grain sits BEHIND content (z-index 0 < 1) and never over text */
-			.grain { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.035;
-				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+			/* CRT overlays — pure decoration, behind nothing legible, motion-gated */
+			.scanlines { position: fixed; inset: 0; z-index: 60; pointer-events: none;
+				background: repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.16) 2px 3px);
+				mix-blend-mode: multiply; opacity: 0.55; animation: scan 8s linear infinite; }
+			.vignette { position: fixed; inset: 0; z-index: 59; pointer-events: none;
+				box-shadow: inset 0 0 200px 40px rgba(0,0,0,0.55); background: radial-gradient(120% 120% at 50% 50%, transparent 60%, rgba(0,0,0,0.35)); }
+			@keyframes scan { to { background-position: 0 600px; } }
+			@keyframes flicker { 0%,100%{opacity:1} 7%{opacity:.93} 9%{opacity:1} 52%{opacity:.97} 54%{opacity:1} }
+			@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+			@keyframes bootIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+			@keyframes type { from { width: 0; } to { width: var(--tw, 30ch); } }
+			@keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
 			main, .nav, .foot, .concept-banner, .pillars { position: relative; z-index: 1; }
 			a { color: inherit; text-decoration: none; }
-			:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
-			code { font-family: 'IBM Plex Mono', monospace; font-size: 0.86em; background: rgba(255,255,255,0.06); padding: 0.1em 0.35em; border-radius: 4px; color: var(--green); }
-			.accent { color: var(--green); } .muted { color: var(--muted); }
+			:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+			code { font-family: var(--mono); font-size: 0.92em; color: var(--green-hi); background: rgba(77,255,160,0.08); padding: 0.05em 0.32em; border-radius: 3px; }
+			.accent { color: var(--green); text-shadow: 0 0 14px var(--green-glow); }
+			.muted { color: var(--muted); }
+			.ps1 { color: var(--green); }
+			.cursor { display: inline-block; width: 9px; height: 1.05em; background: var(--green); box-shadow: 0 0 10px var(--green-glow); vertical-align: text-bottom; margin-left: 4px; animation: blink 1.1s steps(1) infinite; }
 
-			/* state badges — color is never the ONLY signal (text label always present) */
-			.state { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; border: 1px solid; }
-			.state-off { color: var(--green); border-color: rgba(109,242,171,0.4); background: rgba(109,242,171,0.08); }
-			.state-on { color: var(--blue); border-color: rgba(116,188,255,0.4); background: rgba(116,188,255,0.08); }
-			.led { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; background: var(--green); box-shadow: 0 0 9px rgba(109,242,171,0.7); }
-			.led.amber { background: var(--amber); box-shadow: 0 0 9px rgba(245,182,86,0.7); }
+			.state { font-size: 11px; letter-spacing: 0.04em; padding: 2px 7px; border-radius: 3px; border: 1px solid; }
+			.state-off { color: var(--green); border-color: rgba(77,255,160,0.4); background: rgba(77,255,160,0.07); }
+			.state-on { color: var(--cyan); border-color: rgba(56,214,255,0.4); background: rgba(56,214,255,0.07); }
+			.led { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--green); box-shadow: 0 0 9px var(--green-glow); }
 
 			/* NAV */
-			.nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px clamp(18px, 5vw, 48px); backdrop-filter: blur(12px); background: rgba(10,11,13,0.72); border-bottom: 1px solid var(--line); }
-			.brand { font-family: 'IBM Plex Mono', monospace; font-weight: 600; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
-			.brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); animation: pulse 2.8s infinite; }
-			@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-			.nav-links { display: flex; align-items: center; gap: clamp(10px, 2vw, 26px); }
-			.nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; color: var(--muted); transition: color .2s; }
-			.nav-links a:hover { color: var(--text); }
-			.nav-links .ghost { border: 1px solid var(--line2); padding: 6px 12px; border-radius: 7px; color: var(--text); }
+			.nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 13px clamp(16px,4vw,40px); background: rgba(6,9,10,0.8); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+			.brand { font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; gap: 9px; }
+			.brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); animation: blink 2.4s steps(1) infinite; }
+			.nav-links { display: flex; align-items: center; gap: clamp(10px,2vw,22px); }
+			.nav-links a { font-size: 13px; color: var(--ink-soft); }
+			.nav-links a:hover { color: var(--green); }
+			.nav-links .ghost { border: 1px solid var(--line-bright); padding: 6px 12px; border-radius: 6px; color: var(--ink); }
 			.nav-links .ghost:hover { border-color: var(--green); color: var(--green); }
 
-			.concept-banner { display: block; text-align: center; padding: 9px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--text); background: rgba(245,182,86,0.07); border-bottom: 1px solid rgba(245,182,86,0.22); }
+			.concept-banner { display: block; text-align: center; padding: 8px 16px; font-size: 12.5px; color: var(--ink-soft); background: rgba(255,194,75,0.06); border-bottom: 1px solid rgba(255,194,75,0.2); }
 			.concept-banner b { color: var(--amber); }
-			.concept-banner:hover { background: rgba(245,182,86,0.12); }
 
-			/* HERO */
-			.hero { max-width: var(--maxw); margin: 0 auto; padding: clamp(46px, 8vw, 104px) clamp(18px, 5vw, 48px) clamp(26px, 4vw, 52px); display: grid; grid-template-columns: 1.02fr 0.98fr; gap: clamp(28px, 5vw, 60px); align-items: center; position: relative; z-index: 1; }
-			.kicker { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin: 0 0 18px; display: flex; align-items: center; gap: 8px; }
-			h1 { font-family: 'Fraunces', serif; font-weight: 900; font-size: var(--fs-hero); line-height: 0.94; letter-spacing: -0.035em; margin: 0 0 22px; }
-			.tagline { font-size: var(--fs-1); color: var(--text); margin: 0 0 26px; max-width: 34ch; }
-			.tagline em { color: var(--green); font-style: italic; font-family: 'Fraunces', serif; }
-			.cta-row { display: flex; gap: 14px; flex-wrap: wrap; } .cta-row.center { justify-content: center; }
-			.btn { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; padding: 12px 20px; border-radius: 9px; border: 1px solid var(--line2); background: var(--surface); color: var(--text); cursor: pointer; transition: transform .15s, border-color .2s, box-shadow .2s; }
-			.btn:hover { transform: translateY(-2px); border-color: var(--text); }
-			.btn.primary { background: var(--green); color: #04130b; border-color: var(--green); font-weight: 600; }
-			.btn.primary:hover { box-shadow: 0 8px 28px rgba(109,242,171,0.3); }
-			.btn.sm { padding: 8px 14px; font-size: 12.5px; }
-			.micro { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim); margin: 20px 0 0; }
+			/* HERO CRT */
+			.hero { max-width: var(--maxw); margin: 0 auto; padding: clamp(34px,6vw,72px) clamp(16px,4vw,40px) clamp(20px,3vw,40px); }
+			.crt { border: 1px solid var(--line-bright); border-radius: 12px; background: linear-gradient(180deg, var(--panel-2), var(--panel)); box-shadow: 0 0 0 1px rgba(77,255,160,0.05), 0 40px 90px -40px rgba(0,0,0,0.9), inset 0 0 60px rgba(77,255,160,0.03); overflow: hidden; animation: flicker 9s infinite; }
+			.crt-bar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: rgba(0,0,0,0.25); font-size: 12.5px; color: var(--ink-soft); }
+			.dots { display: flex; gap: 6px; } .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-bright); display: block; }
+			.dots i:first-child { background: var(--red); } .dots i:nth-child(2) { background: var(--amber); } .dots i:last-child { background: var(--green); }
+			.crt-title { margin: 0 auto 0 4px; }
+			.crt-stat { display: flex; align-items: center; gap: 7px; color: var(--green); margin-left: auto; }
+			.crt-screen { padding: clamp(18px,3vw,34px); }
 
-			/* HERO ARTIFACT — the audit dossier */
-			.dossier { margin: 0; background: linear-gradient(180deg, var(--surface), var(--bg2)); border: 1px solid var(--line2); border-radius: 14px; overflow: hidden; box-shadow: 0 30px 80px -34px rgba(0,0,0,0.85); font-family: 'IBM Plex Mono', monospace; }
-			.dsr-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); font-size: 12.5px; }
-			.dsr-id { letter-spacing: 0.16em; color: var(--text); }
-			.dsr-status { display: flex; align-items: center; gap: 7px; color: var(--green); }
-			.dsr-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 0; border-bottom: 1px solid var(--line); }
-			.dsr-meta div { display: flex; gap: 8px; padding: 8px 16px; font-size: 11.5px; border-bottom: 1px solid var(--line); }
-			.dsr-meta div:nth-last-child(-n+2) { border-bottom: none; }
-			.dsr-meta dt { color: var(--dim); margin: 0; min-width: 52px; } .dsr-meta dd { color: var(--muted); margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-			.dsr-log { list-style: none; counter-reset: ln; margin: 0; padding: 10px 0; }
-			.op { counter-increment: ln; display: grid; grid-template-columns: 18px 64px 14px 1fr; align-items: start; gap: 8px; padding: 6px 16px; font-size: 13px; line-height: 1.5; color: var(--muted); }
-			.op::before { content: counter(ln, decimal-leading-zero); color: var(--dim); font-size: 11px; padding-top: 1px; }
-			.op-role { color: var(--dim); } .op-glyph { font-weight: 600; }
-			.op.solver .op-glyph { color: var(--muted); }
-			.op.risk .op-role { color: var(--amber); } .op.risk .op-glyph { color: var(--amber); }
-			.dsr-rank { padding: 9px 16px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; gap: 8px; flex-wrap: wrap; }
-			.dsr-rank .op-role { color: var(--dim); }
-			.dsr-verdict { display: grid; grid-template-columns: 64px 14px 1fr; gap: 8px; padding: 12px 16px; font-size: 13px; line-height: 1.5; color: var(--text); background: rgba(109,242,171,0.05); }
-			.dsr-verdict .op-role { color: var(--green); } .dsr-verdict .op-glyph { color: var(--green); font-weight: 600; }
-			.dsr-foot { display: flex; justify-content: space-between; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--line); font-size: 11px; color: var(--dim); }
+			.boot { list-style: none; margin: 0 0 26px; padding: 0; font-size: 13px; }
+			.boot-line { display: flex; align-items: center; gap: 8px; padding: 2px 0; color: var(--ink-soft); opacity: 0; animation: bootIn .34s both; animation-delay: calc(var(--i) * 0.13s); }
+			.boot-line .t { color: var(--green-dim); }
+			.boot-line .msg { color: var(--ink-soft); white-space: nowrap; }
+			.boot-line .dotfill { flex: 1; border-bottom: 1px dotted var(--faint); margin: 0 6px; transform: translateY(-3px); min-width: 14px; }
+			.stamp { font-weight: 600; }
+			.stamp.ok { color: var(--green); } .stamp.held { color: var(--amber); } .stamp.none { color: var(--muted); }
 
-			/* TRUST PILLARS */
-			.pillars { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(18px, 5vw, 48px) clamp(22px, 4vw, 44px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
-			.pillar { padding: 26px clamp(18px, 2.4vw, 32px); border-right: 1px solid var(--line); }
+			.hero-head { margin: 26px 0 22px; }
+			.kicker { color: var(--green-dim); font-size: 12.5px; margin: 0 0 14px; letter-spacing: 0.04em; }
+			h1 { font-family: var(--display); font-weight: 700; font-size: clamp(46px,8vw,92px); line-height: 0.92; letter-spacing: -0.03em; margin: 0; color: var(--ink); }
+			.tagline { font-family: var(--mono); font-size: clamp(14.5px,1.5vw,16.5px); color: var(--ink-soft); margin: 18px 0 0; max-width: 56ch; }
+			.tagline em { color: var(--green); font-style: normal; }
+
+			.prompt { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 12px 14px; margin: 4px 0 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(0,0,0,0.25); font-size: 13.5px; }
+			.prompt .typed { color: var(--green-hi); overflow: hidden; white-space: nowrap; display: inline-block; --tw: 46ch; animation: type 1.5s steps(46) 1.5s both; }
+			.prompt .cursor { margin-left: 0; }
+
+			.cta-row { display: flex; gap: 12px; flex-wrap: wrap; } .cta-row.center { justify-content: center; }
+			.btn { font-family: var(--mono); font-size: 13.5px; font-weight: 500; padding: 11px 18px; border-radius: 7px; border: 1px solid var(--line-bright); background: rgba(255,255,255,0.02); color: var(--ink); cursor: pointer; transition: transform .15s, border-color .2s, box-shadow .2s, background .2s; }
+			.btn:hover { transform: translateY(-2px); border-color: var(--green); color: var(--green); }
+			.btn.primary { background: var(--green); color: #021109; border-color: var(--green); font-weight: 700; }
+			.btn.primary:hover { color: #021109; box-shadow: 0 0 26px var(--green-glow); }
+			.btn.sm { padding: 8px 12px; font-size: 12.5px; }
+
+			/* pillars */
+			.pillars { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(16px,4vw,40px) clamp(20px,3vw,40px); display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border-top: 1px solid var(--line); }
+			.pillar { padding: 24px clamp(14px,2vw,26px); border-right: 1px solid var(--line); }
 			.pillar:last-child { border-right: none; }
-			.p-tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--dim); }
-			.pillar b { display: block; margin: 12px 0 8px; font-size: var(--fs-1); font-weight: 500; color: var(--green); font-family: 'IBM Plex Mono', monospace; letter-spacing: -0.01em; }
-			.pillar p { margin: 0; color: var(--muted); font-size: 15px; }
+			.p-tag { color: var(--green-dim); font-size: 11.5px; }
+			.pillar b { display: block; margin: 10px 0 7px; color: var(--green); font-weight: 600; font-size: 16px; }
+			.pillar p { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
 
-			/* INSTRUMENT-PANEL BANDS — spec-sheet gutter + body */
-			.band { max-width: var(--maxw); margin: 0 auto; padding: clamp(42px, 6.5vw, 84px) clamp(18px, 5vw, 48px); border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(120px, 168px) 1fr; gap: clamp(20px, 4vw, 56px); }
-			.band-meta { font-family: 'IBM Plex Mono', monospace; }
-			.band-meta .sec { display: block; font-size: 22px; color: var(--green); letter-spacing: -0.02em; }
-			.band-meta .mode { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.14em; color: var(--dim); position: sticky; top: 78px; }
-			.band-body { min-width: 0; }
-			.band-body.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(26px, 4vw, 52px); align-items: center; }
-			.eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin: 0 0 14px; }
-			h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: var(--fs-3); line-height: 1.04; letter-spacing: -0.02em; margin: 0 0 18px; max-width: 22ch; }
-			.lead { font-size: var(--fs-1); color: var(--muted); max-width: 60ch; margin: 0; }
+			/* bands */
+			.band { max-width: var(--maxw); margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(16px,4vw,40px); border-top: 1px solid var(--line); }
+			.cmd { font-size: 13px; color: var(--ink-soft); margin: 0 0 22px; }
+			.cmd .ps1 { margin-right: 8px; }
+			h2 { font-family: var(--display); font-weight: 600; font-size: clamp(26px,4vw,44px); line-height: 1.06; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 24ch; color: var(--ink); }
+			.lead { font-size: clamp(15px,1.6vw,17px); color: var(--ink-soft); max-width: 64ch; margin: 0; }
+			.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,48px); align-items: center; }
 
-			/* numbered rows (council stages) */
-			.rows { margin-top: 36px; display: flex; flex-direction: column; }
-			.row { display: grid; grid-template-columns: 56px 1fr; gap: 18px; padding: 22px 0; border-top: 1px solid var(--line); }
+			.rows { margin-top: 30px; }
+			.row { display: grid; grid-template-columns: 50px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); }
 			.row:first-child { border-top: none; }
-			.row-n { font-family: 'IBM Plex Mono', monospace; color: var(--green); font-size: 14px; }
-			.row h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: var(--fs-2); margin: 0 0 6px; }
-			.row p { margin: 0; color: var(--muted); font-size: 15.5px; max-width: 60ch; }
+			.row-n { color: var(--green); font-size: 13px; }
+			.row h3 { font-family: var(--mono); font-weight: 600; font-size: 17px; margin: 0 0 6px; color: var(--green-hi); }
+			.row p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
 
-			.ticks { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 14px; }
-			.ticks li { padding-left: 26px; position: relative; color: var(--text); }
+			.ticks { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 12px; }
+			.ticks li { padding-left: 22px; position: relative; color: var(--ink); }
 			.ticks li::before { content: '▸'; position: absolute; left: 0; color: var(--green); }
 
-			/* cloud vs offline */
-			.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 34px; }
-			.vs-col { border: 1px solid var(--line); border-radius: 14px; padding: 24px; background: var(--surface); }
-			.vs-col.ours { border-color: rgba(109,242,171,0.4); background: rgba(109,242,171,0.04); }
-			.vs-head { font-family: 'IBM Plex Mono', monospace; font-size: 14px; display: flex; align-items: center; gap: 9px; margin-bottom: 16px; color: var(--text); }
-			.vs-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-			.vs-col li { font-size: 15px; padding-left: 24px; position: relative; }
-			.vs-col.cloud li { color: var(--muted); } .vs-col.cloud li::before { content: '✕'; position: absolute; left: 0; color: var(--red); }
-			.vs-col.ours li { color: var(--text); } .vs-col.ours li::before { content: '✓'; position: absolute; left: 0; color: var(--green); }
+			/* dossier */
+			.dossier { margin: 0; border: 1px solid var(--line-bright); border-radius: 10px; overflow: hidden; background: var(--panel); font-size: 13.5px; }
+			.dsr-meta { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+			.dsr-meta span { padding: 9px 14px; border-bottom: 1px solid var(--line); color: var(--ink-soft); font-size: 12px; }
+			.dsr-meta span:nth-last-child(-n+2) { border-bottom: none; }
+			.dsr-meta b { color: var(--green-dim); font-weight: 500; margin-right: 8px; } .dsr-meta .ok b { color: var(--green); }
+			.dsr-log { list-style: none; margin: 0; padding: 10px 0; }
+			.op { display: grid; grid-template-columns: 70px 14px 1fr; gap: 8px; padding: 5px 14px; color: var(--ink-soft); line-height: 1.5; }
+			.op .r { color: var(--muted); } .op .gl { font-weight: 700; }
+			.op.solver .gl { color: var(--ink-soft); }
+			.op.risk .r { color: var(--amber); } .op.risk .gl { color: var(--amber); }
+			.dsr-rank { padding: 9px 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink-soft); font-size: 12.5px; }
+			.dsr-rank .r { color: var(--muted); margin-right: 8px; }
+			.dsr-verdict { display: grid; grid-template-columns: 70px 14px 1fr; gap: 8px; padding: 12px 14px; background: rgba(77,255,160,0.05); color: var(--ink); }
+			.dsr-verdict .r { color: var(--green); } .dsr-verdict .gl { color: var(--green); font-weight: 700; }
 
-			.diff { background: var(--surface); border: 1px solid var(--line2); border-radius: 14px; overflow: hidden; font-family: 'IBM Plex Mono', monospace; }
-			.diff-head { padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); }
-			.diff-row { display: flex; justify-content: space-between; padding: 11px 16px; font-size: 13.5px; border-bottom: 1px solid var(--line); }
-			.diff-row span { color: var(--dim); }
-			.diff-actions { display: flex; gap: 10px; padding: 14px 16px; justify-content: flex-end; }
+			/* versus */
+			.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
+			.vs-col { border: 1px solid var(--line); border-radius: 10px; padding: 22px; background: var(--panel); }
+			.vs-col.ours { border-color: rgba(77,255,160,0.38); background: rgba(77,255,160,0.035); }
+			.vs-head { font-size: 13.5px; margin-bottom: 14px; }
+			.vs-col.cloud .vs-head { color: var(--red); } .vs-col.ours .vs-head { color: var(--green); }
+			.vs-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+			.vs-col li { font-size: 14px; padding-left: 22px; position: relative; }
+			.vs-col.cloud li { color: var(--ink-soft); } .vs-col.cloud li::before { content: '✕'; position: absolute; left: 0; color: var(--red); }
+			.vs-col.ours li { color: var(--ink); } .vs-col.ours li::before { content: '✓'; position: absolute; left: 0; color: var(--green); }
 
-			.seat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 34px; }
-			.seat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 5px; transition: border-color .2s, transform .2s; }
+			.diff { border: 1px solid var(--line-bright); border-radius: 10px; overflow: hidden; background: var(--panel); }
+			.diff-head { padding: 11px 14px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--cyan); }
+			.diff-row { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--line); }
+			.diff-row span { color: var(--muted); } .diff-row b { color: var(--ink); font-weight: 500; }
+			.diff-actions { display: flex; gap: 10px; padding: 13px 14px; justify-content: flex-end; }
+
+			.seat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 30px; }
+			.seat { border: 1px solid var(--line); border-radius: 9px; padding: 16px; background: var(--panel); display: flex; flex-direction: column; gap: 5px; transition: border-color .2s, transform .2s; }
 			.seat:hover { border-color: var(--green); transform: translateY(-3px); }
-			.seat-house { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
-			.seat b { font-size: 16px; font-weight: 500; } .seat-role { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--green); }
+			.seat-house { color: var(--muted); font-size: 11.5px; }
+			.seat b { font-size: 15px; font-weight: 600; color: var(--ink); } .seat-role { color: var(--green); font-size: 12px; }
 
-			.feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
-			.feat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
-			.feat b { display: block; margin: 12px 0 6px; font-size: 16px; font-weight: 500; } .feat p { color: var(--muted); font-size: 14px; margin: 0; }
+			.feat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 30px; }
+			.feat { border: 1px solid var(--line); border-radius: 9px; padding: 16px; background: var(--panel); }
+			.feat b { display: block; margin: 11px 0 6px; font-size: 14.5px; color: var(--green-hi); } .feat p { color: var(--ink-soft); font-size: 13px; margin: 0; }
 
-			.play-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
-			.play { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: var(--surface); }
-			.play-n { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--green); }
-			.play b { display: block; margin: 8px 0 6px; font-size: 16px; font-weight: 500; } .play p { margin: 0; color: var(--muted); font-size: 14px; }
+			.play-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 30px; }
+			.play { border: 1px solid var(--line); border-radius: 9px; padding: 18px; background: var(--panel); }
+			.play-n { color: var(--green); font-size: 12px; }
+			.play b { display: block; margin: 8px 0 6px; font-size: 14.5px; color: var(--ink); } .play p { margin: 0; color: var(--ink-soft); font-size: 13px; }
 
-			.ed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
-			.ed { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; gap: 8px; }
-			.ed.star { border-color: var(--green); box-shadow: 0 0 40px -22px var(--green); }
-			.ed-flag { position: absolute; top: -10px; right: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #04130b; background: var(--green); padding: 3px 10px; border-radius: 20px; }
-			.ed > b { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; }
-			.ed-tag { color: var(--muted); font-size: 14px; }
-			.ed ul { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; }
-			.ed ul li { padding-left: 22px; position: relative; } .ed ul li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-family: 'IBM Plex Mono', monospace; }
-			.ed-req { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim); padding-top: 10px; border-top: 1px solid var(--line); margin-top: auto; }
+			.ed-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 30px; }
+			.ed { position: relative; border: 1px solid var(--line); border-radius: 11px; padding: 24px; background: var(--panel); display: flex; flex-direction: column; gap: 7px; }
+			.ed.star { border-color: var(--green); box-shadow: 0 0 40px -22px var(--green-glow); }
+			.ed-flag { position: absolute; top: -10px; right: 16px; font-size: 11px; color: #021109; background: var(--green); padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+			.ed > b { font-family: var(--display); font-size: 26px; font-weight: 600; color: var(--ink); }
+			.ed-tag { color: var(--ink-soft); font-size: 13px; }
+			.ed ul { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-direction: column; gap: 7px; font-size: 13.5px; color: var(--ink-soft); }
+			.ed ul li { padding-left: 20px; position: relative; } .ed ul li::before { content: '+'; position: absolute; left: 0; color: var(--green); }
+			.ed-req { color: var(--muted); font-size: 12px; padding-top: 10px; border-top: 1px solid var(--line); margin-top: auto; }
 			.ed .btn { margin-top: 12px; text-align: center; }
-			.note { margin-top: 24px; color: var(--dim); font-size: 14px; max-width: 70ch; }
+			.note { margin-top: 22px; color: var(--muted); font-size: 13px; }
 
-			.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
-			.persona { border-left: 2px solid var(--green); padding: 4px 0 4px 22px; }
-			.pnum { font-family: 'IBM Plex Mono', monospace; color: var(--green); font-size: 13px; }
-			.persona h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 21px; margin: 8px 0; } .persona p { color: var(--muted); font-size: 15px; margin: 0; }
+			.persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; }
+			.persona { border-left: 2px solid var(--green); padding: 4px 0 4px 20px; }
+			.pnum { color: var(--green); font-size: 12.5px; }
+			.persona h3 { font-family: var(--mono); font-weight: 600; font-size: 16px; margin: 7px 0; color: var(--green-hi); } .persona p { color: var(--ink-soft); font-size: 14px; margin: 0; }
 
-			.table-wrap { margin-top: 32px; overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
-			table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-			td { padding: 13px 16px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); color: var(--muted); }
+			.table-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+			table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+			td { padding: 12px 14px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); color: var(--ink-soft); }
 			tr:last-child td { border-bottom: none; } td:last-child { border-right: none; }
-			.thead td { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); background: rgba(255,255,255,0.02); }
-			td.ours { color: var(--green); background: rgba(109,242,171,0.05); font-weight: 500; }
-			td:first-child { color: var(--dim); }
+			.thead td { color: var(--ink); background: rgba(255,255,255,0.02); }
+			td.ours { color: var(--green); background: rgba(77,255,160,0.05); }
+			td:first-child { color: var(--muted); }
 
-			.faq { margin-top: 28px; max-width: 760px; }
-			details { border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px; margin-bottom: 10px; background: var(--surface); }
-			details[open] { border-color: var(--line2); }
-			summary { cursor: pointer; padding: 14px 0; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+			.faq { margin-top: 26px; max-width: 760px; }
+			details { border: 1px solid var(--line); border-radius: 9px; padding: 2px 16px; margin-bottom: 9px; background: var(--panel); }
+			details[open] { border-color: var(--line-bright); }
+			summary { cursor: pointer; padding: 13px 0; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 16px; color: var(--ink); }
 			summary::-webkit-details-marker { display: none; }
-			summary::after { content: '+'; font-family: 'IBM Plex Mono', monospace; color: var(--green); font-size: 20px; }
-			details[open] summary::after { content: '−'; }
-			details p { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+			summary::after { content: '+'; color: var(--green); } details[open] summary::after { content: '−'; }
+			details p { margin: 0 0 15px; color: var(--ink-soft); font-size: 14px; }
 
-			.proof .band-body { max-width: 64ch; }
 			.proof a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
 
-			.cta-final { max-width: var(--maxw); margin: 0 auto; padding: clamp(64px, 11vw, 132px) clamp(18px, 5vw, 48px); text-align: center; border-top: 1px solid var(--line); }
-			.cta-final h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(34px, 6vw, 62px); margin: 0 auto 32px; max-width: 16ch; }
+			.cta-final { max-width: var(--maxw); margin: 0 auto; padding: clamp(56px,10vw,120px) clamp(16px,4vw,40px); text-align: center; border-top: 1px solid var(--line); }
+			.cta-final .ps1.big { font-size: clamp(15px,2vw,20px); margin: 0 0 18px; }
+			.cta-final h2 { font-family: var(--display); font-weight: 700; font-size: clamp(30px,5vw,56px); margin: 0 auto 28px; }
 
-			.foot { max-width: var(--maxw); margin: 0 auto; padding: 28px clamp(18px, 5vw, 48px); border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--muted); }
+			.foot { max-width: var(--maxw); margin: 0 auto; padding: 26px clamp(16px,4vw,40px); border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: var(--ink-soft); }
 
-			/* one signature reveal — gated below for reduced-motion */
-			.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+			.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
 			.reveal.in { opacity: 1; transform: none; }
 
 			@media (max-width: 900px) {
-				.hero { grid-template-columns: 1fr; }
-				.band { grid-template-columns: 1fr; gap: 14px; }
-				.band-meta { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
-				.band-meta .sec { font-size: 15px; } .band-meta .mode { margin-top: 0; position: static; }
-				.band-body.split { grid-template-columns: 1fr; }
-				.pillars { grid-template-columns: 1fr; } .pillar { border-right: none; border-bottom: 1px solid var(--line); }
-				.pillar:last-child { border-bottom: none; }
-				.feat-grid, .play-grid { grid-template-columns: 1fr 1fr; }
-				.seat-grid, .persona-grid, .ed-grid, .versus { grid-template-columns: 1fr 1fr; }
+				.split, .versus { grid-template-columns: 1fr; }
+				.pillars { grid-template-columns: 1fr; } .pillar { border-right: none; border-bottom: 1px solid var(--line); } .pillar:last-child { border-bottom: none; }
+				.feat-grid, .play-grid, .seat-grid, .persona-grid, .ed-grid { grid-template-columns: 1fr 1fr; }
 				.nav-links a:not(.ghost) { display: none; }
 			}
-			@media (max-width: 540px) {
-				.seat-grid, .feat-grid, .play-grid, .persona-grid, .ed-grid, .versus { grid-template-columns: 1fr; }
+			@media (max-width: 560px) {
+				.feat-grid, .play-grid, .seat-grid, .persona-grid, .ed-grid { grid-template-columns: 1fr; }
+				.boot-line .msg { white-space: normal; }
 			}
 			@media (prefers-reduced-motion: reduce) {
 				* { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+				.boot-line { opacity: 1; transform: none; }
+				.prompt .typed { width: auto; }
 				.reveal { opacity: 1; transform: none; }
+				.scanlines { display: none; }
 			}
 		</style>
 
 		<script is:inline>
 			const io = new IntersectionObserver(
-				(entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+				(es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
 				{ threshold: 0.12 }
 			);
 			document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
