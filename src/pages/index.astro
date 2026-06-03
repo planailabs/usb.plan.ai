@@ -54,13 +54,39 @@
 					<a href="#seats">council seats</a>
 					<a href="#editions">editions</a>
 					<a href="/docs/">docs</a>
+					<a class="sg" href="/style-guide/">◇ style guide</a>
 				</div>
 				<div class="right">
-					<a class="star" href="https://github.com/planailabs/usb.plan.ai">★ Star <span class="n">GitHub</span></a>
-					<a class="btn btn-pri" href="https://github.com/planailabs/usb.plan.ai">Build your own</a>
+					<a class="star" href="https://github.com/planailabs/usb.plan.ai" target="_blank" rel="noopener noreferrer">★ Star <span class="n">GitHub</span></a>
+					<a class="btn btn-pri sm" href="/docs/start-here/quickstart/">Build your own</a>
+					<button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
 				</div>
 			</div>
 		</nav>
+
+		<!-- mobile slide-in drawer -->
+		<div class="scrim" id="scrim" hidden></div>
+		<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+			<div class="dr-head">
+				<span class="dr-brand">▚ usb<b>.plan.ai</b></span>
+				<button class="dr-close" id="drClose" type="button" aria-label="Close menu">✕</button>
+			</div>
+			<nav class="dr-links" aria-label="Mobile navigation">
+				<a href="#how" style="--d:0"><span class="i">▚</span>how it works</a>
+				<a href="#vs" style="--d:1"><span class="i">▚</span>cloud vs offline</a>
+				<a href="#privacy" style="--d:2"><span class="i">▚</span>privacy</a>
+				<a href="#seats" style="--d:3"><span class="i">▚</span>council seats</a>
+				<a href="#app" style="--d:4"><span class="i">▚</span>inside the app</a>
+				<a href="#editions" style="--d:5"><span class="i">▚</span>editions</a>
+				<a href="#faq" style="--d:6"><span class="i">▚</span>faq</a>
+				<a href="/docs/" style="--d:7"><span class="i">▚</span>docs</a>
+				<a class="sg" href="/style-guide/" style="--d:8"><span class="i">◇</span>style guide / design system</a>
+			</nav>
+			<div class="dr-cta">
+				<a class="btn btn-pri" href="/docs/start-here/quickstart/">Build your own — free</a>
+				<a class="btn btn-ghost" href="https://github.com/planailabs/usb.plan.ai" target="_blank" rel="noopener noreferrer">★ Star on GitHub</a>
+			</div>
+		</aside>
 
 		<!-- HERO — CRT terminal boot -->
 		<header class="hero" id="top">
@@ -95,7 +121,7 @@
 						</div>
 
 						<div class="cta">
-							<a class="btn btn-pri" href="https://github.com/planailabs/usb.plan.ai">Build your own — free</a>
+							<a class="btn btn-pri" href="/docs/start-here/quickstart/">Build your own — free</a>
 							<a class="btn btn-ghost" href="#how">How it works →</a>
 						</div>
 						<p class="meta"><b>Apache-2.0</b> · Windows · macOS · Linux · grid-down ready · no login · no telemetry</p>
@@ -192,7 +218,7 @@
 						</ul>
 					</div>
 					<div class="pdiff reveal" role="group" aria-label="Privacy-Diff before send">
-						<div class="th"><span class="dot cyan" aria-hidden="true"></span>privacy-diff · before send</div>
+						<div class="th"><span class="dot cyan" aria-hidden="true"></span>privacy-diff · before send · sample</div>
 						<div class="rows">
 							<div class="r"><span class="k">contents</span><span class="v">logs.txt · 2.1 kB</span></div>
 							<div class="r"><span class="k">providers</span><span class="v on">Anthropic · OpenAI</span></div>
@@ -280,7 +306,7 @@
 					<div class="bar"><span class="d r" aria-hidden="true"></span><span class="d y" aria-hidden="true"></span><span class="d g" aria-hidden="true"></span><span class="t">root@usb.plan.ai — quickstart</span></div>
 					<div class="scr">
 						<div class="ln"><span class="p">$</span> <span class="cmd">git clone github.com/planailabs/usb.plan.ai</span></div>
-						<div class="ln out"><span class="ok">✓</span> cloned → unzip the release onto your <span class="hl">exFAT</span> drive</div>
+						<div class="ln out"><span class="ok">✓</span> cloned onto your <span class="hl">exFAT</span> drive</div>
 						<div class="ln"><span class="p">$</span> <span class="cmd">./preflight-check</span></div>
 						<div class="ln out"><span class="ok">[ ok ]</span> filesystem exFAT · USB 3.2 read 980 MB/s · RAM 64 GB · GPU detected</div>
 						<div class="ln out"><span class="ok">[ ok ]</span> recommended tier → <span class="hl">Lab</span> (32B×2 + 8B + vision)</div>
@@ -332,7 +358,7 @@
 			<div class="wrap">
 				<h2 class="display">Open. Offline. Auditable.<br /><span class="g">Smarter together.</span></h2>
 				<div class="cta">
-					<a class="btn btn-pri" href="https://github.com/planailabs/usb.plan.ai">★ Star on GitHub</a>
+					<a class="btn btn-pri" href="https://github.com/planailabs/usb.plan.ai" target="_blank" rel="noopener noreferrer">★ Star on GitHub</a>
 					<a class="btn btn-ghost" href="/docs/">Read the docs →</a>
 				</div>
 			</div>
@@ -611,6 +637,61 @@
 				.kick .mode { display:none; }
 				nav.bar .links { display:none; }
 			}
+			/* ===== header button size + mobile menu + slide-in drawer (council UX pass) ===== */
+			.btn.sm { padding: 9px 15px; font-size: 13.5px; }
+			nav.bar .links .sg { color: var(--green); } nav.bar .links .sg:hover { color: var(--green-hi); }
+			.menu-btn { display:none; width:42px; height:38px; border:1px solid var(--line-bright); border-radius:6px; background:transparent; cursor:pointer; padding:0; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
+			.menu-btn span { width:18px; height:2px; background:var(--green); display:block; transition: transform .2s ease, opacity .2s ease; }
+			.menu-btn[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+			.menu-btn[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+			.menu-btn[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+			.scrim { position:fixed; inset:0; z-index:120; background:rgba(2,5,4,0.62); backdrop-filter: blur(2px); opacity:0; transition: opacity .24s ease; }
+			.scrim.open { opacity:1; }
+			.drawer { position:fixed; top:0; right:0; bottom:0; z-index:130; width:min(88vw,360px); transform: translateX(101%); transition: transform .26s cubic-bezier(.4,0,.2,1); background: linear-gradient(180deg,#0b1011,#070a0b); border-left:1px solid var(--green-deep); box-shadow: -30px 0 80px -30px #000, inset 1px 0 0 rgba(51,255,0,0.1); display:flex; flex-direction:column; overflow-y:auto; }
+			.drawer::before { content:""; position:absolute; inset:0; pointer-events:none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,0.14) 2px 3px); mix-blend-mode:multiply; }
+			.drawer.open { transform:none; }
+			.dr-head { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--line); position:relative; z-index:1; }
+			.dr-brand { color:var(--green); font-weight:700; } .dr-brand b { color:var(--ink); }
+			.dr-close { background:transparent; border:1px solid var(--line-bright); color:var(--ink-soft); width:34px; height:34px; border-radius:6px; cursor:pointer; font-size:14px; }
+			.dr-close:hover { border-color:var(--green-dim); color:var(--green); }
+			.dr-links { display:flex; flex-direction:column; padding:14px 12px; gap:2px; position:relative; z-index:1; }
+			.dr-links a { display:flex; align-items:center; gap:12px; padding:13px 12px; border-radius:6px; font-size:clamp(17px,5vw,20px); color:var(--ink); border:1px solid transparent; }
+			.dr-links a .i { color:var(--green-dim); width:1em; text-align:center; }
+			.dr-links a:hover, .dr-links a:focus-visible { background:rgba(51,255,0,0.06); border-color:var(--green-deep); color:var(--green); }
+			.dr-links a.sg { color:var(--green); border-top:1px solid var(--line); margin-top:8px; padding-top:18px; }
+			.dr-links a.sg .i { color:var(--green); }
+			.dr-cta { margin-top:auto; display:flex; flex-direction:column; gap:10px; padding:16px 18px 26px; border-top:1px solid var(--line); position:relative; z-index:1; }
+			.dr-cta .btn { width:100%; justify-content:center; }
+			body.menu-open { overflow:hidden; }
+			@media (prefers-reduced-motion: no-preference) { .drawer.open .dr-links a { opacity:0; animation: bootIn .34s both; animation-delay: calc(.05s + var(--d) * .035s); } }
+
+			/* ===== mobile pass (council) ===== */
+			@media (max-width: 920px) {
+				nav.bar .links { display:none; }
+				nav.bar .right .star, nav.bar .right .btn-pri { display:none; }
+				.menu-btn { display:flex; }
+				.wrap { padding: 0 clamp(16px,5vw,32px); }
+				.h2 { font-size: clamp(26px,6.5vw,42px); max-width:18ch; }
+				.feats { grid-template-columns: 1fr 1fr; }
+				.steps, .models, .tiers, .vs { grid-template-columns: 1fr; }
+				.split { grid-template-columns: 1fr; gap: 32px; }
+				.kick .mode { display:none; }
+			}
+			@media (max-width: 600px) {
+				.hero-head h1 { font-size: clamp(34px,9vw,56px); }
+				.hero .crt-screen { padding: 18px; }
+				.boot { font-size: 12px; } .boot-line .bmsg { white-space: normal; } .boot-line .bdot { display:none; }
+				.boot-line .bok, .boot-line .bheld { margin-left:auto; }
+				.hero .prompt { font-size: 12.5px; } .hero .prompt .typed { animation: none !important; white-space: normal; width: auto; overflow: visible; }
+				.kv .v.nw { white-space: normal; word-break: break-all; }
+				.verdict { flex-wrap: wrap; } .verdict .signed { margin-left: 0; width: 100%; margin-top: 4px; }
+				.ctable { display:block; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch; }
+				.terminal .scr { overflow-x:auto; }
+				.hero .cta, .final .cta { flex-direction: column; align-items: stretch; }
+				.hero .cta .btn, .final .cta .btn { width: 100%; justify-content: center; }
+				.feat p, .seat-role { font-size: 13px; }
+			}
+			@media (max-width: 480px) { .feats { grid-template-columns: 1fr; } }
 		</style>
 
 		<script is:inline>
@@ -633,6 +714,20 @@
 				} else {
 					document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
 				}
+			})();
+		</script>
+		<script is:inline>
+			(function () {
+				var btn = document.getElementById('menuBtn'), drawer = document.getElementById('drawer'),
+				    scrim = document.getElementById('scrim'), closeBtn = document.getElementById('drClose');
+				if (!btn || !drawer || !scrim) return;
+				function open() { drawer.classList.add('open'); scrim.hidden = false; requestAnimationFrame(function () { scrim.classList.add('open'); }); document.body.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); drawer.setAttribute('aria-hidden', 'false'); }
+				function shut() { drawer.classList.remove('open'); scrim.classList.remove('open'); document.body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); drawer.setAttribute('aria-hidden', 'true'); setTimeout(function () { scrim.hidden = true; }, 280); btn.focus(); }
+				btn.addEventListener('click', function () { drawer.classList.contains('open') ? shut() : open(); });
+				closeBtn.addEventListener('click', shut);
+				scrim.addEventListener('click', shut);
+				drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', shut); });
+				document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) shut(); });
 			})();
 		</script>
 	</body>
