@@ -32,6 +32,14 @@ export default defineConfig({
 			description: 'Portable AI Council — an open-source, offline-first, auditable AI stick.',
 			// Light phosphor-terminal tint derived from the Style Guide (/style-guide).
 			customCss: ['./src/styles/theme.css'],
+			// Open external links (e.g. GitHub) from the docs in a new tab.
+			head: [
+				{
+					tag: 'script',
+					content:
+						"document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('a[href^=\"http\"]').forEach(function(a){try{if(new URL(a.href).host!==location.host){a.target='_blank';a.rel='noopener noreferrer';}}catch(e){}});});",
+				},
+			],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/planailabs/usb.plan.ai' }],
 			components: {
 				// The default header title links to the docs root (/docs/).

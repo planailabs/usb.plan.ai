@@ -24,9 +24,23 @@
 }
 
 /* A touch of phosphor on the things that carry the brand. */
-.site-title { color: var(--sl-color-text-accent); }
-.sl-markdown-content code:not(:where(.expressive-code *)) { color: #86ff63; }
+/* Docs top bar — special brand style: a phosphor hairline + mono title. */
+header.header { box-shadow: inset 0 -1px 0 var(--sl-color-accent); }
+.site-title { color: var(--sl-color-text-accent); font-family: var(--sl-font-mono); font-weight: 600; letter-spacing: -0.01em; }
+:root[data-theme='dark'] .sl-markdown-content code:not(:where(.expressive-code *)) { color: #86ff63; }
 .sl-markdown-content a { text-underline-offset: 3px; }
+
+/* Light mode: the bright phosphor green is unreadable on white — use a deeper,
+   readable green, and make the hairlines more intense so structure stays crisp. */
+:root[data-theme='light'] {
+	--sl-color-text-accent: #137a0c;
+	--sl-color-accent: #1c8a12;
+	--sl-color-accent-high: #0d5807;
+	--sl-color-accent-low: #d7f3cf;
+	--sl-color-hairline-light: #aebfb4;
+	--sl-color-hairline: #c2d2c8;
+}
+:root[data-theme='light'] .sl-markdown-content code:not(:where(.expressive-code *)) { color: #0d6b08; }
 
 /* Wide multi-column tables scroll horizontally instead of overflowing the
    content column on narrow / mobile viewports. */

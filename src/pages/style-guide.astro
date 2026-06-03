@@ -207,11 +207,85 @@
 				.swatches { grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); }
 				.clearspace { gap: 18px; padding: 22px; }
 			}
+			/* ===== shared site header bar + slide-in drawer ===== */
+			.btn.sm { padding: 9px 15px; font-size: 13.5px; }
+			nav.bar { position: sticky; top: 0; z-index: 160; backdrop-filter: blur(10px); background: rgba(6,9,10,0.82); border-bottom: 1px solid var(--line); }
+			nav.bar .row { display: flex; align-items: center; gap: clamp(16px,2.4vw,30px); height: 60px; }
+			nav.bar .brand { color: var(--green); font-weight: 700; font-size: 15px; letter-spacing: 0.02em; white-space: nowrap; }
+			nav.bar .brand b { color: var(--ink); }
+			nav.bar .links { display: flex; gap: clamp(14px,1.8vw,24px); font-size: 13.5px; }
+			nav.bar .links a { color: var(--ink-soft); white-space: nowrap; position: relative; padding: 4px 0; transition: color .15s ease; }
+			nav.bar .links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform .18s ease; }
+			nav.bar .links a:hover { color: var(--green); } nav.bar .links a:hover::after { transform: scaleX(1); }
+			nav.bar .links .sg { color: var(--green); } nav.bar .links .sg::after { transform: scaleX(1); opacity: .6; }
+			nav.bar .right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+			nav.bar .gh { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid var(--line-bright); border-radius: 6px; color: var(--ink-soft); transition: color .15s, border-color .15s; }
+			nav.bar .gh:hover { color: var(--green); border-color: var(--green-dim); } nav.bar .gh svg { width: 19px; height: 19px; display: block; }
+			.menu-btn { display: none; width: 42px; height: 38px; border: 1px solid var(--line-bright); border-radius: 6px; background: transparent; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
+			.menu-btn span { width: 18px; height: 2px; background: var(--green); display: block; transition: transform .2s, opacity .2s; }
+			.menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+			.menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+			.menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+			.scrim { position: fixed; inset: 0; z-index: 170; background: rgba(2,5,4,0.62); backdrop-filter: blur(2px); opacity: 0; transition: opacity .24s; } .scrim.open { opacity: 1; }
+			.drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 180; width: min(88vw,360px); transform: translateX(101%); transition: transform .26s cubic-bezier(.4,0,.2,1); background: linear-gradient(180deg,#0b1011,#070a0b); border-left: 1px solid var(--green-deep); box-shadow: -30px 0 80px -30px #000; display: flex; flex-direction: column; overflow-y: auto; } .drawer.open { transform: none; }
+			.dr-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+			.dr-brand { color: var(--green); font-weight: 700; } .dr-brand b { color: var(--ink); }
+			.dr-close { background: transparent; border: 1px solid var(--line-bright); color: var(--ink-soft); width: 34px; height: 34px; border-radius: 6px; cursor: pointer; }
+			.dr-links { display: flex; flex-direction: column; padding: 14px 12px; gap: 2px; }
+			.dr-links a { display: flex; align-items: center; gap: 12px; padding: 13px 12px; border-radius: 6px; font-size: clamp(17px,5vw,20px); color: var(--ink); border: 1px solid transparent; }
+			.dr-links a .i { color: var(--green-dim); width: 1em; text-align: center; } .dr-links a:hover { background: rgba(51,255,0,0.06); border-color: var(--green-deep); color: var(--green); }
+			.dr-links a.sg { color: var(--green); border-top: 1px solid var(--line); margin-top: 8px; padding-top: 18px; } .dr-links a.sg .i { color: var(--green); }
+			.dr-cta { margin-top: auto; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px 26px; border-top: 1px solid var(--line); } .dr-cta .btn { width: 100%; justify-content: center; }
+			body.menu-open { overflow: hidden; }
+			.guidenav { top: 60px; z-index: 140; }
+			section.s { scroll-margin-top: 116px; }
+			@media (max-width: 1080px) { nav.bar .links { display: none; } nav.bar .right .gh, nav.bar .right .btn-pri { display: none; } .menu-btn { display: flex; } }
 		</style>
 	</head>
 	<body>
 		<div class="fx fx-vig" aria-hidden="true"></div>
 		<div class="fx fx-scan" aria-hidden="true"></div>
+
+		<nav class="bar">
+			<div class="wrap row">
+				<a class="brand" href="/">▚ usb<b>.plan.ai</b></a>
+				<div class="links">
+					<a href="/#how">how it works</a>
+					<a href="/#vs">cloud vs offline</a>
+					<a href="/#seats">council seats</a>
+					<a href="/#editions">editions</a>
+					<a href="/docs/">docs</a>
+					<a class="sg" aria-current="page" href="/style-guide/">◇ style guide</a>
+				</div>
+				<div class="right">
+					<a class="gh" href="https://github.com/planailabs/usb.plan.ai" target="_blank" rel="noopener noreferrer" aria-label="usb.plan.ai on GitHub" title="GitHub">
+						<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+					</a>
+					<a class="btn btn-pri sm" href="/docs/start-here/quickstart/">Build your own</a>
+					<button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+				</div>
+			</div>
+		</nav>
+
+		<div class="scrim" id="scrim" hidden></div>
+		<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+			<div class="dr-head">
+				<span class="dr-brand">▚ usb<b>.plan.ai</b></span>
+				<button class="dr-close" id="drClose" type="button" aria-label="Close menu">✕</button>
+			</div>
+			<nav class="dr-links" aria-label="Mobile navigation">
+				<a href="/#how"><span class="i">▚</span>how it works</a>
+				<a href="/#vs"><span class="i">▚</span>cloud vs offline</a>
+				<a href="/#seats"><span class="i">▚</span>council seats</a>
+				<a href="/#editions"><span class="i">▚</span>editions</a>
+				<a href="/docs/"><span class="i">▚</span>docs</a>
+				<a class="sg" href="/style-guide/"><span class="i">◇</span>style guide / design system</a>
+			</nav>
+			<div class="dr-cta">
+				<a class="btn btn-pri" href="/docs/start-here/quickstart/">Build your own — free</a>
+				<a class="btn btn-ghost" href="https://github.com/planailabs/usb.plan.ai" target="_blank" rel="noopener noreferrer">★ Star on GitHub</a>
+			</div>
+		</aside>
 
 		<header class="mast">
 			<div class="rain" data-rain aria-hidden="true"></div>
@@ -478,10 +552,11 @@
 
 		<footer>
 			<div class="wrap row">
-				<span class="brand">▚ usb<b>.plan.ai</b></span>
-				<span style="color:var(--muted)">Style Guide</span>
+				<a class="brand" href="/">▚ usb<b>.plan.ai</b></a>
+				<span style="color:var(--muted)">Style Guide · Portable AI Council</span>
 				<span class="sp"></span>
-				<span style="color:var(--green-dim)">tokens · page styles · v0.3</span>
+				<a href="/docs/" style="color:var(--green-dim)">docs</a>
+				<span style="color:var(--muted)">· Apache-2.0 (code) · plan.ai</span>
 			</div>
 		</footer>
 
@@ -502,6 +577,20 @@
 					});
 				}, { rootMargin: '-15% 0px -75% 0px' });
 				document.querySelectorAll('section.s').forEach(function (s) { spy.observe(s); });
+			})();
+		</script>
+		<script is:inline>
+			(function () {
+				var btn = document.getElementById('menuBtn'), drawer = document.getElementById('drawer'),
+				    scrim = document.getElementById('scrim'), closeBtn = document.getElementById('drClose');
+				if (!btn || !drawer || !scrim) return;
+				function open() { drawer.classList.add('open'); scrim.hidden = false; requestAnimationFrame(function () { scrim.classList.add('open'); }); document.body.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); drawer.setAttribute('aria-hidden', 'false'); }
+				function shut() { drawer.classList.remove('open'); scrim.classList.remove('open'); document.body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); drawer.setAttribute('aria-hidden', 'true'); setTimeout(function () { scrim.hidden = true; }, 280); btn.focus(); }
+				btn.addEventListener('click', function () { drawer.classList.contains('open') ? shut() : open(); });
+				closeBtn.addEventListener('click', shut);
+				scrim.addEventListener('click', shut);
+				drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', shut); });
+				document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) shut(); });
 			})();
 		</script>
 	</body>
