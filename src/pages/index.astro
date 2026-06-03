@@ -106,7 +106,6 @@
 
 		<!-- TRACE SHOWCASE (the deliberation card, kept from Direction B) -->
 		<section class="sec" id="trace">
-			<div class="rainband" data-rain-band aria-hidden="true"></div>
 			<div class="wrap">
 				<div class="kick reveal"><span class="no">§00</span> TRACE <span class="mode">AUDIT · DELIBERATION</span></div>
 				<h2 class="h2 display reveal">Not one model's opinion. A council's verdict.</h2>
@@ -295,6 +294,7 @@
 
 		<!-- COMPARE -->
 		<section class="sec tight" id="compare">
+			<div class="rainband" data-rain-band aria-hidden="true"></div>
 			<div class="wrap">
 				<div class="kick reveal"><span class="no">§07</span> COMPARE <span class="mode">INDEX · WHERE IT SITS</span></div>
 				<h2 class="h2 display reveal">Where it sits.</h2>
@@ -314,7 +314,6 @@
 
 		<!-- FAQ -->
 		<section class="sec tight" id="faq">
-			<div class="rainband" data-rain-band aria-hidden="true"></div>
 			<div class="wrap">
 				<div class="kick reveal"><span class="no">§08</span> FAQ <span class="mode">LOG · STRAIGHT ANSWERS</span></div>
 				<h2 class="h2 display reveal">Straight answers.</h2>
@@ -330,7 +329,6 @@
 
 		<!-- FINAL CTA -->
 		<section class="final">
-			<div class="rainband" data-rain-band aria-hidden="true"></div>
 			<div class="wrap">
 				<h2 class="display">Open. Offline. Auditable.<br /><span class="g">Smarter together.</span></h2>
 				<div class="cta">
@@ -617,7 +615,7 @@
 
 		<script is:inline>
 			(function () {
-				var cols = 130, rows = 12;
+				var cols = 360, rows = 12;
 				document.querySelectorAll('[data-rain-band]').forEach(function (b) {
 					var t = '';
 					for (var r = 0; r < rows; r++) {
