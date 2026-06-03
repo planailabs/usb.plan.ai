@@ -31,7 +31,8 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'usb.plan.ai',
-			description: 'Documentation for usb.plan.ai.',
+			description: 'Portable AI Council — an open-source, offline-first, auditable AI stick.',
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/planailabs/usb.plan.ai' }],
 			components: {
 				// The default header title links to the docs root (/docs/).
 				// Override so the logo points at the main site home (/) instead.
@@ -39,7 +40,15 @@ export default defineConfig({
 			},
 			sidebar: [
 				{ label: 'Start here', items: [{ autogenerate: { directory: 'start-here' } }] },
+				{ label: 'The Council', items: [{ autogenerate: { directory: 'council' } }] },
+				{ label: 'Architecture', items: [{ autogenerate: { directory: 'architecture' } }] },
+				{ label: 'Models', items: [{ autogenerate: { directory: 'models' } }] },
+				{ label: 'Hardware', items: [{ autogenerate: { directory: 'hardware' } }] },
 				{ label: 'Reference', items: [{ autogenerate: { directory: 'reference' } }] },
+				{ label: 'Security', items: [{ autogenerate: { directory: 'security' } }] },
+				{ label: 'Evals', items: [{ autogenerate: { directory: 'evals' } }] },
+				{ label: 'Contributing', items: [{ autogenerate: { directory: 'contributing' } }] },
+				{ label: 'Project', items: [{ autogenerate: { directory: 'project' } }] },
 			],
 		}),
 	],

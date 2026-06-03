@@ -1,7 +1,53 @@
 ---
-// Main app landing. Docs live at /docs (built from starlight/, copied into
-// public/docs/ by the root build:docs script).
-const title = 'usb.plan.ai';
+// usb.plan.ai — landing page.
+// Aesthetic: industrial-terminal "field instrument". Near-black, blueprint grid
+// + grain, phosphor-green (offline) vs signal-blue (online-council) accents.
+// Display: Fraunces · UI/labels: IBM Plex Mono · body: IBM Plex Sans.
+// Self-contained: scoped CSS + a touch of vanilla JS (scroll reveal + trace replay).
+// Docs live at /docs (built from starlight/).
+const repo = 'https://github.com/planailabs/usb.plan.ai';
+
+const seats = [
+	{ name: 'Claude Opus 4.8', role: 'Reasoning', house: 'Anthropic' },
+	{ name: 'GPT-5.5', role: 'Allround', house: 'OpenAI' },
+	{ name: 'Gemini 3.1 Pro', role: 'Long-context · Chairman', house: 'Google' },
+	{ name: 'DeepSeek V4', role: 'Cost / frontier', house: 'DeepSeek' },
+	{ name: 'DeepSeek-R1-Distill 32B', role: 'Local · MIT', house: 'on-device' },
+	{ name: 'Qwen3-32B', role: 'Local agent · Apache-2.0', house: 'on-device' },
+];
+
+const features = [
+	{ k: 'Local Chat', d: 'Fast single-model answers — the default mode.', tag: 'offline' },
+	{ k: 'Council / Review', d: 'Solve → Skeptic → Synthesis. The deliberate deep mode.', tag: 'offline' },
+	{ k: 'Council Trace', d: 'Every opinion, the peer ranking, the marked dissent.', tag: 'offline' },
+	{ k: 'Voice (STT)', d: 'Push-to-talk, on-device whisper.cpp.', tag: 'offline' },
+	{ k: 'Vision (VLM)', d: 'Read images and documents locally.', tag: 'offline' },
+	{ k: 'Phone Access', d: 'A 2nd screen on your LAN — TLS + one-time token.', tag: 'offline' },
+	{ k: 'BYO API Keys', d: 'Passphrase-encrypted in the on-stick vault.', tag: 'online' },
+	{ k: 'Privacy-Diff', d: 'See exactly what is sent, to whom, at what cost.', tag: 'online' },
+];
+
+const personas = [
+	{ t: 'Privacy Developer', d: 'Review code, logs, architecture locally. Escalate online only when you choose to.' },
+	{ t: 'Field Researcher · Journalist · NGO', d: 'Process sensitive notes, photos and documents on the move, under changing connectivity.' },
+	{ t: 'Security · Compliance Power-User', d: 'Traceable model opinions, minimal-trace, bring-your-own keys.' },
+];
+
+const tiers = [
+	{ n: 'Pocket', e: 'Runs almost anywhere, quick help', m: '1× 4–8B + role council + Whisper-base', usb: '16–32 GB', ram: '8–12 GB RAM', gpu: 'CPU ok' },
+	{ n: 'Field', e: 'Documents, notes, stable offline', m: '8B + Vision + Whisper', usb: '32 GB', ram: '12–16 GB RAM', gpu: 'GPU recommended' },
+	{ n: 'Lab', e: 'Real multi-model council, deep', m: '32B reasoning + 32B agent + 8B + Vision', usb: '64–128 GB NVMe-SSD', ram: '48–64 GB RAM', gpu: 'GPU required' },
+];
+
+const compare = [
+	['', 'PortableMind', 'techjarves', 'usb.plan.ai'],
+	['License', 'Closed', 'MIT', 'Apache-2.0'],
+	['Core', 'Single-model', 'Single-model', 'Auditable Council'],
+	['Council mode', '—', '—', 'Opinion · Review · Chairman'],
+	['Online (opt-in)', '—', '—', 'Frontier + Privacy-Diff'],
+	['Engine', 'Proprietary', 'Ollama', 'llama.cpp llama-server'],
+	['Price', '$49–$129', 'Free', 'Free (OSS)'],
+];
 ---
 
 <!doctype html>
@@ -10,38 +56,541 @@ const title = 'usb.plan.ai';
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>{title}</title>
-		<style>
-			:root { color-scheme: light dark; }
-			body {
-				margin: 0;
-				min-height: 100dvh;
-				display: grid;
-				place-items: center;
-				font: 16px/1.6 system-ui, sans-serif;
-				background: Canvas;
-				color: CanvasText;
-			}
-			main { text-align: center; padding: 2rem; }
-			h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin: 0 0 .5rem; }
-			p { opacity: .75; margin: 0 0 1.5rem; }
-			a {
-				display: inline-block;
-				padding: .6rem 1.2rem;
-				border: 1px solid currentColor;
-				border-radius: 8px;
-				text-decoration: none;
-				color: inherit;
-			}
-			a:hover { background: currentColor; }
-			a:hover span { color: Canvas; }
-		</style>
+		<title>usb.plan.ai — Portable AI Council</title>
+		<meta name="description" content="An open-source, offline-first, auditable AI Council on a USB stick. Bring the best models you trust into one auditable council — offline-first." />
+		<meta property="og:title" content="usb.plan.ai — Portable AI Council" />
+		<meta property="og:description" content="Bring the best models you trust into one auditable council — offline-first." />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
+		<div class="grain" aria-hidden="true"></div>
+
+		<header class="nav">
+			<a class="brand" href="/">
+				<span class="dot"></span>usb.plan.ai
+			</a>
+			<nav class="nav-links">
+				<a href="#council">Council</a>
+				<a href="#routing">Local-first</a>
+				<a href="#tiers">Hardware</a>
+				<a href="/docs/">Docs</a>
+				<a class="ghost" href={repo}>GitHub ★</a>
+			</nav>
+		</header>
+
 		<main>
-			<h1>{title}</h1>
-			<p>Static Astro app with Starlight docs.</p>
-			<a href="/docs/"><span>Read the docs →</span></a>
+			<!-- HERO -->
+			<section class="hero">
+				<div class="hero-copy">
+					<p class="kicker">Open · Offline · Auditable</p>
+					<h1>Portable<br /><span class="accent">AI Council</span></h1>
+					<p class="tagline">
+						Bring the best models you trust into one auditable council —
+						<em>offline-first</em>.
+					</p>
+					<p class="scenario">
+						You're on a train with no signal. On the stick: confidential project
+						logs. A local model proposes a fix. The <b class="g">Skeptic</b> finds
+						the risk. The <b class="b">Chairman</b> hands you a safe answer. Later,
+						online, you escalate the same case to frontier models —
+						<b>only after you allow it.</b>
+					</p>
+					<div class="cta-row">
+						<a class="btn primary" href={repo}>Build your own</a>
+						<a class="btn" href="/docs/start-here/quickstart/">5-min quickstart →</a>
+					</div>
+					<p class="micro">Apache-2.0 · llama.cpp · no subscription · no telemetry</p>
+				</div>
+
+				<!-- Animated Council Trace -->
+				<div class="trace" id="trace">
+					<div class="trace-head">
+						<span class="status"><i class="led g"></i> offline</span>
+						<span class="trace-title">council.trace</span>
+						<button class="replay" id="replay" aria-label="Replay">↺</button>
+					</div>
+					<div class="trace-body">
+						<div class="stage" style="--i:0">
+							<span class="lbl">stage 1 · first opinions</span>
+							<div class="op solver"><b>Solver</b> Run it with <code>sudo</code> to skip the permission errors.</div>
+							<div class="op skeptic"><b>Skeptic</b> <span class="flag">⚠ risk</span> <code>sudo</code> + unverified script = full-system exposure.</div>
+							<div class="op sec"><b>Security</b> No checksum, no sandbox. Block as-is.</div>
+						</div>
+						<div class="stage" style="--i:1">
+							<span class="lbl">stage 2 · peer review</span>
+							<div class="rank">Skeptic ↑ ranked highest on accuracy &amp; insight <span class="dim">(anonymized)</span></div>
+						</div>
+						<div class="stage chair" style="--i:2">
+							<span class="lbl b">stage 3 · chairman</span>
+							<div class="op final">
+								<b>Chairman</b> Don't <code>sudo</code> it. Read it, dry-run in a
+								sandbox, verify the checksum, then run as your user. Dissent on
+								<code>sudo</code> was decisive.
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- WHAT'S DIFFERENT -->
+			<section class="band" id="council">
+				<p class="eyebrow">What's different</p>
+				<h2>A council, not a single answer.</h2>
+				<p class="lead">
+					A good single model wins at "write me an email." A council wins at
+					"review this decision, this code, this risk — and show me the dissent."
+				</p>
+				<div class="stages-grid reveal">
+					<div class="scard"><span class="num">01</span><h3>First Opinions</h3><p>N seats answer in parallel — locally as roles, or as real frontier models.</p></div>
+					<div class="scard"><span class="num">02</span><h3>Peer Review</h3><p>Each seat ranks the others' anonymized answers. Order randomized, no self-voting.</p></div>
+					<div class="scard"><span class="num">03</span><h3>Chairman</h3><p>Synthesizes a reasoned final answer — plus the full, auditable trace.</p></div>
+				</div>
+			</section>
+
+			<!-- LOCAL-FIRST / ROUTING -->
+			<section class="band split" id="routing">
+				<div>
+					<p class="eyebrow">Local-first, not local-only</p>
+					<h2>Nothing leaves the stick without your word.</h2>
+					<p class="lead">
+						Works fully offline by default. With a network it gets smarter — but
+						every online step shows a <b>Privacy-Diff</b> first.
+					</p>
+					<ul class="ticks">
+						<li>Default: <b class="g">🟢 offline</b> — zero upload.</li>
+						<li>Opt-in: <b class="b">🔵 online-council</b> — frontier models, your keys.</li>
+						<li>Keys live passphrase-encrypted in the on-stick vault.</li>
+					</ul>
+				</div>
+				<div class="diff reveal">
+					<div class="diff-head">privacy-diff · before send</div>
+					<div class="diff-row"><span>contents</span><b>logs.txt · 2.1 kB</b></div>
+					<div class="diff-row"><span>providers</span><b>Anthropic · OpenAI</b></div>
+					<div class="diff-row"><span>est. cost</span><b>$0.04</b></div>
+					<div class="diff-row"><span>store locally</span><b>yes</b></div>
+					<div class="diff-actions"><button class="btn sm">Cancel</button><button class="btn sm primary">Send to council</button></div>
+				</div>
+			</section>
+
+			<!-- SEATS -->
+			<section class="band" id="seats">
+				<p class="eyebrow">Council seats</p>
+				<h2>Bring the best models you trust.</h2>
+				<p class="lead">Swappable seats — frontier houses online, MIT/Apache families on-device. Defaults the community maintains.</p>
+				<div class="seat-grid reveal">
+					{seats.map((s) => (
+						<div class="seat">
+							<span class="seat-house">{s.house}</span>
+							<b>{s.name}</b>
+							<span class="seat-role">{s.role}</span>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- FEATURES -->
+			<section class="band" id="features">
+				<p class="eyebrow">Inside the app</p>
+				<h2>Everything on the stick.</h2>
+				<div class="feat-grid reveal">
+					{features.map((f) => (
+						<div class={`feat ${f.tag}`}>
+							<span class={`pill ${f.tag}`}>{f.tag}</span>
+							<b>{f.k}</b>
+							<p>{f.d}</p>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- PERSONAS -->
+			<section class="band" id="who">
+				<p class="eyebrow">For whom</p>
+				<h2>Built for people who can't just paste it into a chatbot.</h2>
+				<div class="persona-grid reveal">
+					{personas.map((p, i) => (
+						<div class="persona"><span class="pnum">0{i + 1}</span><h3>{p.t}</h3><p>{p.d}</p></div>
+					))}
+				</div>
+			</section>
+
+			<!-- TIERS -->
+			<section class="band" id="tiers">
+				<p class="eyebrow">Hardware tiers</p>
+				<h2>Honest about what your hardware can do.</h2>
+				<div class="tier-grid reveal">
+					{tiers.map((t, i) => (
+						<div class={`tier ${i === 2 ? 'lab' : ''}`}>
+							<div class="tier-top"><b>{t.n}</b><span>{t.e}</span></div>
+							<p class="tier-m">{t.m}</p>
+							<ul><li>{t.usb}</li><li>{t.ram}</li><li>{t.gpu}</li></ul>
+						</div>
+					))}
+				</div>
+				<p class="note">A 20 GB model off a normal USB stick = ~2 min just to load. The Lab tier wants an NVMe USB-SSD. The <code>preflight-check</code> measures and tells you the truth.</p>
+			</section>
+
+			<!-- COMPARE -->
+			<section class="band" id="compare">
+				<p class="eyebrow">Compare</p>
+				<h2>Where it sits.</h2>
+				<div class="table-wrap reveal">
+					<table>
+						<tbody>
+							{compare.map((row, r) => (
+								<tr class={r === 0 ? 'thead' : ''}>
+									{row.map((cell, c) => (
+										<td class={c === 3 ? 'ours' : ''}>{cell}</td>
+									))}
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<!-- QUICKSTART -->
+			<section class="band" id="quickstart">
+				<p class="eyebrow">Quickstart · 5 minutes</p>
+				<h2>From a fresh stick to a deliberated answer.</h2>
+				<ol class="steps reveal">
+					<li><span>download</span> the release onto a fast drive</li>
+					<li><span>preflight</span> checks FS, USB speed, RAM, GPU</li>
+					<li><span>choose Pocket</span> — one model + the role council</li>
+					<li><span>ask</span> the demo prompt</li>
+					<li><span>see the trace</span> — opinions, ranking, dissent</li>
+				</ol>
+			</section>
+
+			<!-- SECURITY -->
+			<section class="band" id="security">
+				<p class="eyebrow">Security</p>
+				<h2>Minimal-trace — honest, not "zero".</h2>
+				<p class="lead">
+					No persistent user data on the host, no telemetry, no accounts.
+					Unavoidable OS artifacts are documented openly rather than denied.
+					A compromised host (malware/keylogger) is outside the protection scope —
+					we say so.
+				</p>
+			</section>
+
+			<section class="cta-final">
+				<h2>Open. Offline. Auditable.<br /><span class="accent">Smarter together.</span></h2>
+				<div class="cta-row center">
+					<a class="btn primary" href={repo}>Star on GitHub ★</a>
+					<a class="btn" href="/docs/">Read the docs →</a>
+				</div>
+			</section>
 		</main>
+
+		<footer class="foot">
+			<span>usb.plan.ai — Portable AI Council</span>
+			<span class="dim">Apache-2.0 (code) · model weights keep their own license · plan.ai</span>
+		</footer>
+
+		<style>
+			:root {
+				--bg: #0a0b0d;
+				--bg2: #0e1013;
+				--surface: #14171c;
+				--surface2: #181c22;
+				--line: rgba(255, 255, 255, 0.08);
+				--line2: rgba(255, 255, 255, 0.14);
+				--text: #e9e5db;
+				--muted: #9aa1a9;
+				--dim: #696f77;
+				--green: #5ef2a4;
+				--blue: #6bb8ff;
+				--amber: #f7b955;
+				--maxw: 1180px;
+			}
+			* { box-sizing: border-box; }
+			html { scroll-behavior: smooth; }
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--text);
+				font-family: 'IBM Plex Sans', sans-serif;
+				font-size: 17px;
+				line-height: 1.6;
+				-webkit-font-smoothing: antialiased;
+				overflow-x: hidden;
+				/* blueprint grid + radial atmosphere */
+				background-image:
+					radial-gradient(120% 80% at 80% -10%, rgba(94, 242, 164, 0.07), transparent 60%),
+					radial-gradient(90% 70% at 0% 0%, rgba(107, 184, 255, 0.06), transparent 55%),
+					linear-gradient(var(--line) 1px, transparent 1px),
+					linear-gradient(90deg, var(--line) 1px, transparent 1px);
+				background-size: auto, auto, 64px 64px, 64px 64px;
+				background-position: 0 0, 0 0, -1px -1px, -1px -1px;
+			}
+			.grain {
+				position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.04;
+				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+			}
+			main, .nav, .foot { position: relative; z-index: 1; }
+			a { color: inherit; text-decoration: none; }
+			code {
+				font-family: 'IBM Plex Mono', monospace;
+				font-size: 0.85em;
+				background: rgba(255, 255, 255, 0.06);
+				padding: 0.1em 0.35em; border-radius: 4px;
+				color: var(--green);
+			}
+			.g { color: var(--green); } .b { color: var(--blue); }
+			.dim { color: var(--dim); }
+			.accent { color: var(--green); }
+
+			/* NAV */
+			.nav {
+				position: sticky; top: 0; z-index: 50;
+				display: flex; align-items: center; justify-content: space-between;
+				padding: 14px clamp(18px, 5vw, 48px);
+				backdrop-filter: blur(12px);
+				background: rgba(10, 11, 13, 0.7);
+				border-bottom: 1px solid var(--line);
+			}
+			.brand {
+				font-family: 'IBM Plex Mono', monospace; font-weight: 600;
+				letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px;
+			}
+			.brand .dot {
+				width: 9px; height: 9px; border-radius: 50%; background: var(--green);
+				box-shadow: 0 0 12px var(--green); animation: pulse 2.6s infinite;
+			}
+			@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+			.nav-links { display: flex; align-items: center; gap: clamp(10px, 2vw, 26px); }
+			.nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; color: var(--muted); transition: color .2s; }
+			.nav-links a:hover { color: var(--text); }
+			.nav-links .ghost {
+				border: 1px solid var(--line2); padding: 6px 12px; border-radius: 7px; color: var(--text);
+			}
+			.nav-links .ghost:hover { border-color: var(--green); color: var(--green); }
+
+			/* HERO */
+			.hero {
+				max-width: var(--maxw); margin: 0 auto;
+				padding: clamp(48px, 9vw, 110px) clamp(18px, 5vw, 48px) clamp(40px, 6vw, 80px);
+				display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 5vw, 64px);
+				align-items: center;
+			}
+			.kicker {
+				font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.22em;
+				text-transform: uppercase; color: var(--green); margin: 0 0 18px;
+				opacity: 0; animation: rise .7s .05s forwards;
+			}
+			h1 {
+				font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(48px, 8vw, 92px);
+				line-height: 0.92; letter-spacing: -0.03em; margin: 0 0 22px;
+				opacity: 0; animation: rise .8s .12s forwards;
+			}
+			.tagline {
+				font-size: clamp(19px, 2.4vw, 24px); color: var(--text); margin: 0 0 22px; max-width: 30ch;
+				opacity: 0; animation: rise .8s .2s forwards;
+			}
+			.tagline em { color: var(--green); font-style: italic; font-family: 'Fraunces', serif; }
+			.scenario {
+				font-size: 15.5px; color: var(--muted); line-height: 1.7; max-width: 46ch; margin: 0 0 28px;
+				padding-left: 16px; border-left: 2px solid var(--line2);
+				opacity: 0; animation: rise .8s .3s forwards;
+			}
+			.scenario b { color: var(--text); font-weight: 600; }
+			.cta-row { display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; animation: rise .8s .4s forwards; }
+			.cta-row.center { justify-content: center; }
+			.btn {
+				font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;
+				padding: 12px 20px; border-radius: 9px; border: 1px solid var(--line2);
+				background: var(--surface); color: var(--text); cursor: pointer;
+				transition: transform .15s, border-color .2s, background .2s;
+			}
+			.btn:hover { transform: translateY(-2px); border-color: var(--text); }
+			.btn.primary { background: var(--green); color: #04130b; border-color: var(--green); font-weight: 600; }
+			.btn.primary:hover { box-shadow: 0 8px 30px rgba(94, 242, 164, 0.35); }
+			.btn.sm { padding: 8px 14px; font-size: 12.5px; }
+			.micro { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim); margin: 20px 0 0; opacity: 0; animation: rise .8s .5s forwards; }
+			@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+			/* TRACE CARD */
+			.trace {
+				background: linear-gradient(180deg, var(--surface), var(--bg2));
+				border: 1px solid var(--line2); border-radius: 16px; overflow: hidden;
+				box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
+				opacity: 0; animation: rise .9s .35s forwards;
+			}
+			.trace-head {
+				display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+				border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02);
+				font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+			}
+			.status { display: flex; align-items: center; gap: 7px; color: var(--green); }
+			.led { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+			.led.b { background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+			.trace-title { color: var(--dim); margin-left: auto; }
+			.replay {
+				background: none; border: 1px solid var(--line2); color: var(--muted);
+				width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-size: 13px;
+			}
+			.replay:hover { color: var(--green); border-color: var(--green); }
+			.trace-body { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+			.stage {
+				display: flex; flex-direction: column; gap: 8px;
+				opacity: 0; transform: translateY(8px);
+				animation: traceIn .6s forwards; animation-delay: calc(.5s + var(--i) * 1.1s);
+			}
+			.trace.replaying .stage { animation: none; opacity: 0; }
+			.lbl {
+				font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+				text-transform: uppercase; color: var(--dim);
+			}
+			.lbl.b { color: var(--blue); }
+			.op {
+				font-size: 13.5px; line-height: 1.55; padding: 10px 12px; border-radius: 9px;
+				background: var(--surface2); border: 1px solid var(--line);
+			}
+			.op b { font-family: 'IBM Plex Mono', monospace; font-size: 12px; display: inline-block; margin-right: 6px; }
+			.op.solver b { color: var(--muted); }
+			.op.skeptic { border-color: rgba(247, 185, 85, 0.3); }
+			.op.skeptic b { color: var(--amber); }
+			.op.sec b { color: var(--muted); }
+			.flag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--amber); margin-right: 4px; }
+			.rank { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--muted); padding: 8px 12px; }
+			.chair .op.final {
+				border-color: rgba(107, 184, 255, 0.35); background: rgba(107, 184, 255, 0.06);
+			}
+			.chair .op.final b { color: var(--blue); }
+			@keyframes traceIn { to { opacity: 1; transform: none; } }
+
+			/* BANDS */
+			.band {
+				max-width: var(--maxw); margin: 0 auto;
+				padding: clamp(48px, 8vw, 96px) clamp(18px, 5vw, 48px);
+				border-top: 1px solid var(--line);
+			}
+			.eyebrow {
+				font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.2em;
+				text-transform: uppercase; color: var(--green); margin: 0 0 14px;
+			}
+			h2 {
+				font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(30px, 4.6vw, 52px);
+				line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 18px; max-width: 20ch;
+			}
+			.lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 60ch; margin: 0 0 8px; }
+			.band.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+
+			.ticks { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 12px; }
+			.ticks li { padding-left: 26px; position: relative; color: var(--text); }
+			.ticks li::before { content: '▸'; position: absolute; left: 0; color: var(--green); }
+
+			/* reusable card grids */
+			.stages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
+			.scard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px 22px; }
+			.scard .num { font-family: 'IBM Plex Mono', monospace; color: var(--green); font-size: 13px; }
+			.scard h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 23px; margin: 10px 0 8px; }
+			.scard p { color: var(--muted); font-size: 15px; margin: 0; }
+
+			.diff { background: var(--surface); border: 1px solid var(--line2); border-radius: 14px; overflow: hidden; font-family: 'IBM Plex Mono', monospace; }
+			.diff-head { padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); }
+			.diff-row { display: flex; justify-content: space-between; padding: 11px 16px; font-size: 13.5px; border-bottom: 1px solid var(--line); }
+			.diff-row span { color: var(--dim); }
+			.diff-actions { display: flex; gap: 10px; padding: 14px 16px; justify-content: flex-end; }
+
+			.seat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
+			.seat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 5px; transition: border-color .2s, transform .2s; }
+			.seat:hover { border-color: var(--green); transform: translateY(-3px); }
+			.seat-house { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+			.seat b { font-size: 16px; }
+			.seat-role { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--green); }
+
+			.feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 36px; }
+			.feat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; position: relative; }
+			.feat b { display: block; margin: 10px 0 6px; font-size: 16px; }
+			.feat p { color: var(--muted); font-size: 14px; margin: 0; }
+			.pill { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; }
+			.pill.offline { color: var(--green); background: rgba(94, 242, 164, 0.1); }
+			.pill.online { color: var(--blue); background: rgba(107, 184, 255, 0.1); }
+
+			.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
+			.persona { border-left: 2px solid var(--green); padding: 4px 0 4px 22px; }
+			.pnum { font-family: 'IBM Plex Mono', monospace; color: var(--green); font-size: 13px; }
+			.persona h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 21px; margin: 8px 0; }
+			.persona p { color: var(--muted); font-size: 15px; margin: 0; }
+
+			.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }
+			.tier { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+			.tier.lab { border-color: var(--green); box-shadow: 0 0 40px -20px var(--green); }
+			.tier-top { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+			.tier-top b { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; }
+			.tier-top span { color: var(--muted); font-size: 14px; }
+			.tier-m { font-size: 14px; color: var(--text); margin: 0 0 14px; min-height: 42px; }
+			.tier ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--muted); }
+			.tier ul li { padding-top: 8px; border-top: 1px solid var(--line); }
+			.note { margin-top: 26px; color: var(--dim); font-size: 14px; max-width: 70ch; }
+
+			.table-wrap { margin-top: 34px; overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+			table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+			td { padding: 13px 16px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); color: var(--muted); }
+			tr:last-child td { border-bottom: none; }
+			td:last-child { border-right: none; }
+			.thead td { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); background: rgba(255,255,255,0.02); }
+			td.ours { color: var(--green); background: rgba(94, 242, 164, 0.05); font-weight: 500; }
+			.thead td.ours { color: var(--green); }
+			td:first-child { color: var(--dim); }
+
+			.steps { counter-reset: s; list-style: none; padding: 0; margin: 38px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+			.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 16px; font-size: 14px; color: var(--muted); }
+			.steps li::before { content: counter(s, decimal-leading-zero); font-family: 'IBM Plex Mono', monospace; color: var(--green); display: block; margin-bottom: 8px; }
+			.steps li span { color: var(--text); font-weight: 600; display: block; font-family: 'IBM Plex Mono', monospace; font-size: 13px; margin-bottom: 4px; }
+
+			.cta-final { max-width: var(--maxw); margin: 0 auto; padding: clamp(64px, 12vw, 140px) clamp(18px, 5vw, 48px); text-align: center; border-top: 1px solid var(--line); }
+			.cta-final h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(34px, 6vw, 64px); margin: 0 auto 32px; max-width: 16ch; }
+
+			.foot {
+				max-width: var(--maxw); margin: 0 auto; padding: 28px clamp(18px, 5vw, 48px);
+				border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+				font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--muted);
+			}
+
+			/* reveal on scroll */
+			.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s, transform .7s; }
+			.reveal.in { opacity: 1; transform: none; }
+
+			@media (max-width: 860px) {
+				.hero { grid-template-columns: 1fr; }
+				.band.split { grid-template-columns: 1fr; }
+				.stages-grid, .seat-grid, .feat-grid, .persona-grid, .tier-grid, .steps { grid-template-columns: 1fr 1fr; }
+				.nav-links a:not(.ghost) { display: none; }
+			}
+			@media (max-width: 540px) {
+				.stages-grid, .seat-grid, .feat-grid, .persona-grid, .tier-grid, .steps { grid-template-columns: 1fr; }
+			}
+			@media (prefers-reduced-motion: reduce) {
+				* { animation: none !important; transition: none !important; }
+				.kicker, h1, .tagline, .scenario, .cta-row, .micro, .trace, .stage { opacity: 1 !important; transform: none !important; }
+				.reveal { opacity: 1; transform: none; }
+			}
+		</style>
+
+		<script is:inline>
+			// Scroll reveal
+			const io = new IntersectionObserver(
+				(entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('in')),
+				{ threshold: 0.12 }
+			);
+			document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+			// Replay the council trace animation
+			const trace = document.getElementById('trace');
+			const replay = document.getElementById('replay');
+			replay?.addEventListener('click', () => {
+				trace.classList.add('replaying');
+				void trace.offsetWidth; // reflow
+				trace.classList.remove('replaying');
+			});
+		</script>
 	</body>
 </html>

@@ -61,7 +61,7 @@ This is the pre-merge gate (no GitHub Actions CI). CF Pages builds on deploy.
 ```
 dist/
 ├── index.html, favicon.svg
-└── docs/{index.html (redirect), start-here/, reference/, _astro/, pagefind/, sitemap-*.xml}
+└── docs/{index.html (redirect), start-here/, council/, architecture/, models/, hardware/, reference/, security/, evals/, contributing/, project/, _astro/, pagefind/, sitemap-*.xml}
 ```
 
 Base-prefix sanity check:

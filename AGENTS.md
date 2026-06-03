@@ -19,7 +19,7 @@ Agent-facing entry point. Optimize edits here for agent consumption — facts, t
 
 Build pipeline: `starlight/dist` → `public/docs/` (via `build:docs`) → main `astro build` sweeps `public/` into `dist/`. Sequential.
 
-Docs content: markdown under `starlight/src/content/docs/`. Sidebar autogenerates from sections registered in `starlight/astro.config.mjs` (currently `start-here`, `reference`).
+Docs content: markdown under `starlight/src/content/docs/`. Sidebar autogenerates from sections registered in `starlight/astro.config.mjs` (currently `start-here`, `council`, `architecture`, `models`, `hardware`, `reference`, `security`, `evals`, `contributing`, `project`). The landing page (`src/pages/index.astro`) is a self-contained dark "field-instrument" design (Fraunces + IBM Plex; scoped CSS, no Tailwind).
 
 ## Commands
 
