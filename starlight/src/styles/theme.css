@@ -50,5 +50,13 @@ header.header { box-shadow: inset 0 -1px 0 var(--sl-color-accent); }
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
 }
-.sl-markdown-content table :where(th, td) { white-space: nowrap; }
-.sl-markdown-content table :where(th, td):last-child { white-space: normal; }
+.sl-markdown-content table :where(th, td) { overflow-wrap: anywhere; }
+
+/* Narrow viewports: shrink dense tables + wide ASCII code blocks so they fit
+   (or scroll cleanly) instead of overflowing. */
+@media (max-width: 640px) {
+	.sl-markdown-content table { font-size: 12.5px; }
+	.sl-markdown-content :where(th, td) { padding-block: 0.35rem; padding-inline: 0.5rem; }
+	.sl-markdown-content .expressive-code code,
+	.sl-markdown-content pre > code { font-size: 11px; line-height: 1.45; }
+}

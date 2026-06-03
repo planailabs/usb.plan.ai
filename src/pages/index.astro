@@ -135,9 +135,11 @@
 		<!-- TRACE SHOWCASE (the deliberation card, kept from Direction B) -->
 		<section class="sec" id="trace">
 			<div class="wrap">
-				<div class="kick reveal"><span class="no">§00</span> TRACE <span class="mode">AUDIT · DELIBERATION</span></div>
-				<h2 class="h2 display reveal">Not one model's opinion. A council's verdict.</h2>
-				<p class="lead reveal">A single model wins at "write me an email." A council wins at "review this code, this risk, and show me the dissent." Here's a real trace: solver proposes, skeptic and security object, the chairman synthesizes a safe path. Auditable, signed, offline.</p>
+				<div class="t-copy">
+					<div class="kick reveal"><span class="no">§00</span> TRACE <span class="mode">AUDIT · DELIBERATION</span></div>
+					<h2 class="h2 display reveal">Not one model's opinion. A council's verdict.</h2>
+					<p class="lead reveal">A single model wins at "write me an email." A council wins at "review this code, this risk, and show me the dissent." Here's a real trace: solver proposes, skeptic and security object, the chairman synthesizes a safe path. Auditable, signed, offline.</p>
+				</div>
 				<div class="trace reveal">
 					<div class="th">⬡ council trace <span class="sp"><span class="dot" aria-hidden="true"></span>offline · verified</span></div>
 					<div class="body">
@@ -714,6 +716,23 @@
 				nav.bar .links { display: none; }
 				nav.bar .right .gh, nav.bar .right .btn-pri { display: none; }
 				.menu-btn { display: flex; }
+			}
+			/* ===== section composition pass (desktop · design council) ===== */
+			/* §00 TRACE — two-column instrument panel: copy left, trace card right */
+			#trace .wrap { display: grid; grid-template-columns: minmax(340px, 0.9fr) minmax(520px, 640px); gap: clamp(32px, 5vw, 64px); align-items: start; }
+			#trace .t-copy { grid-column: 1; }
+			#trace .h2 { max-width: 14ch; } #trace .lead { max-width: 46ch; margin-top: 16px; }
+			#trace .trace { grid-column: 2; max-width: none; margin-top: 0; }
+			/* tighten intros + balance block widths */
+			.steps { margin-top: 40px; }
+			.vs { margin-top: 36px; } #vs .h2 { max-width: 24ch; }
+			.split { grid-template-columns: minmax(0, 600px) 400px; gap: clamp(32px, 5vw, 72px); align-items: start; }
+			.models { gap: 16px; }
+			.terminal { max-width: 920px; margin-left: auto; margin-right: auto; }
+			@media (max-width: 920px) {
+				#trace .wrap { display: block; }
+				#trace .trace { max-width: none; margin-top: 28px; }
+				.split { grid-template-columns: 1fr; }
 			}
 		</style>
 
