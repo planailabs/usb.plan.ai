@@ -5,8 +5,8 @@ sidebar:
   order: 1
 ---
 
-usb.plan.ai is a **council kit**: recipes, model-packs, plugins, playbooks — not
-a monolithic product. Contributors win stars via clear docking points.
+usb.plan.ai is a **council kit**: recipes, model-packs, plugins, playbooks. It is
+not a monolithic product. Contributors get clear docking points.
 
 | Directory | Contributor hook |
 |---|---|
@@ -24,7 +24,7 @@ download release → run preflight → choose Pocket → ask demo prompt → see
 ```
 
 Demo prompt: *"I have to run this risky bash script offline. Check benefit,
-risks, and a better alternative."* — the Skeptic finds real errors a single chat
+risks, and a better alternative."* The Skeptic finds real errors a single chat
 misses. See the [quickstart](/start-here/quickstart/).
 
 ## Repo docs

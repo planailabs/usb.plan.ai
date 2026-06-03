@@ -7,14 +7,14 @@ sidebar:
 
 usb.plan.ai is **fully open and hackable** (Apache-2.0 code). No lock-in, no
 sealed firmware, no "approved" store. If you can read a manifest, you can extend
-it — in software *and* hardware.
+it in software *and* hardware.
 
 ## Software extensions
 
 | Surface | Directory | What you add |
 |---|---|---|
 | **Plugins** | `plugins/` | New providers (a cloud or local backend), models, or tools the orchestrator can call. A plugin is a folder with a `plugin.json` manifest (id, kind, entrypoint, capabilities) + an entrypoint the [orchestrator](/reference/software-stack/) discovers at startup. |
-| **Recipes** | `recipes/` | Council roles, seat line-ups, and use-case presets — pure config, no code. |
+| **Recipes** | `recipes/` | Council roles, seat line-ups, and use-case presets; pure config, no code. |
 | **Playbooks** | `playbooks/` | Offline workflows (code review, incident response, field notes…). |
 | **Model packs** | `model-packs/` | Verified GGUF manifests (license + SHA-256). |
 
@@ -25,13 +25,13 @@ any network egress).
 
 ## Hardware extensions
 
-The stick is the **start**, not the whole product. "Bring your own host" — and
+The stick is the **start**, not the whole product. Bring your own host and
 extend it:
 
 | Extension | Why |
 |---|---|
-| **USB-C PD power bank** | Local inference is power-hungry; a USB-C Power-Delivery bank (e.g. 20,000 mAh+, 60–100 W PD) keeps a laptop/handheld running the council off-grid for hours. The field-kit staple. |
-| **NVMe USB-SSD** | The performance backbone — see [hardware procurement](/reference/hardware-procurement/). |
+| **USB-C PD power bank** | Local inference is power-hungry; a USB-C Power-Delivery bank (e.g. 20,000 mAh+, 60-100 W PD) keeps a laptop/handheld running the council off-grid for hours. The field-kit staple. |
+| **NVMe USB-SSD** | The performance backbone; see [hardware procurement](/reference/hardware-procurement/). |
 | **eGPU enclosure** | Turns a thin laptop into a [Lab-tier](/hardware/tiers/) multi-model host. |
 | **Single-board / handheld host** | Run from a Pi-class board or handheld; `llama-server` is a portable binary with CPU fallback. |
 | **Rugged field kit** | SSD + power bank + host in a waterproof case = a self-contained, grid-down council. |
@@ -44,7 +44,7 @@ so the community can assemble and share kits.
 
 A powered stick (e.g. on a USB-C [power bank](#hardware-extensions)) can become a
 **Wi-Fi hub** that serves signed **model-packs**, tools, and a local **council
-API** to paired nearby devices over high-speed Wi-Fi — so a field team shares one
+API** to paired nearby devices over high-speed Wi-Fi. A field team can share one
 stick without per-device installs. **Off by default.** It is **internet-off LAN
 networking, not air-gapped**: peers verify TUF metadata + SHA-256; no internet
 bridge, no vault/chat/key sharing. See the [roadmap](/project/roadmap/),
@@ -54,4 +54,4 @@ bridge, no vault/chat/key sharing. See the [roadmap](/project/roadmap/),
 ## Contribute an extension
 
 Add a `plugin/`, `recipe/`, `playbook/`, `model-pack/`, or a documented hardware
-kit. See [contributing](/contributing/overview/) — extensions are the point.
+kit. See [contributing](/contributing/overview/). Extensions are the point.

@@ -12,12 +12,12 @@ page is canonical.
 
 | Term | Means |
 |---|---|
-| **Council** | The 3-stage deliberation — *First Opinions → Peer Review → Chairman*. A deliberate review mode, not the default chat. |
+| **Council** | The 3-stage deliberation: *First Opinions → Peer Review → Chairman*. A deliberate review mode, not the default chat. |
 | **Local role council** | **One** on-device model prompted in sequential roles (*solver · skeptic · security · summarizer*). The default offline mode. |
 | **Local multi-model council** | **Several** distinct on-device model families, run on the [Lab tier](/hardware/tiers/). |
-| **Online frontier council** | Frontier models via BYO keys — **opt-in only**, gated by the Privacy-Diff. |
+| **Online frontier council** | Frontier models via BYO keys, **opt-in only**, gated by the Privacy-Diff. |
 | **Chairman** | The seat that synthesizes the final verdict from the others. |
-| **Seat** | A configurable slot in the council — a role (local) or a model (online/Lab). |
+| **Seat** | A configurable slot in the council: a role (local) or a model (online/Lab). |
 | **Trace** | The auditable record of a deliberation: every opinion + the peer ranking + the marked dissent + the verdict. |
 
 ## Privacy & data
@@ -31,7 +31,7 @@ page is canonical.
 
 ## Hardware tiers
 
-**Pocket · Field · Lab** — the three hardware tiers. [hardware/tiers](/hardware/tiers/)
+**Pocket · Field · Lab** are the three hardware tiers. [hardware/tiers](/hardware/tiers/)
 is the **single source of truth** for their RAM / USB / model specs; other pages
 link there rather than restating numbers.
 

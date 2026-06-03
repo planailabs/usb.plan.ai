@@ -18,7 +18,7 @@ sidebar:
 | Rollback-safe updater | **The Update Framework (TUF)** | Signed metadata, expiry, version counters, target hashes, delegated roles. |
 | Delta updates | **xdelta3** patches as TUF targets | Verify patch SHA → apply into a staging dir → verify final tree SHA → switch. |
 | SBOM | **syft** (`-o cyclonedx-json`) | One per release. |
-| Rollback | Versioned dirs: `app/versions/1.0.4/` + `app/current-version.txt` | Keep the last known-good. **Avoid symlinks** — exFAT doesn't do them. |
+| Rollback | Versioned dirs: `app/versions/1.0.4/` + `app/current-version.txt` | Keep the last known-good. **Avoid symlinks**; exFAT doesn't do them. |
 | Runtime integrity | `preflight-check` | Verifies release manifest, engine binary hashes, model SHA-256, and license notices **before launch**. |
 
 ## Update flow

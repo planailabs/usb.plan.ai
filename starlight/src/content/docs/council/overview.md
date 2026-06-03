@@ -30,12 +30,12 @@ Each stage **streams** into the UI.
 
 - **First opinions** are produced independently, so seats don't anchor on each
   other.
-- **Peer review** surfaces where the seats *disagree* — the dissent is the
+- **Peer review** surfaces where the seats *disagree*: the dissent is the
   signal, not noise.
 - **The chairman** must justify its synthesis against the visible opinions.
 
-The [Council trace](/council/the-trace/) — every opinion, the peer ranking, and
-the marked dissent — is the central UX hook. Quality is enforced by a
+The [Council trace](/council/the-trace/) shows every opinion, the peer ranking,
+and the marked dissent. Quality is enforced by a
 [bias guard](/council/bias-and-confidence/), and locally it runs as a
 [role or multi-model council](/council/local-council/).
 

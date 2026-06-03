@@ -52,10 +52,10 @@ wireless:                       # planned (v0.6) — off by default
 | Key | Meaning |
 |---|---|
 | `mode` | Force offline/online or let the [router](/architecture/routing-and-privacy/) decide (`auto`). |
-| `local_council` | `role` (default) or `multi-model` — see [local council](/council/local-council/). |
+| `local_council` | `role` (default) or `multi-model`; see [local council](/council/local-council/). |
 | `chairman` / `fallback_chairman` | Synthesis model; the fallback is local so offline always works. |
 | `local_seats` / `local_roles` | Seats for the multi-model council / roles for the role council. |
 | `online_seats` | Frontier [seats](/models/seats/) used on opt-in. |
 | `routing` | Offline preference, escalation trigger, privacy guard, [cost cap](/architecture/routing-and-privacy/). |
-| `review_bias_guard` | Peer-review fairness — see [bias guard](/council/bias-and-confidence/). |
-| `wireless` | **Planned (v0.6)**, off by default — [local distribution](/reference/extensibility/) hub mode; internet-off LAN, not air-gapped. |
+| `review_bias_guard` | Peer-review fairness; see [bias guard](/council/bias-and-confidence/). |
+| `wireless` | **Planned (v0.6)**, off by default. [local distribution](/reference/extensibility/) hub mode; internet-off LAN, not air-gapped. |

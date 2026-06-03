@@ -6,7 +6,7 @@ sidebar:
 ---
 
 Existing portable-AI sticks ship a single model offline. usb.plan.ai is not
-another "portable Ollama setup" — it is an **auditable decision and review
+another "portable Ollama setup." It is an **auditable decision and review
 assistant**.
 
 ## Council, not single-shot
@@ -18,8 +18,8 @@ User question ──▶ Stage 1: First Opinions   (parallel)
 ```
 
 The structure follows [karpathy/llm-council](https://github.com/karpathy/llm-council):
-parallel first opinions, anonymized peer review/ranking, chairman synthesis —
-extended here with a **local role council** for weak hardware. See the
+parallel first opinions, anonymized peer review/ranking, chairman synthesis. This
+version adds a **local role council** for weak hardware. See the
 [Council overview](/council/overview/).
 
 ## Compared to the inspiration
@@ -31,10 +31,10 @@ extended here with a **local role council** for weak hardware. See the
 | Council mode | No | No | First Opinion → Peer Review → Chairman |
 | Online mode | No | No | Optional frontier council, opt-in, privacy-diff |
 | Engine | Proprietary | Ollama | **llama.cpp `llama-server`** (+ optional Ollama) |
-| Voice / Vision | Yes | No | Yes, local (Whisper + VLM) — from phase 5 |
-| Encryption | AES-256 (opt.) | — | Passphrase vault (Argon2id + AES-256) |
+| Voice / Vision | Yes | No | Yes, local (Whisper + VLM), from phase 5 |
+| Encryption | AES-256 (opt.) | - | Passphrase vault (Argon2id + AES-256) |
 | Platforms | Win, macOS | Win, Mac, Linux | Win, macOS, Linux (+ browser-only fallback) |
-| Price | $49–$129 | Free | Free (OSS) |
+| Price | $49-$129 | Free | Free (OSS) |
 
 ## Three primary personas
 

@@ -22,7 +22,7 @@ routing:
   cost_cap_usd_per_query: 0.50 # Stage 2 is ~O(N²) → token/cost cap
 ```
 
-## Privacy Guard — the resolved paradox
+## Privacy Guard: the resolved paradox
 
 Every online escalation shows a **privacy diff** *before* sending:
 
@@ -30,9 +30,9 @@ Every online escalation shows a **privacy diff** *before* sending:
 > store locally: yes/no"
 
 - Default: **nothing** leaves the stick.
-- UI indicator: 🟢 offline / 🔵 online-council.
+- UI indicator: offline / online-council.
 - Honest boundary: a **compromised host** (keylogger/malware) is **outside** the
-  protection scope — see the [threat model](/security/threat-model/).
+  protection scope; see the [threat model](/security/threat-model/).
 
 This pairs with [BYO keys](/reference/features/) stored in the encrypted
 [vault](/security/threat-model/): keys are decrypted in memory only after the

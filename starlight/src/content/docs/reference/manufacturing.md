@@ -6,10 +6,10 @@ sidebar:
 ---
 
 > **You don't need any custom hardware.** Default usb.plan.ai is software + your
-> own drive — see [hardware procurement](/reference/hardware-procurement/). This
+> own drive. See [hardware procurement](/reference/hardware-procurement/). This
 > page is forward-looking research for **(a)** an *optional* branded usb.plan.ai
 > SKU and **(b)** the planned [local wireless distribution](/project/roadmap/)
-> hardware. Mid-2026 notes — **not endorsements**; verify capabilities, MOQs,
+> hardware. Mid-2026 notes. **Not endorsements**; verify capabilities, MOQs,
 > compliance, and supply chain before any engagement.
 
 ## USB / SSD producers (OEM / ODM)
@@ -24,7 +24,7 @@ matters).
 | [CustomUSB](https://www.customusb.com/) | US | US manufacturer; bulk; lifetime warranty |
 | [Neomory](https://www.neomory.com/product/usb-flash-drive/) | CN | OEM/ODM, MOQ ~100, free samples |
 | [Sino-Memory](https://www.sino-memory.com/) | CN | OEM from 1 pc / ODM from 100; 12+ yrs |
-| Pengshiwei | CN | Source factory — USB / SSD / cards |
+| Pengshiwei | CN | Source factory: USB / SSD / cards |
 | [Made-in-China](https://www.made-in-china.com/factory/USB-Flash-Drive.html) | Marketplace | Directory of certified OEM suppliers |
 
 ## Wireless modules / boards
@@ -39,6 +39,6 @@ serving model-packs + council over high-speed Wi-Fi):
 | Qualcomm IPQ5424 (e.g. [Wallys DR5424](https://www.cnx-software.com/2026/02/04/qualcomm-ipq5424-embedded-router-board-supports-22-gbps-tri-band-wi-fi-7-and-dual-10gbe-networking/)) | Tri-band Wi-Fi 7 ~22 Gbps router board |
 | [SparkLAN](https://www.sparklan.com/) · [Ezurio](https://www.ezurio.com/wireless-modules/wifi-modules-bluetooth) · [Advantech](https://www.advantech.com/en-us/products/embedded-wi-fi-oem-modules) | Certified embedded Wi-Fi 6E/7 modules |
 
-> Wireless distribution is **internet-off local networking, not air-gapped** —
+> Wireless distribution is **internet-off local networking, not air-gapped**.
 > see the [threat model](/security/threat-model/) and
 > [routing & privacy](/architecture/routing-and-privacy/).

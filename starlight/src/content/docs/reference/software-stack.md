@@ -8,7 +8,7 @@ sidebar:
 The cleanest portable stack is **out-of-process binaries + a thin orchestrator**.
 No daemon, no host Python required, no per-machine install.
 
-## Engine — `llama.cpp` `llama-server` (default)
+## Engine: `llama.cpp` `llama-server` (default)
 
 A single self-contained binary, no Python runtime, runs on a Pi or a workstation.
 `llama-server` exposes an **OpenAI-compatible** HTTP API (`/v1/chat/completions`,
@@ -28,12 +28,12 @@ but daemon/cache-oriented; LM Studio isn't built for redistributable USB
 packaging; vLLM/SGLang are too CUDA/Python-heavy for arbitrary offline laptops;
 MLX is Apple-only. `llama-server` wins on **portability**.
 
-## Voice (STT) — `whisper.cpp`
+## Voice (STT): `whisper.cpp`
 
 Same philosophy: a portable binary, offline, with Metal/Vulkan/CUDA/ROCm/CPU and
 VAD. Use `base` for the Pocket tier, `large-v3-turbo` for Field/Lab.
 
-## Vision (VLM) — Qwen2.5-VL GGUF via `llama-server`
+## Vision (VLM): Qwen2.5-VL GGUF via `llama-server`
 
 | Use | Model |
 |---|---|
@@ -43,7 +43,7 @@ VAD. Use `base` for the Pocket tier, `large-v3-turbo` for Field/Lab.
 
 **Caveats (still version-sensitive):** the model GGUF and its `mmproj` projector
 must match; freeze exact files + SHA-256 in the manifest. Images consume context
-tokens — budget a larger `-c`.
+tokens, so budget a larger `-c`.
 
 ## Distribution & integrity
 
@@ -55,7 +55,7 @@ tokens — budget a larger `-c`.
 | App build | `uv` + `uv.lock`, frozen with PyInstaller `--onedir` | reproducible, no host Python |
 | Orchestrator | FastAPI + `httpx` / OpenAI client | thin: start `llama-server`, call localhost, stream [council stages](/council/overview/) |
 
-> Do **not** make `llama-cpp-python` the default runtime — bundling native wheels
+> Do **not** make `llama-cpp-python` the default runtime. Bundling native wheels
 > across Metal/CUDA/Vulkan/ROCm is messier than keeping `llama-server`
 > out-of-process. See the [build runbook](/project/build-runbook/) to implement this.
 

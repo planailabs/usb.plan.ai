@@ -32,10 +32,10 @@ usb.plan.ai/
 
 ## Stick hygiene
 
-exFAT has **no journaling** → use **atomic writes** (write-temp-then-rename), a
+exFAT has **no journaling**, so use **atomic writes** (write-temp-then-rename), a
 "safely eject" reminder, and explicit "stick full" handling.
 
-> exFAT has **no** 4 GB file-size limit — that was FAT32. A 20 GB GGUF lives
+> exFAT has **no** 4 GB file-size limit. That was FAT32. A 20 GB GGUF lives
 > fine as a single file. The `preflight-check` only aborts on **FAT32**.
 
 The `model-packs/`, `recipes/`, `plugins/`, and `playbooks/` directories are the

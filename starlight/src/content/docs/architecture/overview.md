@@ -33,11 +33,11 @@ Everything runs from the USB drive (exFAT, NVMe-SSD recommended). A FastAPI
 
 | Component | Tech | Role |
 |---|---|---|
-| **Local Engine** | **llama.cpp `llama-server`** (primary), Ollama optional | Deterministically bundleable, genuinely portable — no installer hack |
+| **Local Engine** | **llama.cpp `llama-server`** (primary), Ollama optional | Deterministically bundleable, genuinely portable; no installer hack |
 | **Council Core** | FastAPI (Python 3.11+), async httpx | Orchestrates stages, offline/online [router](/architecture/routing-and-privacy/), concurrency/backpressure |
-| **UI** | FastAPI serves a local web UI (`localhost`) | **Browser-only as the most robust portable default**; optional per-platform Tauri wrapper |
+| **UI** | FastAPI serves a local web UI (`localhost`) | Browser-only as the safest portable default; optional per-platform Tauri wrapper |
 | **Voice (STT)** | whisper.cpp (per-OS/arch binaries) | On-device speech-to-text |
-| **Vision (VLM)** | llama.cpp multimodal (Qwen-VL / Moondream GGUF) | Image understanding (integration cost is real — see [roadmap](/project/roadmap/)) |
+| **Vision (VLM)** | llama.cpp multimodal (Qwen-VL / Moondream GGUF) | Image understanding (integration cost is real; see [roadmap](/project/roadmap/)) |
 | **Router** | Custom logic | Local vs cloud; privacy guard enforces opt-in |
 | **Cloud Council** | OpenRouter (first) / native SDKs (optional) | Frontier models on network + consent |
 | **Vault** | Argon2id KDF + AES-256 (age/libsodium) | Passphrase-unlocked; key material never plaintext on the stick |

@@ -1,9 +1,9 @@
 # Contributing to usb.plan.ai
 
-Thanks for helping build the **Portable AI Council**. 🙏
+Thanks for helping build the Portable AI Council.
 
 > **Status: v0.2 concept & spec.** Today the repo is a website + docs + the spec.
-> The product is **not built yet** — which means contributing is wide open. The
+> The product is **not built yet**. Contributing is wide open. The
 > highest-value contributions right now are the first runnable pieces, not more
 > marketing copy.
 
@@ -27,15 +27,15 @@ See [`AGENTS.md`](./AGENTS.md) and `.agents/skills/` for how it's wired.
 
 Concrete starter tasks, roughly easiest → meatiest:
 
-- **`preflight-check` (shell)** — detect filesystem (abort on FAT32), measure USB
+- **`preflight-check` (shell):** detect filesystem (abort on FAT32), measure USB
   read speed, read RAM, detect GPU/VRAM; print a recommended tier.
-- **Thin role-council demo** — call a local `llama-server` (OpenAI-compatible
+- **Thin role-council demo:** call a local `llama-server` (OpenAI-compatible
   API) three times as *Solver → Skeptic → Chairman*; emit a `trace.json`.
-- **Council-vs-Single eval** — one task, single-model answer vs council answer,
+- **Council-vs-Single eval:** one task, single-model answer vs council answer,
   with raw prompts + raw outputs published under `evals/`.
-- **Model-pack manifest** — add a verified GGUF entry (name, size, **license**,
+- **Model-pack manifest:** add a verified GGUF entry (name, size, **license**,
   SHA-256) for an MIT/Apache model.
-- **Docs/site** — fix a typo, tighten a page, add a playbook write-up.
+- **Docs/site:** fix a typo, tighten a page, add a playbook write-up.
 
 Open an issue describing what you'll tackle before a large PR.
 
@@ -50,7 +50,7 @@ pnpm build          # ordered: docs → main
 
 ## Ground rules
 
-- **pnpm only** — `npm`/`yarn` silently break the docs build.
+- **pnpm only:** `npm`/`yarn` silently break the docs build.
 - **Honesty over hype.** This is the project's core value. Don't describe
   unbuilt features as if they ship. Mark planned things as planned.
 - **Licenses matter.** Code is Apache-2.0; every model keeps its own weights

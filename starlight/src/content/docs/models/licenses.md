@@ -5,17 +5,17 @@ sidebar:
   order: 2
 ---
 
-> **Critical:** the repository is Apache-2.0, but **every model keeps its own
-> weights license.** The `model-packs/` manifests carry a **license column** per
+> Note: the repository is Apache-2.0, but every model keeps its own
+> weights license. The `model-packs/` manifests carry a **license column** per
 > model.
 
 ## Redistribution on the stick
 
 | Model | Redistribution |
 |---|---|
-| DeepSeek-R1-Distill | **MIT** — unrestricted |
-| Qwen3 (8B / 32B) | **Apache-2.0** — free; keep the copyright notice |
-| **Gemma 4** | **⚠ Gemma Terms** — commercial use allowed, but **every redistribution must include the agreement/notice file** and mark modifications. **Therefore: not in the default bundle — opt-in download only, with the notice auto-attached.** |
+| DeepSeek-R1-Distill | **MIT**: unrestricted |
+| Qwen3 (8B / 32B) | **Apache-2.0**: free; keep the copyright notice |
+| **Gemma 4** | **⚠ Gemma Terms**: commercial use allowed, but **every redistribution must include the agreement/notice file** and mark modifications. Not in the default bundle; opt-in download only, with the notice auto-attached. |
 
 ## Policy
 
