@@ -2,7 +2,7 @@
 title: Build runbook (for agents)
 description: The exact order to implement usb.plan.ai from spec to v0.4, with the chosen stack and invariants.
 sidebar:
-  order: 0
+  order: 1.5
 ---
 
 This is the agent-facing implementation guide: build the product in this order,
@@ -13,9 +13,10 @@ honour the invariants, and the repo comes together coherently. It assumes the
 
 ## Build order
 
-1. **`preflight-check.*`** (shell, per-OS): detect filesystem (abort on FAT32),
-   measure USB read speed, RAM, GPU/VRAM; print the recommended
-   [tier](/hardware/tiers/). *Ship this first; it gates everything.*
+1. **`preflight-check.*`** (shell, per-OS): detect filesystem, measure USB read
+   speed, RAM, GPU/VRAM; print the recommended [tier](/hardware/tiers/). See
+   [directory structure](/reference/directory-structure/) and
+   [performance](/hardware/performance/). *Ship this first; it gates everything.*
 2. **Vendor the engine:** per-OS/arch `llama-server` binaries under
    `engine/llama-server/` (pin the build tag). Add `whisper.cpp` under
    `engine/whisper/`.
@@ -23,8 +24,9 @@ honour the invariants, and the repo comes together coherently. It assumes the
    call its OpenAI-compatible localhost API, stream the
    [council stages](/council/overview/). Keep it out-of-process; **never** make
    `llama-cpp-python` the default runtime.
-4. **Role council:** implement the four roles (Solver, Skeptic, Security,
-   Summarizer) as sequential prompts against one model; emit `trace.json`.
+4. **Local role council:** implement the four roles (Solver, Skeptic, Security,
+   Summarizer) as sequential prompts against one model. Summarizer is the
+   Chairman and composes the verdict; emit `trace.json`.
 5. **Model packs:** `models.lock.json` entries with `repo_id`, `revision`,
    `filename`, `size`, `license`, `sha256`, `engine_build`, `source_url`.
    Download via Hugging Face, verify SHA-256, never bundle Gemma in the default.
@@ -52,7 +54,8 @@ honour the invariants, and the repo comes together coherently. It assumes the
 - **Model packs are content-addressed** (SHA-256) and update separately from the app.
 - **Honesty over hype:** mark unbuilt features as planned; back the council
   claim with [evals](/evals/overview/), don't assert it.
-- **pnpm only** for the site; **exFAT** for the stick; **Unix-only** build glue.
+- **pnpm only** for the site; stick filesystem rules live in
+  [directory structure](/reference/directory-structure/); **Unix-only** build glue.
 
 ## Toolchain
 

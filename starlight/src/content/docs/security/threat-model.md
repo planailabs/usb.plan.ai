@@ -5,12 +5,15 @@ sidebar:
   order: 1
 ---
 
+This threat model states what the stick protects and where it stops. It is
+minimal-trace, not zero-trace.
+
 | Measure | Implementation |
 |---|---|
 | **Minimal-trace** (not "zero") | No persistent user data on the host; **unavoidable OS artifacts documented openly** (Win: Prefetch, ShellBags, AmCache, USBSTOR, event logs, WebView cache). |
 | **No telemetry** | No tracking, no accounts, no phone-home. |
 | **Vault** | Argon2id KDF + AES-256; **passphrase-unlocked**, key material never plaintext on the stick. |
-| **Privacy Guard** | Online only on opt-in + a [privacy-diff](/architecture/routing-and-privacy/) before every upload. |
+| **Privacy Guard** | Online only on opt-in + a [Privacy-Diff](/architecture/routing-and-privacy/) before every upload. |
 | **Phone Access** | self-signed **TLS**, one-time token in a QR, session expiry, bind to the active LAN IP only, rate-limiting, visible "active" indicator. |
 | **Supply chain** | Signed releases, **SHA-256 manifest** per model, SBOM, signed delta updates with rollback. |
 

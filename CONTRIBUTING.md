@@ -2,10 +2,9 @@
 
 Thanks for helping build the Portable AI Council.
 
-> **Status: v0.2 concept & spec.** Today the repo is a website + docs + the spec.
-> The product is **not built yet**. Contributing is wide open. The
-> highest-value contributions right now are the first runnable pieces, not more
-> marketing copy.
+> **Status: v0.3 concept & spec.** The product is not built yet; see the
+> [status](https://usb.plan.ai/docs/start-here/welcome/). The highest-value
+> contributions right now are the first runnable pieces, not more marketing copy.
 
 ## The shape of the project
 
@@ -27,10 +26,14 @@ See [`AGENTS.md`](./AGENTS.md) and `.agents/skills/` for how it's wired.
 
 Concrete starter tasks, roughly easiest → meatiest:
 
-- **`preflight-check` (shell):** detect filesystem (abort on FAT32), measure USB
-  read speed, read RAM, detect GPU/VRAM; print a recommended tier.
-- **Thin role-council demo:** call a local `llama-server` (OpenAI-compatible
-  API) three times as *Solver → Skeptic → Chairman*; emit a `trace.json`.
+- **`preflight-check` (shell):** detect filesystem, measure USB read speed, RAM,
+  and GPU/VRAM; print a recommended [tier](https://usb.plan.ai/docs/hardware/tiers/).
+  Filesystem and speed details live in
+  [directory structure](https://usb.plan.ai/docs/reference/directory-structure/)
+  and [performance](https://usb.plan.ai/docs/hardware/performance/).
+- **Thin local role council demo:** call a local `llama-server`
+  (OpenAI-compatible API) as *Solver → Skeptic → Summarizer*; the Summarizer is
+  the local Chairman. Emit a `trace.json`.
 - **Council-vs-Single eval:** one task, single-model answer vs council answer,
   with raw prompts + raw outputs published under `evals/`.
 - **Model-pack manifest:** add a verified GGUF entry (name, size, **license**,

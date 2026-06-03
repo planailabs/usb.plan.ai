@@ -18,7 +18,7 @@ User question ──▶ Stage 1: First Opinions   (parallel)
 ```
 
 The structure follows [karpathy/llm-council](https://github.com/karpathy/llm-council):
-parallel first opinions, anonymized peer review/ranking, chairman synthesis. This
+parallel first opinions, anonymized peer review/ranking, Chairman synthesis. This
 version adds a **local role council** for weak hardware. See the
 [Council overview](/council/overview/).
 
@@ -27,9 +27,9 @@ version adds a **local role council** for weak hardware. See the
 | Aspect | PortableMind (commercial) | techjarves (OSS, DIY) | **usb.plan.ai** |
 |---|---|---|---|
 | License | Closed | MIT | Apache-2.0 (code) |
-| Core | Single-model, offline | Single-model (AnythingLLM/Ollama) | **Auditable Council (roles → multi-model)** |
+| Core | Single-model, offline | Single-model (AnythingLLM/Ollama) | **Auditable Council (local role council → local multi-model council)** |
 | Council mode | No | No | First Opinion → Peer Review → Chairman |
-| Online mode | No | No | Optional frontier council, opt-in, privacy-diff |
+| Online mode | No | No | Optional online frontier council, opt-in, Privacy-Diff |
 | Engine | Proprietary | Ollama | **llama.cpp `llama-server`** (+ optional Ollama) |
 | Voice / Vision | Yes | No | Yes, local (Whisper + VLM), from phase 5 |
 | Encryption | AES-256 (opt.) | - | Passphrase vault (Argon2id + AES-256) |

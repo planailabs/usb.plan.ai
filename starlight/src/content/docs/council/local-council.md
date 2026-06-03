@@ -5,32 +5,32 @@ sidebar:
   order: 2
 ---
 
-Three full 32B models running at once is unrealistic on consumer hardware (~40 GB
-of weights alone, before KV-cache). So the local Council has **two variants**.
+The local council has two variants: one for ordinary hardware and one for the
+Lab tier. Tier numbers live in [hardware tiers](/hardware/tiers/).
 
 | Variant | How | Hardware | When |
 |---|---|---|---|
-| **Role council** (default) | **One** strong local model, prompted in sequential roles: *Solver, Skeptic, Security-Reviewer, Summarizer* | Runs on the [Pocket/Field tier](/hardware/tiers/) | Weak hardware, fast activation |
-| **Multi-model council** (Lab) | Several real models of different families, resident or serial | [Lab tier](/hardware/tiers/) (NVMe-SSD, 48-64 GB RAM, GPU) | Maximum diversity, deliberately "slow but deep" |
+| **Local role council** (default) | One strong local model, prompted in sequential roles: *Solver, Skeptic, Security-Reviewer, Summarizer* | [Pocket/Field tier](/hardware/tiers/) | Weak hardware, fast activation |
+| **Local multi-model council** (Lab) | Several real models of different families, resident or serial | [Lab tier](/hardware/tiers/) | Maximum diversity, deliberately "slow but deep" |
 
-## Role council (default)
+## Local role council (default)
 
-The role council preserves the Council UX with low RAM and latency cost. One
-model answers the same question in different hats:
+The local role council preserves the Council UX with low RAM and latency cost.
+One model answers the same question in different hats:
 
 - **Solver:** proposes a concrete solution.
 - **Skeptic:** attacks it: failure modes, edge cases, hidden risk.
 - **Security-Reviewer:** checks for unsafe operations, data exposure, footguns.
-- **Summarizer:** distills the deliberation for the chairman.
+- **Summarizer:** acts as the local Chairman and composes the verdict from the
+  deliberation.
 
-For many users this is just as traceable as a true model council.
+For many users this is just as traceable as a true local multi-model council.
 
-## Multi-model council (Lab)
+## Local multi-model council (Lab)
 
-Several distinct model families (e.g. a reasoning model + an agent/tools model +
-a mid model) give genuine perspective diversity, with RAM and
-load/reload latency from the USB bus. Reserve it for the
-[Lab tier](/hardware/tiers/) and see the [performance reality](/hardware/performance/).
+Several distinct model families give genuine perspective diversity, with RAM and
+load/reload latency from the USB bus. Reserve it for the [Lab tier](/hardware/tiers/)
+and see the [performance reality](/hardware/performance/).
 
 Configure which variant runs via `local_council: role | multi-model` in
 [`council.config.yaml`](/reference/configuration/).

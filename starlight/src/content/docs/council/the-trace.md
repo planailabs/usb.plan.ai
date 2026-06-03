@@ -12,7 +12,7 @@ UX hook. For each query it shows:
 - **The peer ranking:** how each seat ranked the others on accuracy & insight.
 - **Marked dissent:** where the seats disagreed, highlighted rather than
   averaged away.
-- **The chairman's synthesis:** the final answer, justified against the
+- **The Chairman's synthesis:** the final answer, justified against the
   opinions above.
 
 ## Why it matters

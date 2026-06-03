@@ -5,10 +5,13 @@ sidebar:
   order: 2
 ---
 
+This page lists the target app capabilities. Current status lives in
+[welcome](/start-here/welcome/), and sequencing lives in the [roadmap](/project/roadmap/).
+
 | Feature | Description | Offline | Online |
 |---|---|:--:|:--:|
 | **Local Chat** (default) | Fast single-model answer | ✅ | ✅ |
-| **Council / Review Mode** | Deliberate deep mode: Solve → Skeptic → Synthesis with [trace](/council/the-trace/) | ✅ (role/multi) | ✅ (frontier) |
+| **Council / Review Mode** | Deliberate deep mode: Solve → Skeptic → Chairman with [trace](/council/the-trace/) | ✅ (local role council / local multi-model council) | ✅ (online frontier council) |
 | **Council Trace** | All opinions + peer ranking + marked dissent | ✅ | ✅ |
 | **Voice (STT)** | Push-to-talk, on-device | ✅ | ✅ |
 | **Vision (VLM)** | Read images/documents locally | ✅ | ✅ |
@@ -23,6 +26,5 @@ Chat is the default; the [Council](/council/overview/) is the deliberate review
 mode. Online features are gated by the
 [privacy guard](/architecture/routing-and-privacy/).
 
-> These are the **target** capabilities. What ships when is in the
-> [roadmap](/project/roadmap/): voice, vision and phone access land in v0.5,
-> and wireless distribution in v0.6.
+> These target capabilities are not shipped yet; see [welcome](/start-here/welcome/)
+> and the [roadmap](/project/roadmap/).

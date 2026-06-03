@@ -5,15 +5,17 @@ sidebar:
   order: 4
 ---
 
+Short answers for the recurring product questions. Canonical details live on
+the linked pages.
+
 **Does it work fully offline?**
 Yes. That's the default. Online is opt-in only, gated by a
-[privacy-diff](/architecture/routing-and-privacy/). Nothing leaves the stick
+[Privacy-Diff](/architecture/routing-and-privacy/). Nothing leaves the stick
 without your explicit consent.
 
 **What hardware do I need?**
-Depends on the [tier](/hardware/tiers/). Pocket runs on a normal laptop (8-12 GB
-RAM, CPU ok). The multi-model Lab tier needs 48-64 GB RAM, a GPU, and an NVMe
-USB-SSD; see [performance reality](/hardware/performance/).
+Depends on the [tier](/hardware/tiers/); [performance reality](/hardware/performance/)
+explains the bottlenecks.
 
 **Where do my API keys live?**
 Passphrase-encrypted in the [vault](/security/threat-model/) on the stick
@@ -26,7 +28,7 @@ dissent." For "write me an email," a single model is fine. The advantage is
 
 **What is the Council trace?**
 The auditable record: all first opinions, the peer ranking, and the marked
-dissent, plus the chairman's synthesis. See [the trace](/council/the-trace/).
+dissent, plus the Chairman's synthesis. See [the trace](/council/the-trace/).
 
 **Is it "zero trace"?**
 No. It's **minimal-trace**, honestly. No persistent user data on the host, but

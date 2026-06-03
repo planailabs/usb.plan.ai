@@ -32,12 +32,12 @@ Each stage **streams** into the UI.
   other.
 - **Peer review** surfaces where the seats *disagree*: the dissent is the
   signal, not noise.
-- **The chairman** must justify its synthesis against the visible opinions.
+- **The Chairman** must justify its synthesis against the visible opinions.
 
 The [Council trace](/council/the-trace/) shows every opinion, the peer ranking,
 and the marked dissent. Quality is enforced by a
 [bias guard](/council/bias-and-confidence/), and locally it runs as a
-[role or multi-model council](/council/local-council/).
+[local role council or local multi-model council](/council/local-council/).
 
 > **Cost note (online):** Stage 2 is roughly O(N²) in tokens. A per-query
 > [cost cap](/reference/configuration/) bounds it.

@@ -5,12 +5,12 @@ sidebar:
   order: 2
 ---
 
-Offline-first + an optional cloud council is only consistent if escalation is
-**explicit, granular, and visible**.
+Offline-first + an optional online frontier council is only consistent if
+escalation is explicit, granular, and visible.
 
 ## The router
 
-The router chooses local vs cloud. Its default is `prefer: offline`, and it only
+The router chooses local vs online. Its default is `prefer: offline`, and it only
 escalates on `user_opt_in` (see [confidence](/council/bias-and-confidence/) for
 why automatic routing is deferred).
 
@@ -24,7 +24,7 @@ routing:
 
 ## Privacy Guard: the resolved paradox
 
-Every online escalation shows a **privacy diff** *before* sending:
+Every online escalation shows a **Privacy-Diff** *before* sending:
 
 > "These contents will be sent · to these providers · estimated cost: $X ·
 > store locally: yes/no"

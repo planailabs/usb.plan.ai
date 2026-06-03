@@ -5,6 +5,9 @@ sidebar:
   order: 3
 ---
 
+Peer review is useful only if it resists style bias and accidental self-voting.
+Online escalation stays manual until a real dissent metric exists.
+
 ## Bias guard
 
 Hiding provider names isn't enough. Models recognize their own style. The peer

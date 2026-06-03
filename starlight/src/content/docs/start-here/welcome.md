@@ -9,10 +9,10 @@ sidebar:
 different core from existing offline-AI sticks: an **auditable AI Council**.
 
 > **The core:** instead of a single chat answer, usb.plan.ai gives you a
-> **deliberated, multi-perspective** answer. Locally, that is a *role council* (one
-> strong model in several roles), and, when a network is available and you
-> explicitly allow it, as a real multi-provider *frontier council*. The Council
-> is a deliberate **review mode**, not the default chat.
+> **deliberated, multi-perspective** answer. Locally, that is a *local role
+> council* (one strong model in several roles), and, when a network is available
+> and you explicitly allow it, as a real multi-provider *online frontier
+> council*. The Council is a deliberate **review mode**, not the default chat.
 
 :::caution[Status: concept / spec v0.3]
 The website and these docs exist today. The product is not built yet. That
@@ -53,5 +53,5 @@ and the [Council](/council/overview/).
 | Owner | plan.ai |
 
 > v0.3 is the result of a 3-stage LLM council (first opinions on Claude Opus 4.8,
-> GPT-5.5, Gemini 3.1 Pro → peer review → chairman synthesis). The key
+> GPT-5.5, Gemini 3.1 Pro → peer review → Chairman synthesis). The key
 > corrections versus v0.1 are in the [council changelog](/project/changelog/).

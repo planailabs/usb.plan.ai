@@ -5,6 +5,9 @@ sidebar:
   order: 3
 ---
 
+This is the planned stick layout. Filesystem behavior and stick hygiene live
+here because every installer and update path depends on them.
+
 ```
 usb.plan.ai/
 ├── start-windows.bat / start-mac.command / start-linux.sh

@@ -13,7 +13,7 @@ page is canonical.
 | Term | Means |
 |---|---|
 | **Council** | The 3-stage deliberation: *First Opinions → Peer Review → Chairman*. A deliberate review mode, not the default chat. |
-| **Local role council** | **One** on-device model prompted in sequential roles (*solver · skeptic · security · summarizer*). The default offline mode. |
+| **Local role council** | **One** on-device model prompted in sequential roles (*solver · skeptic · security · summarizer*). The summarizer is the Chairman. The default offline mode. |
 | **Local multi-model council** | **Several** distinct on-device model families, run on the [Lab tier](/hardware/tiers/). |
 | **Online frontier council** | Frontier models via BYO keys, **opt-in only**, gated by the Privacy-Diff. |
 | **Chairman** | The seat that synthesizes the final verdict from the others. |

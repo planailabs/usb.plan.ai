@@ -5,6 +5,9 @@ sidebar:
   order: 3
 ---
 
+These are the unresolved decisions that should be settled by prototypes,
+measurement, or focused review.
+
 1. **llama-server vs Ollama:** `llama-server` for portability, but offer
    Ollama's comfort as an optional mode?
 2. **Confidence routing:** which concrete [dissent measure](/council/bias-and-confidence/)

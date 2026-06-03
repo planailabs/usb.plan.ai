@@ -5,10 +5,9 @@ sidebar:
   order: 4
 ---
 
-The single biggest "is this usable" factor is the **drive**. A 20 GB GGUF at a
-cheap stick's ~200 MB/s is ~100 s of pure read before the first token; on a good
-NVMe USB-SSD it's ~20-30 s. Buy the drive first. See
-[performance reality](/hardware/performance/) for why.
+The single biggest "is this usable" factor is the drive. Buy it first, then let
+`preflight-check` measure it. The USB read-speed math lives in
+[performance reality](/hardware/performance/).
 
 ## Recommended drives (mid-2026)
 
@@ -30,14 +29,13 @@ treat Gen 2 (10 Gbps) as the realistic ceiling.
 
 ## Format & hygiene
 
-- Format **exFAT** (cross-platform, no 4 GB file limit → a 20 GB GGUF is one
-  file). The installer aborts on FAT32.
-- exFAT has **no journaling** → atomic writes (write-temp-then-rename), a "safely
-  eject" reminder, and **SHA-256 verification** after every model download (see
-  [model packs](/reference/software-stack/)).
+- Format and filesystem rules live in [directory structure](/reference/directory-structure/).
+- Keep **SHA-256 verification** after every model download; see
+  [model packs](/reference/software-stack/).
 
 Match the drive to your [tier](/hardware/tiers/): Pocket/Field are fine on the
-T7 Shield; the multi-model **Lab tier requires** a Gen 2×2 NVMe USB-SSD.
+T7 Shield, and Lab buyers should favor Gen 2×2 NVMe USB-SSD when the host
+supports it.
 
 > Sources: [Tom's Hardware — best external SSDs](https://www.tomshardware.com/reviews/best-external-hard-drive-ssd,5987.html) ·
 > [Samsung T7 Shield](https://semiconductor.samsung.com/us/consumer-storage/portable-ssd/t7-shield/) ·

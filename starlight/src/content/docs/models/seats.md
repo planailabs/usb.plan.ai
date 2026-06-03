@@ -10,7 +10,7 @@ Models are **swappable "seats"**, not "the smartest models." Defaults live in
 registry, and concrete benchmark numbers are pulled live from leaderboards,
 never frozen into the spec.
 
-## Online seats (frontier, via BYO keys / OpenRouter)
+## Online frontier council seats (via BYO keys / OpenRouter)
 
 State June 2026:
 

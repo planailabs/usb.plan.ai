@@ -9,12 +9,13 @@ The 5-minute "wow" flow: from a fresh stick to a deliberated answer.
 
 ## Steps
 
-1. **Download** the release onto a fast USB drive (an NVMe USB-SSD for the Lab
-   tier; see [hardware](/hardware/tiers/)).
-2. **Run preflight:** `preflight-check.*` measures filesystem (FAT32 → abort),
-   USB read speed, RAM, and GPU/VRAM, then recommends a [tier](/hardware/performance/).
-3. **Choose Pocket:** installs one small model + the local
-   [role council](/council/local-council/) + Whisper-base.
+1. **Download** the release onto a fast USB drive; see [hardware tiers](/hardware/tiers/).
+2. **Run preflight:** `preflight-check.*` measures filesystem, USB read speed,
+   RAM, and GPU/VRAM, then recommends a [tier](/hardware/tiers/). Filesystem and
+   speed details live in [directory structure](/reference/directory-structure/)
+   and [performance](/hardware/performance/).
+3. **Choose Pocket:** installs one small model + the
+   [local role council](/council/local-council/) + Whisper-base.
 4. **Ask the demo prompt:**
 
    > *"I have to run this risky bash script offline. Check the benefit, the
