@@ -13,7 +13,11 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content="#06090a" />
 		<title>usb.plan.ai — Portable AI Council</title>
 		<meta name="description" content="Not one model's opinion. A council's verdict. Offline-first, auditable AI on a USB stick. Open-source, no cloud required." />
 		<link rel="canonical" href="https://usb.plan.ai/" />
@@ -53,8 +57,8 @@
 					<a href="#vs">cloud vs offline</a>
 					<a href="#seats">council seats</a>
 					<a href="#editions">editions</a>
-					<a class="sg" href="/docs/start-here/welcome/">docs</a>
 					<a class="sg" href="/style-guide/">style guide</a>
+					<a class="sg" href="/docs/start-here/welcome/">docs</a>
 				</div>
 				<div class="right">
 					<a class="gh" href="https://github.com/planailabs/usb.plan.ai" target="_blank" rel="noopener noreferrer" aria-label="usb.plan.ai on GitHub" title="GitHub">
@@ -268,7 +272,7 @@
 					<div class="feat"><span class="tag off">offline</span><h3>Council Trace</h3><p>Every opinion, the peer ranking, the marked dissent.</p></div>
 					<div class="feat"><span class="tag off">offline</span><h3>Voice (STT)</h3><p>Push-to-talk, on-device whisper.cpp.</p></div>
 					<div class="feat"><span class="tag off">offline</span><h3>Vision (VLM)</h3><p>Read images and documents locally.</p></div>
-					<div class="feat"><span class="tag off">offline</span><h3>Phone Access</h3><p>A second screen on your LAN: TLS + one-time token.</p></div>
+					<div class="feat"><span class="tag off">offline</span><h3>Phone Access</h3><p>A second screen on your LAN: TLS, one-time token, optional compute relay.</p></div>
 					<div class="feat"><span class="tag on">online</span><h3>BYO API Keys</h3><p>Passphrase-encrypted in the on-stick vault.</p></div>
 					<div class="feat"><span class="tag on">online</span><h3>Privacy-Diff</h3><p>See exactly what is sent, to whom, at what cost.</p></div>
 				</div>
@@ -353,6 +357,7 @@
 					<div class="q"><div class="qt"><span class="mk" aria-hidden="true">?</span>What hardware do I need?</div><div class="a">Pocket runs on a normal laptop (8-12 GB RAM, CPU ok). The multi-model Lab tier wants <b>48-64 GB RAM, a GPU, and an NVMe USB-SSD</b>.</div></div>
 					<div class="q"><div class="qt"><span class="mk" aria-hidden="true">?</span>Council vs a single model: when does it win?</div><div class="a">"Review this code / decision / risk and show me the dissent." For "write me an email," a single model is fine. <b>The edge is measured in evals, not asserted.</b></div></div>
 					<div class="q"><div class="qt"><span class="mk" aria-hidden="true">?</span>Is it "zero trace"?</div><div class="a">No. Minimal-trace, honestly. No persistent user data on the host, but unavoidable OS artifacts exist and are documented. A compromised host is out of scope.</div></div>
+						<div class="q"><div class="qt"><span class="mk" aria-hidden="true">?</span>Could it run in the browser, or on a tiny Pi-Zero-class board?</div><div class="a">Both are on our radar, neither is the product. In-browser <b>WebGPU</b> inference and a self-hosting board are a different shape with their own tradeoffs (smaller models, a wider threat surface). We keep them honestly fenced as a research track. See <a href="/docs/architecture/explorations/">explorations</a>.</div></div>
 				</div>
 			</div>
 		</section>

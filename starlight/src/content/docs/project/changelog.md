@@ -19,6 +19,10 @@ through the docs.
 - Documented the future [local wireless distribution](/project/roadmap/) (v0.6)
   with an explicit "internet-off LAN, **not air-gapped**" boundary.
 - Added a real `LICENSE` (Apache-2.0) + [manufacturing notes](/reference/manufacturing/).
+- Opened an [explorations](/architecture/explorations/) research track (browser-side
+  WebGPU inference, a self-hosting board, a compute-sharing relay) after a four-voice
+  council with web research. Kept fenced from the core, with corrected figures
+  (e.g. there is no "Llama 3.3 8B"; Llama 3.3 is 70B) and honest caveats.
 
 ## v0.2: council-optimized (from v0.1)
 

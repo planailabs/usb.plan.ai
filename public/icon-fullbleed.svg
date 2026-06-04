@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="usb.plan.ai">
+	<rect width="512" height="512" fill="#06090a"/>
+	<g fill="#33ff00">
+		<rect x="116" y="116" width="128" height="128"/>
+		<rect x="268" y="268" width="128" height="128"/>
+	</g>
+</svg>

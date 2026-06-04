@@ -17,14 +17,17 @@
     "check": "pnpm check:docs && pnpm check:app",
     "check:app": "astro check",
     "check:docs": "pnpm --filter usb-docs check",
-    "astro": "astro"
+    "astro": "astro",
+    "icons": "node scripts/gen-icons.mjs"
   },
   "dependencies": {
     "astro": "^6.3.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@resvg/resvg-js": "^2.6.2",
     "concurrently": "^9.1.0",
+    "png-to-ico": "^3.0.1",
     "typescript": "^5.6.3"
   }
 }

@@ -30,6 +30,12 @@ no vault/chat/key sharing, but a shared local network is a larger surface than a
 single offline stick. It stays **off by default**, and online escalation still
 requires the [Privacy-Diff](/architecture/routing-and-privacy/).
 
+**The [explorations](/architecture/explorations/) widen the surface, by design.**
+Browser-side inference needs a secure context (valid HTTPS), and a self-hosting
+board adds firmware, device-provisioned HTTPS, and a token-gated reverse proxy. Each is a real
+new attack surface, which is exactly why those ideas stay fenced as research
+rather than folded into this model.
+
 "Minimal-trace" is deliberate honesty: a portable app cannot leave *zero* trace
 on every OS, so the unavoidable artifacts are listed rather than denied. The
 encrypted vault holds keys, chats, and the [Council trace](/council/the-trace/);
